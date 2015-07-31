@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="IconViewFontelico">
+        <attr name="fontelico_icon" format="enum">
+            <enum name="icon_emo_happy" value="0" />
+            <enum name="icon_emo_wink" value="1" />
+            <enum name="icon_emo_wink2" value="2" />
+            <enum name="icon_emo_unhappy" value="3" />
+            <enum name="icon_emo_sleep" value="4" />
+            <enum name="icon_emo_thumbsup" value="5" />
+            <enum name="icon_emo_devil" value="6" />
+            <enum name="icon_emo_surprised" value="7" />
+            <enum name="icon_emo_tongue" value="8" />
+            <enum name="icon_emo_coffee" value="9" />
+            <enum name="icon_emo_sunglasses" value="10" />
+            <enum name="icon_emo_displeased" value="11" />
+            <enum name="icon_emo_beer" value="12" />
+            <enum name="icon_emo_grin" value="13" />
+            <enum name="icon_emo_angry" value="14" />
+            <enum name="icon_emo_saint" value="15" />
+            <enum name="icon_emo_cry" value="16" />
+            <enum name="icon_emo_shoot" value="17" />
+            <enum name="icon_emo_squint" value="18" />
+            <enum name="icon_emo_laugh" value="19" />
+            <enum name="icon_spin1" value="20" />
+            <enum name="icon_spin2" value="21" />
+            <enum name="icon_spin3" value="22" />
+            <enum name="icon_spin4" value="23" />
+            <enum name="icon_spin5" value="24" />
+            <enum name="icon_spin6" value="25" />
+            <enum name="icon_firefox" value="26" />
+            <enum name="icon_chrome" value="27" />
+            <enum name="icon_opera" value="28" />
+            <enum name="icon_ie" value="29" />
+            <enum name="icon_crown" value="30" />
+            <enum name="icon_crown_plus" value="31" />
+            <enum name="icon_crown_minus" value="32" />
+            <enum name="icon_marquee" value="33" />
+        </attr>
+    </declare-styleable>
+
+</resources>

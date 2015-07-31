@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+        <attr name="border_overlay" format="boolean" />
+    </declare-styleable>
+    
+    <declare-styleable name="TitleBarView">
+        <attr name="left_title_background" format="reference"/>
+        <attr name="right_title_background" format="reference"/>
+    </declare-styleable>
+
+    <!--recycleview 的属性-->
+    <declare-styleable name="twowayview_TwoWayLayoutManager">
+        <attr name="android:orientation" tools:ignore="ResourceName"/>
+    </declare-styleable>
+
+    <declare-styleable name="twowayview_TwoWayView">
+        <attr name="twowayview_layoutManager" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="twowayview_GridLayoutManager">
+        <attr name="twowayview_numColumns" format="integer"/>
+        <attr name="twowayview_numRows" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="twowayview_SpacingItemDecoration">
+        <attr name="android:verticalSpacing" tools:ignore="ResourceName"/>
+        <attr name="android:horizontalSpacing" tools:ignore="ResourceName"/>
+    </declare-styleable>
+
+    <declare-styleable name="twowayview_DividerItemDecoration">
+        <attr name="android:divider" tools:ignore="ResourceName"/>
+        <attr name="twowayview_verticalDivider" format="reference"/>
+        <attr name="twowayview_horizontalDivider" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="twowayview_StaggeredGridViewChild">
+        <attr name="twowayview_span" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="twowayview_SpannableGridViewChild">
+        <attr name="twowayview_colSpan" format="integer"/>
+        <attr name="twowayview_rowSpan" format="integer"/>
+    </declare-styleable>
+
+    <!-- uikit -->
+    <declare-styleable name="LoopViewPager">
+        <attr name="uik_ratio" />
+    </declare-styleable>
+
+    <declare-styleable name="Banner">
+        <attr name="uik_autoScrollInterval" format="integer" />
+        <attr name="uik_autoScroll" format="boolean" />
+        <attr name="uik_ratio" format="float"/>
+        <attr name="uik_use_indicatorView" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="IndicatorView">
+        <attr name="uik_indicatorRadius" format="dimension" />
+        <attr name="uik_gapMargin" format="dimension" />
+        <attr name="uik_total" format="integer" />
+        <attr name="uik_index" format="integer" />
+        <attr name="uik_focusColor" format="reference|color" />
+        <attr name="uik_unfocusColor" format="reference|color" />
+        <attr name="uik_strokeColor" format="reference|color"/>
+        <attr name="uik_strokeWidth" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="ExpandableTextView">
+        <attr name="maxCollapsedLines" format="integer"/>
+        <attr name="animDuration" format="integer"/>
+        <attr name="animAlphaStart" format="float"/>
+        <attr name="expandDrawable" format="reference"/>
+        <attr name="collapseDrawable" format="reference"/>
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="fontelico_icons">
+        <item>&#xe800;</item>
+        <item>&#xe801;</item>
+        <item>&#xe813;</item>
+        <item>&#xe802;</item>
+        <item>&#xe803;</item>
+        <item>&#xe804;</item>
+        <item>&#xe805;</item>
+        <item>&#xe806;</item>
+        <item>&#xe807;</item>
+        <item>&#xe808;</item>
+        <item>&#xe809;</item>
+        <item>&#xe80a;</item>
+        <item>&#xe80b;</item>
+        <item>&#xe80c;</item>
+        <item>&#xe80d;</item>
+        <item>&#xe80e;</item>
+        <item>&#xe80f;</item>
+        <item>&#xe810;</item>
+        <item>&#xe811;</item>
+        <item>&#xe812;</item>
+        <item>&#xe830;</item>
+        <item>&#xe831;</item>
+        <item>&#xe832;</item>
+        <item>&#xe834;</item>
+        <item>&#xe838;</item>
+        <item>&#xe839;</item>
+        <item>&#xe840;</item>
+        <item>&#xe841;</item>
+        <item>&#xe842;</item>
+        <item>&#xe843;</item>
+        <item>&#xe844;</item>
+        <item>&#xe845;</item>
+        <item>&#xe846;</item>
+        <item>&#xe847;</item>
+    </string-array>
+
+</resources>

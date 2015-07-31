@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:weightSum="1">
+
+    <fragment
+            android:id="@+id/home_fragment"
+            android:name="com.dongman.fm.ui.fragment.HomePageFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_homepage">
+
+    </fragment>
+
+    <LinearLayout
+            android:id="@+id/main_navigation"
+            android:layout_gravity="bottom"
+            android:background="@color/gainsboro"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:id="@+id/home_button"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dip"
+                android:layout_height="match_parent">
+            <ImageView
+                    android:src="@drawable/dm_icon_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:text="首页"
+                    android:textColor="@color/steelblue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/recommend_button"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dip"
+                android:layout_height="match_parent">
+            <ImageView
+                    android:src="@drawable/dm_icon_recommend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:text="推荐"
+                    android:textColor="@color/steelblue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/discovery_button"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dip"
+                android:layout_height="match_parent">
+            <ImageView
+                    android:src="@drawable/dm_icon_discovery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/steelblue"
+                    android:text="发现"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/personal_button"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dip"
+                android:layout_height="match_parent">
+            <ImageView
+                    android:src="@drawable/dm_icon_persional"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:text="我的"
+                    android:textColor="@color/steelblue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
+
