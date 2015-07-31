@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dongman.fm.R;
@@ -56,7 +57,7 @@ public class DetailFragment extends BaseFragment {
 
     private String          mURL;
 
-    private LinearLayout    mRootView;
+    private RelativeLayout  mRootView;
     private TwoWayView      mRecommendView;
     private RecommendAdapter mRecommendAdapter;
     private CustomListView  mCommentList;
@@ -119,7 +120,7 @@ public class DetailFragment extends BaseFragment {
             }
         };
 
-        mRootView = (LinearLayout)root.findViewById(R.id.detail_root_content);
+        mRootView = (RelativeLayout)root.findViewById(R.id.detail_root_content);
         mRootView.setVisibility(View.GONE);
 //        mProgressView = root.findViewById(R.id.detail_progress_view);
 

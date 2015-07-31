@@ -6,5 +6,8 @@
     <dimen name="little_image_width">100dp</dimen>
     <dimen name="little_image_heigth">133dp</dimen>
 
+    <dimen name="anime_average_star_width">20dp</dimen>
+    <dimen name="anime_average_star_heigth">20dp</dimen>
+
     <dimen name="detail_recommend_height">150dp</dimen>
 </resources>

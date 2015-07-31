@@ -6,5 +6,219 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/detail_root_content"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:padding="10dp"
+            android:id="@+id/anime_detail_info_header"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/detail_anime_image"
+                android:scaleType="fitXY"
+                android:src="@drawable/holder"
+                android:layout_width="@dimen/little_image_width"
+                android:layout_height="@dimen/little_image_heigth" />
+            <LinearLayout
+                android:id="@+id/anime_average_star_container"
+                android:layout_toRightOf="@id/detail_anime_image"
+                android:layout_marginLeft="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/icon_star_yellow"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_heigth" />
+                <ImageView
+                    android:src="@drawable/icon_star_grey"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_heigth" />
+                <ImageView
+                    android:src="@drawable/icon_star_grey"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_heigth" />
+                <ImageView
+                    android:src="@drawable/icon_star_grey"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_heigth" />
+                <ImageView
+                    android:src="@drawable/icon_star_grey"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_heigth" />
+                <TextView
+                    android:id="@+id/anime_average"
+                    android:layout_marginLeft="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="2.0分"
+                    android:textColor="@color/red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/anime_subtype"
+                android:layout_below="@id/anime_average_star_container"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/detail_anime_image"
+                android:layout_marginLeft="20dp"
+                android:text="篇幅："
+                style="@style/detail_anime_info_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/anime_countries"
+                android:layout_below="@id/anime_subtype"
+                android:layout_toRightOf="@id/detail_anime_image"
+                android:layout_marginLeft="20dp"
+                android:text="国家地区："
+                style="@style/detail_anime_info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/anime_genres"
+                android:layout_below="@id/anime_countries"
+                android:layout_toRightOf="@id/detail_anime_image"
+                android:layout_marginLeft="20dp"
+                android:text="类型："
+                style="@style/detail_anime_info_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/anime_casts"
+                android:layout_below="@id/anime_genres"
+                android:layout_toRightOf="@id/detail_anime_image"
+                android:layout_marginLeft="20dp"
+                android:text="声优："
+                style="@style/detail_anime_info_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/more_action"
+                android:layout_below="@id/detail_anime_image"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/violet"
+                    android:textSize="20sp"
+                    android:text="更多"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:background="@drawable/back"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="24sp"
+                    android:textColor="@color/white"
+                    android:padding="5dp"
+                    android:text="观看"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:background="@drawable/back"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="24sp"
+                    android:textColor="@color/white"
+                    android:padding="5dp"
+                    android:text="评分"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:background="@drawable/back"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="24sp"
+                    android:textColor="@color/white"
+                    android:padding="5dp"
+                    android:text="漫单"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/anime_summary_title"
+            android:layout_below="@id/anime_detail_info_header"
+            android:text="简介："
+            android:textColor="@color/violet"
+            android:textSize="20sp"
+            android:padding="5dp"
+            android:background="@color/green"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <com.dongman.fm.ui.view.ExpandableTextView
+            android:id="@+id/anime_summary"
+            app:maxCollapsedLines="3"
+            app:animDuration="1"
+            android:background="@color/white"
+            android:layout_below="@id/anime_summary_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@id/expandable_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-light"
+                android:textSize="16sp"
+                android:textColor="#666666"  />
+        </com.dongman.fm.ui.view.ExpandableTextView>
+        <LinearLayout
+            android:id="@+id/recommend_card"
+            android:layout_below="@id/anime_summary"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="动漫FM相关推荐"
+                android:gravity="center"
+                android:textColor="@color/violet"
+                android:textSize="20sp"
+                android:padding="5dp"
+                android:background="@color/green"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <com.dongman.fm.ui.view.recycleview.widget.TwoWayView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/recommend_list"
+                android:scrollbars="none"
+                style="@style/TwoWayView"
+                app:twowayview_layoutManager="ListLayoutManager"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/little_image_heigth">
+            </com.dongman.fm.ui.view.recycleview.widget.TwoWayView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@id/recommend_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:text="相关吐槽"
+                android:gravity="center"
+                android:textColor="@color/violet"
+                android:textSize="20sp"
+                android:padding="5dp"
+                android:background="@color/green"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <com.dongman.fm.ui.view.CustomListView
+                android:id="@+id/comment_list"
+                android:scrollbars="none"
+                android:divider="@color/grey"
+                android:dividerHeight="1dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </com.dongman.fm.ui.view.CustomListView>
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </com.dongman.fm.ui.view.ScrollViewExtend>
