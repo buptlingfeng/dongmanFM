@@ -9,39 +9,11 @@
         <dex dex="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-4b1fb9b87420ba7e92799e7710742781596e57f8.jar" />
     </item>
     <item
-        jar="/Users/liuzhiwei/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.4.0/40340c0748190fe897baf7bffbc1b282734294e5/okhttp-2.4.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="40340c0748190fe897baf7bffbc1b282734294e5">
-        <dex dex="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/pre-dexed/debug/okhttp-2.4.0-ff4d495aee7e873109b119a0e611ea339dff5d1a.jar" />
-    </item>
-    <item
-        jar="/Users/liuzhiwei/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.4.0/5b72bf48563ea8410e650de14aa33ff69a3e8c35/okio-1.4.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="5b72bf48563ea8410e650de14aa33ff69a3e8c35">
-        <dex dex="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/pre-dexed/debug/okio-1.4.0-440d0e4f57aa6d024b3c76778326f563de2be2c2.jar" />
-    </item>
-    <item
-        jar="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-fb61d21037dd6163b19723768dcff77cc23ed2b2.jar" />
-    </item>
-    <item
         jar="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
         <dex dex="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/pre-dexed/debug/classes-2d9d7e7b9b3c19461c320c85b03171f76baab97d.jar" />
-    </item>
-    <item
-        jar="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="efeda77c808750cb670ee9c48d8a1835d89dbcb2">
-        <dex dex="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/pre-dexed/debug/classes-39b0d13fd0d19770eea1c9b82fd89c6b4e40a777.jar" />
     </item>
     <item
         jar="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
@@ -51,11 +23,39 @@
         <dex dex="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/pre-dexed/debug/classes-3b99f2b88dbcfb6fcbdd2af5c4ec3be292f47ee0.jar" />
     </item>
     <item
+        jar="/Users/liuzhiwei/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.4.0/5b72bf48563ea8410e650de14aa33ff69a3e8c35/okio-1.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5b72bf48563ea8410e650de14aa33ff69a3e8c35">
+        <dex dex="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/pre-dexed/debug/okio-1.4.0-440d0e4f57aa6d024b3c76778326f563de2be2c2.jar" />
+    </item>
+    <item
         jar="/Users/liuzhiwei/develop_environment/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
         <dex dex="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-bcb8eb8cdaec3510c9920f3b39441c9aca83492e.jar" />
+    </item>
+    <item
+        jar="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="efeda77c808750cb670ee9c48d8a1835d89dbcb2">
+        <dex dex="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/pre-dexed/debug/classes-39b0d13fd0d19770eea1c9b82fd89c6b4e40a777.jar" />
+    </item>
+    <item
+        jar="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-fb61d21037dd6163b19723768dcff77cc23ed2b2.jar" />
+    </item>
+    <item
+        jar="/Users/liuzhiwei/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.4.0/40340c0748190fe897baf7bffbc1b282734294e5/okhttp-2.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="40340c0748190fe897baf7bffbc1b282734294e5">
+        <dex dex="/Users/liuzhiwei/GitHub/dongmanFM/app/build/intermediates/pre-dexed/debug/okhttp-2.4.0-ff4d495aee7e873109b119a0e611ea339dff5d1a.jar" />
     </item>
 
 </items>

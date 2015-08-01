@@ -66,7 +66,6 @@ public class DetailActivity extends BaseActivity {
                 Log.v(TAG, "right button is clicked!");
             }
         });
-        mTitleView.setTitleContent(mTitle);
 
         DetailFragment detailFragment = new DetailFragment(mURL);
         addFragment(detailFragment);
@@ -77,7 +76,7 @@ public class DetailActivity extends BaseActivity {
         FragmentManager fragmentManager = this.getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);
-        transaction.addToBackStack(null);
+//        transaction.addToBackStack(null);
         transaction.commit();
     }
 
