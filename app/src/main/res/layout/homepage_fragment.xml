@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F1EE"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/homepage_title_height"
+        android:visibility="gone"
+        android:background="@color/lightgrey">
+
+        <com.dongman.fm.ui.view.CircleImageView
+            android:id="@+id/user_icon"
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="5dp"
+            android:layout_width="@dimen/homepage_title_height"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/user_icon"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <EditText
+                android:id="@+id/search_input"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.97"
+                android:background="@color/whitesmoke"
+                android:hint="不知道看什么？点TA--->"
+                android:textColor="@color/green"
+                android:textColorHint="@color/grey"
+                android:textSize="15sp" />
+
+            <ImageButton
+                android:id="@+id/search_button"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_weight="0.03"
+                android:background="@drawable/icon_search_normal" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!--<com.dongman.fm.ui.com.dongman.fm.ui.view.Banner-->
+    <!--android:id="@+id/banner"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--app:uik_autoScroll="false"-->
+    <!--app:uik_ratio="0.5"/>-->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@id/swipe_refresh_widget"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recommend_content_recycleview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</LinearLayout>

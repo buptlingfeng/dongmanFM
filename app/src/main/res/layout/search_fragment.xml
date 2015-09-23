@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#F2F1EE"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/homepage_title_height">
+
+        <com.dongman.fm.ui.view.CircleImageView
+            android:id="@+id/user_icon"
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="5dp"
+            android:layout_width="@dimen/homepage_title_height"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/user_icon"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <EditText
+                android:id="@+id/search_input"
+                android:layout_width="wrap_content"
+                android:layout_height="52dp"
+                android:layout_weight="0.97"
+                android:background="@color/whitesmoke"
+                android:hint="不知道看什么？点TA--->"
+                android:textColor="@color/green"
+                android:textColorHint="@color/grey"
+                android:textSize="15sp" />
+
+            <!--<ImageButton-->
+                <!--android:id="@+id/search_button"-->
+                <!--android:layout_width="55dp"-->
+                <!--android:layout_height="55dp"-->
+                <!--android:layout_weight="0.03"-->
+                <!--android:background="@drawable/icon_search_normal" />-->
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="热搜榜"
+            android:textSize="18sp"
+            android:textColor="@color/text_normal"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="换一换"
+            android:textColor="@color/lightblue"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/recommend_search_list"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:numColumns="3"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none">
+    </GridView>
+
+</LinearLayout>

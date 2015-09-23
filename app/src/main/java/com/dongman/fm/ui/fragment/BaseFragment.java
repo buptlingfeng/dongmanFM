@@ -1,0 +1,150 @@
+package com.dongman.fm.ui.fragment;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.dongman.fm.image.ImageUtils;
+import com.dongman.fm.network.IRequestCallBack;
+import com.dongman.fm.network.OkHttpUtil;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.Map;
+
+public class BaseFragment extends Fragment {
+	protected LayoutInflater inflater;
+	private View contentView;
+	private Context context;
+	private ViewGroup container;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		context = getActivity().getApplicationContext();
+	}
+
+	@Override
+	public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		this.inflater = inflater;
+		this.container = container;
+		onCreateView(savedInstanceState);
+		if (contentView == null)
+			return super.onCreateView(inflater, container, savedInstanceState);
+		return contentView;
+	}
+
+	protected void onCreateView(Bundle savedInstanceState) {
+
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		contentView = null;
+		container = null;
+		inflater = null;
+	}
+
+	public Context getApplicationContext() {
+		return context;
+	}
+
+	public void setContentView(int layoutResID) {
+		setContentView((ViewGroup) inflater.inflate(layoutResID, container, false));
+	}
+
+	public void setContentView(View view) {
+		contentView = view;
+	}
+
+	public View getContentView() {
+		return contentView;
+	}
+
+	public View findViewById(int id) {
+		if (contentView != null)
+			return contentView.findViewById(id);
+		return null;
+	}
+
+	// http://stackoverflow.com/questions/15207305/getting-the-error-java-lang-illegalstateexception-activity-has-been-destroyed
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		try {
+			Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+			childFragmentManager.setAccessible(true);
+			childFragmentManager.set(this, null);
+
+		} catch (NoSuchFieldException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void getImage(String url, ImageView imageView) {
+		ImageUtils.getImage(getActivity(), url, imageView);
+	}
+
+	public void asyncGet(String url, IRequestCallBack requestCallBack) {
+		asyncGet(url, null, requestCallBack);
+	}
+
+	public void asyncGet(String url, Map<String,String> parmas, IRequestCallBack requestCallBack) {
+		if(parmas != null) {
+			String resultUrl = OkHttpUtil.attachHttpGetParams(url, parmas);
+			Request request =  new Request.Builder()
+					.url(resultUrl)
+					.build();
+			asyncGet(request, requestCallBack);
+		} else {
+			Request request = new Request.Builder()
+					.url(url)
+					.build();
+			asyncGet(request,requestCallBack);
+		}
+	}
+
+	public void asyncGet(String url, String key, String value, IRequestCallBack requestCallBack) {
+		String resultUrl = OkHttpUtil.attachHttpGetParam(url,key,value);
+		Request request = new Request.Builder()
+				.url(resultUrl)
+				.build();
+		asyncGet(request, requestCallBack);
+	}
+
+	public void asyncGet(Request request, final IRequestCallBack requestCallBack) {
+		if(request == null) {
+			Log.e("BaseActivity.async", "the request is null!");
+			return;
+		}
+		Callback callback = new Callback() {
+			@Override
+			public void onFailure(Request request, IOException e) {
+				if(requestCallBack != null) {
+					requestCallBack.onFailure(request,e);
+				}
+			}
+
+			@Override
+			public void onResponse(Response response) throws IOException {
+				if(requestCallBack != null) {
+					requestCallBack.onResponse(response);
+				}
+			}
+		};
+
+		OkHttpUtil.asyncGet(request, callback);
+	}
+
+}

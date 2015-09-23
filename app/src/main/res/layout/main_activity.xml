@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:weightSum="1">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <fragment
-            android:id="@+id/home_fragment"
-            android:name="com.dongman.fm.ui.fragment.HomePageFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_homepage">
+    <com.dongman.fm.ui.view.viewpager.indicator.ScrollIndicatorView
+        android:id="@+id/main_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:fillViewport="false" />
 
-    </fragment>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
+    <!--
     <LinearLayout
             android:id="@+id/main_navigation"
-            android:layout_gravity="bottom"
+            android:layout_alignParentBottom="true"
             android:background="@color/gainsboro"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -92,6 +93,6 @@
                     android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
-
-</FrameLayout>
+    -->
+</LinearLayout>
 

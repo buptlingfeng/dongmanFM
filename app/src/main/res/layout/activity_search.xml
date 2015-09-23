@@ -11,6 +11,7 @@
         android:orientation="horizontal"
         android:weightSum="1">
         <TextView
+            android:id="@+id/back"
             android:background="@drawable/icon_backbtn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
@@ -25,13 +26,32 @@
             android:hint="输入动漫"
             android:inputType="text"
             android:paddingLeft="10dp"
+            android:imeOptions="actionSearch"
             android:layout_weight="0.97" />
         <ImageButton
             android:layout_weight="0.03"
             android:background="@drawable/icon_search_normal"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:id="@+id/search_button" />
+            android:id="@+id/search_right_button" />
     </LinearLayout>
+    <!--<GridView-->
+        <!--android:id="@+id/recommend_search_list"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:gravity="center"-->
+        <!--android:listSelector="@android:color/transparent"-->
+        <!--android:scrollbars="none"-->
+        <!--android:visibility="gone">-->
+    <!--</GridView>-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_result_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none">
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

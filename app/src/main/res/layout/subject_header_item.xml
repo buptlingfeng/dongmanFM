@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        app:cardCornerRadius="1dp"
+        app:cardElevation="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/subject_title"
+                android:text="丧尸动画大盘点！"
+                android:textColor="@color/text_normal"
+                android:textSize="18sp"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/create_time"
+                android:textColor="@color/text_grey"
+                android:text="2015-08-03"
+                android:textSize="12sp"
+                android:layout_alignBaseline="@id/subject_title"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/subject_total_animes"
+                android:layout_toLeftOf="@id/create_time"
+                android:layout_marginRight="10dp"
+                android:layout_alignBaseline="@id/subject_title"
+                android:text="16部"
+                android:textColor="@color/text_grey"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/subject_img"
+                android:layout_below="@id/subject_title"
+                android:padding="1dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/subject_image"
+                android:layout_width="match_parent"
+                android:layout_height="180dp" />
+
+            <TextView
+                android:id="@+id/expandable_text"
+                android:layout_below="@+id/subject_img"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:gravity="center_horizontal"
+                android:background="#701a181a"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:text="夏天这么热当然也需要一些另类的凉意啦。也许大家都有看过生化危机，作为几十年经典的恐怖产物;丧尸Zombie，动画和电影都是经久不衰，不死人，活死人，行尸走肉，当然，动画里面的丧尸有恐怖，居然也有呆萌的，盘点那些经典丧尸动画！"
+                android:ellipsize="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!--<com.dongman.fm.ui.com.dongman.fm.ui.view.ExpandableTextView-->
+                <!--android:id="@+id/anime_summary"-->
+                <!--app:maxCollapsedLines="2"-->
+                <!--app:animDuration="1"-->
+                <!--android:background="@color/white"-->
+                <!--android:layout_below="@id/subject_img"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<TextView-->
+                    <!--android:id="@+id/expandable_text"-->
+                    <!--android:paddingTop="5dp"-->
+                    <!--android:paddingBottom="5dp"-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:background="#701a181a"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="10sp"-->
+                    <!--android:ellipsize="end"-->
+                    <!--android:text="夏天这么热当然也需要一些另类的凉意啦。也许大家都有看过生化危机，作为几十年经典的恐怖产物&#45;&#45;丧尸Zombie，动画和电影都是经久不衰，不死人，活死人，行尸走肉，当然，动画里面的丧尸有恐怖，居然也有呆萌的，盘点那些经典丧尸动画！"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" />-->
+            <!--</com.dongman.fm.ui.com.dongman.fm.ui.view.ExpandableTextView>-->
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

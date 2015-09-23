@@ -7,4 +7,7 @@
 
     <item type="id" name="expandable_text"/>
     <item type="id" name="expand_collapse"/>
+
+    <item type="id" name="recycleview_container"/>
+    <item type="id" name="swipe_refresh_widget"/>
 </resources>

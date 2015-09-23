@@ -245,7 +245,7 @@ public class LoopViewPager extends ViewGroup
     private static final ViewPositionComparator sPositionComparator = new ViewPositionComparator();
 
     /**
-     * Indicates that the pager is in an idle, settled state. The current page is fully in view and no animation is in progress.
+     * Indicates that the pager is in an idle, settled state. The current page is fully in com.dongman.fm.ui.view and no animation is in progress.
      */
     public static final int SCROLL_STATE_IDLE = 0;
 
@@ -598,7 +598,7 @@ public class LoopViewPager extends ViewGroup
         if (item > (mCurItem + pageLimit) || item < (mCurItem - pageLimit))
         {
             // We are doing a jump by more than one page.  To avoid
-            // glitches, we want to keep all current pages in the view
+            // glitches, we want to keep all current pages in the com.dongman.fm.ui.view
             // until the scroll ends.
             for (int i = 0; i < mItems.size(); i++)
             {
@@ -759,7 +759,7 @@ public class LoopViewPager extends ViewGroup
     }
 
     /**
-     * Returns the number of pages that will be retained to either side of the current page in the view hierarchy in an idle state. Defaults to 1.
+     * Returns the number of pages that will be retained to either side of the current page in the com.dongman.fm.ui.view hierarchy in an idle state. Defaults to 1.
      *
      * @return How many pages will be kept offscreen on either side
      * @see #setOffscreenPageLimit(int)
@@ -770,12 +770,12 @@ public class LoopViewPager extends ViewGroup
     }
 
     /**
-     * Set the number of pages that should be retained to either side of the current page in the view hierarchy in an idle state. Pages beyond this limit will be recreated from the adapter when
+     * Set the number of pages that should be retained to either side of the current page in the com.dongman.fm.ui.view hierarchy in an idle state. Pages beyond this limit will be recreated from the adapter when
      * needed.
      *
      * <p>This is offered as an optimization. If you know in advance the number of pages you will need to support or have lazy-loading mechanisms in place on your pages, tweaking this setting can have
      * benefits in perceived smoothness of paging animations and interaction. If you have a small number of pages (3-4) that you can keep active all at once, less time will be spent in layout for
-     * newly created view subtrees as the user pages back and forth.</p>
+     * newly created com.dongman.fm.ui.view subtrees as the user pages back and forth.</p>
      *
      * <p>You should keep this limit low, especially if your pages have complex layouts. This setting defaults to 1.</p>
      *
@@ -1124,7 +1124,7 @@ public class LoopViewPager extends ViewGroup
         }
 
         // Also, don't populate until we are attached to a window.  This is to
-        // avoid trying to populate before we have restored our view hierarchy
+        // avoid trying to populate before we have restored our com.dongman.fm.ui.view hierarchy
         // state and conflicting with what is restored.
         if (getWindowToken() == null)
         {
@@ -1455,7 +1455,7 @@ public class LoopViewPager extends ViewGroup
                     if (DEBUG)
                     {
                         Log.i(TAG, "populate() - destroyItem() with pos: " + pos +
-                                   " view: " + ((View) ii.object));
+                                   " com.dongman.fm.ui.view: " + ((View) ii.object));
                     }
                     itemIndex--;
                     curIndex--;
@@ -1499,7 +1499,7 @@ public class LoopViewPager extends ViewGroup
                         if (DEBUG)
                         {
                             Log.i(TAG, "populate() - destroyItem() with pos: " + pos +
-                                       " view: " + ((View) ii.object));
+                                       " com.dongman.fm.ui.view: " + ((View) ii.object));
                         }
                         ii = itemIndex < mItems.size() ? mItems.get(itemIndex) : null;
                     }
@@ -1764,7 +1764,7 @@ public class LoopViewPager extends ViewGroup
         {
             if (lp != null && lp.isDecor)
             {
-                throw new IllegalStateException("Cannot add pager decor view during layout");
+                throw new IllegalStateException("Cannot add pager decor com.dongman.fm.ui.view during layout");
             }
             lp.needsMeasure = true;
             addViewInLayout(child, index, params);
@@ -1849,7 +1849,7 @@ public class LoopViewPager extends ViewGroup
     {
         // For simple implementation, our internal size is always 0.
         // We depend on the container to specify the layout size of
-        // our view.  We can't really know what it is since we will be
+        // our com.dongman.fm.ui.view.  We can't really know what it is since we will be
         // adding and removing different arbitrary views and do not
         // want the layout to change as this happens.
         int width = getDefaultSize(0, widthMeasureSpec);
@@ -2266,7 +2266,7 @@ public class LoopViewPager extends ViewGroup
         boolean needPopulate = mScrollState == SCROLL_STATE_SETTLING;
         if (needPopulate)
         {
-            // Done with scroll, no longer want to cache view drawing.
+            // Done with scroll, no longer want to cache com.dongman.fm.ui.view drawing.
             setScrollingCacheEnabled(false);
             mScroller.abortAnimation();
             int oldX = getScrollX();
@@ -2401,7 +2401,7 @@ public class LoopViewPager extends ViewGroup
                 if (dx != 0 && !isGutterDrag(mLastMotionX, dx) &&
                     canScroll(this, false, (int) dx, (int) x, (int) y))
                 {
-                    // Nested view has scrollable area under this point. Let it be handled there.
+                    // Nested com.dongman.fm.ui.view has scrollable area under this point. Let it be handled there.
                     mLastMotionX = x;
                     mLastMotionY = y;
                     mIsUnableToDrag = true;
@@ -2899,7 +2899,7 @@ public class LoopViewPager extends ViewGroup
     /**
      * Start a fake drag of the pager.
      *
-     * <p>A fake drag can be useful if you want to synchronize the motion of the ViewPager with the touch scrolling of another view, while still letting the ViewPager control the snapping motion and
+     * <p>A fake drag can be useful if you want to synchronize the motion of the ViewPager with the touch scrolling of another com.dongman.fm.ui.view, while still letting the ViewPager control the snapping motion and
      * fling behavior. (e.g. parallax-scrolling tabs.) Call {@link #fakeDragBy(float)} to simulate the actual drag motion. Call {@link #endFakeDrag()} to complete the fake drag and fling as
      * necessary.
      *
@@ -3108,7 +3108,7 @@ public class LoopViewPager extends ViewGroup
      * Tests scrollability within child views of v given a delta of dx.
      *
      * @param v      View to test for horizontal scrollability
-     * @param checkV Whether the view v passed should itself be checked for scrollability (true), or just its children (false).
+     * @param checkV Whether the com.dongman.fm.ui.view v passed should itself be checked for scrollability (true), or just its children (false).
      * @param dx     Delta scrolled in pixels
      * @param x      X coordinate of the active touch point
      * @param y      Y coordinate of the active touch point
@@ -3142,12 +3142,12 @@ public class LoopViewPager extends ViewGroup
 
     @Override public boolean dispatchKeyEvent(KeyEvent event)
     {
-        // Let the focused view and/or our descendants get the key first
+        // Let the focused com.dongman.fm.ui.view and/or our descendants get the key first
         return super.dispatchKeyEvent(event) || executeKeyEvent(event);
     }
 
     /**
-     * You can call this function yourself to have the scroll view perform scrolling from a key event, just as if the event had been dispatched to it by the view hierarchy.
+     * You can call this function yourself to have the scroll com.dongman.fm.ui.view perform scrolling from a key event, just as if the event had been dispatched to it by the com.dongman.fm.ui.view hierarchy.
      *
      * @param event The key event to execute.
      * @return Return true if the event was handled, else false.
@@ -3213,7 +3213,7 @@ public class LoopViewPager extends ViewGroup
                     sb.append(" => ").append(parent.getClass().getSimpleName());
                 }
                 Log.e(TAG, "arrowScroll tried to find focus based on non-child " +
-                           "current focused view " + sb.toString());
+                           "current focused com.dongman.fm.ui.view " + sb.toString());
                 currentFocused = null;
             }
         }
@@ -3574,12 +3574,12 @@ public class LoopViewPager extends ViewGroup
     {
 
         /**
-         * true if this view is a decoration on the pager itself and not a view supplied by the adapter.
+         * true if this com.dongman.fm.ui.view is a decoration on the pager itself and not a com.dongman.fm.ui.view supplied by the adapter.
          */
         public boolean isDecor;
 
         /**
-         * Gravity setting for use on decor views only: Where to position the view page within the overall ViewPager container; constants are defined in {@link Gravity}.
+         * Gravity setting for use on decor views only: Where to position the com.dongman.fm.ui.view page within the overall ViewPager container; constants are defined in {@link Gravity}.
          */
         public int gravity;
 
@@ -3589,17 +3589,17 @@ public class LoopViewPager extends ViewGroup
         float widthFactor = 0.f;
 
         /**
-         * true if this view was added during layout and needs to be measured before being positioned.
+         * true if this com.dongman.fm.ui.view was added during layout and needs to be measured before being positioned.
          */
         boolean needsMeasure;
 
         /**
-         * Adapter position this view is for if !isDecor
+         * Adapter position this com.dongman.fm.ui.view is for if !isDecor
          */
         int position;
 
         /**
-         * Current child index within the ViewPager that this view occupies
+         * Current child index within the ViewPager that this com.dongman.fm.ui.view occupies
          */
         int childIndex;
 

@@ -202,7 +202,7 @@ public class ExpandableTextView extends LinearLayout implements View.OnClickList
         // Saves the text height w/ max lines
         mTextHeightWithMaxLines = getRealTextViewHeight(mTv);
 
-        // Doesn't fit in collapsed mode. Collapse text view as needed. Show
+        // Doesn't fit in collapsed mode. Collapse text com.dongman.fm.ui.view as needed. Show
         // button.
         if (mCollapsed) {
             mTv.setMaxLines(mMaxCollapsedLines);

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="1dp"
+    app:cardElevation="2dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:orientation="vertical"
+        android:id="@+id/container"
+        android:background="@color/white"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/homepage_recommend_item_image_container"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:paddingRight="10dp"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/homepage_recommend_item_image"
+                android:scaleType="fitXY"
+                android:src="@drawable/holder"
+                android:layout_width="@dimen/homepage_recommend_image_width"
+                android:layout_height="@dimen/homepage_recommend_image_heigth"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+            <TextView
+                android:id="@+id/anime_name"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:textColor="#555555"
+                android:singleLine="true"
+                android:text="海贼王"
+                android:layout_width="@dimen/homepage_recommend_image_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/homepage_recommend_item_image"
+                android:layout_alignLeft="@+id/homepage_recommend_item_image"
+                android:layout_alignStart="@+id/homepage_recommend_item_image" />
+            <TextView
+                android:layout_below="@id/anime_name"
+                android:text="7.8分"
+                android:textSize="15sp"
+                android:textColor="@color/red"
+                android:gravity="center"
+                android:layout_width="@dimen/homepage_recommend_image_width"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/homepage_recommend_item_image"
+                android:layout_alignStart="@+id/homepage_recommend_item_image" />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/homepage_recommend_item_abstract"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/homepage_recommend_item_image_container"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#4F4F4F"
+            android:textSize="20sp"
+            android:text="大圣归来，悲情的英雄"
+            android:maxLines="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/homepage_recommend_item_abstract"
+            android:layout_alignLeft="@+id/homepage_recommend_item_abstract">
+
+            <com.dongman.fm.ui.view.CircleImageView
+                android:id="@+id/avatar_img"
+                app:border_width="1dp"
+                app:border_color="@color/white"
+                android:src="@color/red"
+                android:layout_width="@dimen/homepage_user_icon_size"
+                android:layout_height="@dimen/homepage_user_icon_size" />
+
+            <TextView
+                android:id="@+id/user_name"
+                android:text="《大圣归来》"
+                android:textColor="#999999"
+                android:textSize="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_alignLeft="@+id/homepage_recommend_item_abstract"
+                android:layout_alignStart="@+id/homepage_recommend_item_abstract" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/anime_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!--<View-->
+        <!--android:layout_below="@id/homepage_recommend_item_image"-->
+        <!--android:layout_toLeftOf="@id/homepage_recommend_item_image"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:background="@color/grey"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"/>-->
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@id/homepage_recommend_item_abstract"
+            android:orientation="horizontal"
+            android:weightSum="9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/comment_count"
+                android:layout_toRightOf="@+id/data"
+                android:layout_marginRight="20dp"
+                android:textColor="#D0D0D0"
+                android:textSize="15sp"
+                android:text="评论：232"
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/vote_count"
+                android:layout_toRightOf="@+id/data"
+                android:layout_marginRight="20dp"
+                android:textColor="#D0D0D0"
+                android:textSize="15sp"
+                android:text="赞：232"
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:id="@+id/create_time"
+                android:textColor="#D0D0D0"
+                android:textSize="15sp"
+                android:text="2015-07-31"
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

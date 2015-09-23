@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="1dp"
+    app:cardElevation="2dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:background="@color/palegreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/subject_recommend_title"
+            android:text="动漫FM-->专题推荐"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:id="@+id/divider"
+            android:layout_below="@id/subject_recommend_title"
+            android:layout_marginTop="5dp"
+            android:background="@color/lightskyblue"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <LinearLayout
+            android:id="@+id/animes_image_set"
+            android:layout_below="@id/divider"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:weightSum="1.5"
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+            <ImageView
+                android:src="@drawable/holder"
+                android:layout_weight="0.3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:src="@drawable/holder"
+                android:layout_weight="0.3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:src="@drawable/holder"
+                android:layout_weight="0.3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:src="@drawable/holder"
+                android:layout_weight="0.3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:src="@drawable/holder"
+                android:layout_weight="0.3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider2"
+            android:background="@color/lightskyblue"
+            android:layout_below="@id/animes_image_set"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:layout_below="@id/divider2"
+            android:layout_marginTop="5dp"
+            android:text="说到夏天，少不了甲子园，少不了全国大赛，少不了运动、励志和热血，一起燃起来吧！可..."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

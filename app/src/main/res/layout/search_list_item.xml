@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="1dp"
+    app:cardElevation="2dp"
+    android:background="@color/black"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:id="@+id/anime_detail_info_header"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/anime_image"
+                android:scaleType="fitXY"
+                android:src="@drawable/holder"
+                android:layout_width="@dimen/little_image_width"
+                android:layout_height="@dimen/little_image_heigth" />
+
+            <TextView
+                android:id="@+id/anime_name"
+                android:layout_toRightOf="@id/anime_image"
+                android:layout_marginLeft="20dp"
+                android:textSize="18sp"
+                android:text="海贼王"
+                android:textColor="@color/text_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:id="@+id/anime_average_star_container"
+                android:layout_toRightOf="@id/anime_image"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@id/anime_name"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/icon_star_yellow"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_heigth" />
+                <ImageView
+                    android:src="@drawable/icon_star_grey"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_heigth" />
+                <ImageView
+                    android:src="@drawable/icon_star_grey"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_heigth" />
+                <ImageView
+                    android:src="@drawable/icon_star_grey"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_heigth" />
+                <ImageView
+                    android:src="@drawable/icon_star_grey"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_heigth" />
+                <TextView
+                    android:id="@+id/anime_average"
+                    android:layout_marginLeft="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="2.0分"
+                    android:textColor="@color/red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/anime_subtype"
+                android:layout_below="@id/anime_average_star_container"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/anime_image"
+                android:layout_marginLeft="20dp"
+                android:text="篇幅：2/TV版"
+                style="@style/detail_anime_info_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/anime_countries"
+                android:layout_below="@id/anime_subtype"
+                android:layout_toRightOf="@id/anime_image"
+                android:layout_marginLeft="20dp"
+                android:text="国家地区：日本"
+                style="@style/detail_anime_info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/anime_genres"
+                android:layout_below="@id/anime_countries"
+                android:layout_toRightOf="@id/anime_image"
+                android:layout_marginLeft="20dp"
+                android:text="类型：搞笑,热血,短篇"
+                style="@style/detail_anime_info_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/play_count"
+                android:layout_below="@id/anime_genres"
+                android:layout_toRightOf="@id/anime_image"
+                android:layout_marginLeft="20dp"
+                android:text="播放："
+                style="@style/detail_anime_info_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

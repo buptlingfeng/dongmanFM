@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.CardView
+        app:cardCornerRadius="1dp"
+        app:cardElevation="2dp"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/topic_image"
+            android:padding="1dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/subject_image"
+            android:layout_width="match_parent"
+            android:layout_height="180dp" />
+        <TextView
+            android:id="@+id/anime_name"
+            android:layout_gravity="bottom|center"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:gravity="center_horizontal"
+            android:background="#701a181a"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:text="海贼王"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

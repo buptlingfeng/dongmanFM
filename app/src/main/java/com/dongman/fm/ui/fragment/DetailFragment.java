@@ -20,8 +20,8 @@ import com.dongman.fm.R;
 import com.dongman.fm.data.APIConfig;
 import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.BaseFragment;
-import com.dongman.fm.ui.fragment.data.CommentAdapter;
-import com.dongman.fm.ui.fragment.data.RecommendAdapter;
+import com.dongman.fm.ui.fragment.adapter.CommentAdapter;
+import com.dongman.fm.ui.fragment.adapter.DetailRecommendAdapter;
 import com.dongman.fm.ui.view.CustomListView;
 import com.dongman.fm.ui.view.ExpandableTextView;
 import com.dongman.fm.ui.view.loading.Titanic;
@@ -53,11 +53,12 @@ public class DetailFragment extends BaseFragment {
     private static final int RECOMMEND_DATA_ARRIVED_FAILED = 2;
     private static final int RECOMMEND_DATA_ARRIVED_SUCCEED = 3;
 
-    private String          mURL;
+//    private String          mURL;
+    private int             mID;
 
     private RelativeLayout  mRootView;
     private TwoWayView      mRecommendView;
-    private RecommendAdapter mRecommendAdapter;
+    private DetailRecommendAdapter mRecommendAdapter;
     private CustomListView  mCommentList;
     private CommentAdapter  mCommentAdapter;
 
@@ -67,8 +68,7 @@ public class DetailFragment extends BaseFragment {
     private Handler         mHandler;
     private JSONObject      mData;
 
-    public DetailFragment(String params) {
-        mURL = params;
+    public DetailFragment() {
     }
 
     @Override
@@ -79,6 +79,8 @@ public class DetailFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle = getArguments();
+        mID = bundle.getInt("id");
     }
 
     @Override
@@ -86,6 +88,7 @@ public class DetailFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.detail_page_fragment, container, false);
         initLoadingView();
         init(view);
+
         return view;
     }
 
@@ -121,35 +124,16 @@ public class DetailFragment extends BaseFragment {
         mRootView = (RelativeLayout)root.findViewById(R.id.detail_root_content);
         mRootView.setVisibility(View.GONE);
 //        mProgressView = root.findViewById(R.id.detail_progress_view);
-
-        asyncGet(mURL, new IRequestCallBack() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-                Log.e(TAG, "数据请求失败");
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Response response) throws IOException {
-                String result = new String(response.body().bytes());
-                try {
-                    mData = new JSONObject(result);
-                    mHandler.sendEmptyMessage(DETAIL_DATA_ARRIVED_SUCCEED);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                Log.d(TAG, "数据请求成功");
-            }
-        });
-
+        getData(mID);
     }
+
 
     private void initView(View root, final JSONObject data) {
 
         mRecommendView = (TwoWayView) root.findViewById(R.id.recommend_list);
         mRecommendView.setHasFixedSize(true);
         mRecommendView.setLongClickable(true);
-        mRecommendAdapter = new RecommendAdapter(getActivity());
+        mRecommendAdapter = new DetailRecommendAdapter(getActivity());
         mRecommendView.setAdapter(mRecommendAdapter);
 
         mCommentList = (CustomListView) root.findViewById(R.id.comment_list);
@@ -176,10 +160,10 @@ public class DetailFragment extends BaseFragment {
                         JSONArray array = object.getJSONArray("data");
                         if (array == null || array.length() == 0)
                             return;
-                        List<RecommendAdapter.RecommendData> recommendList = new ArrayList<>();
+                        List<DetailRecommendAdapter.RecommendData> recommendList = new ArrayList<>();
                         for (int i = 0; i < array.length(); i++) {
                             JSONObject obj = array.getJSONObject(i);
-                            RecommendAdapter.RecommendData recommendData = RecommendAdapter.RecommendData.make(obj);
+                            DetailRecommendAdapter.RecommendData recommendData = DetailRecommendAdapter.RecommendData.make(obj);
                             if (recommendData != null) {
                                 recommendList.add(recommendData);
                             }
@@ -264,8 +248,32 @@ public class DetailFragment extends BaseFragment {
         params.put("page", "1");
         params.put("size", "9");
 
-        asyncGet(APIConfig.RECOMMEND_API,params,callBack);
+        asyncGet(APIConfig.RECOMMEND_API, params, callBack);
 
+    }
+
+    private void getData(int id) {
+        Map<String,String> parms = new HashMap<>();
+        parms.put("id", id + "");
+        asyncGet(APIConfig.SUBJECT_DETAIL, parms, new IRequestCallBack() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                Log.e(TAG, "数据请求失败");
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                String result = new String(response.body().bytes());
+                try {
+                    mData = new JSONObject(result);
+                    mHandler.sendEmptyMessage(DETAIL_DATA_ARRIVED_SUCCEED);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.d(TAG, "数据请求成功");
+            }
+        });
     }
 
     public static class AnimeDescription {

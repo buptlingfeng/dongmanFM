@@ -31,8 +31,9 @@ public class TitleBarView extends RelativeLayout {
 
         TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.TitleBarView);
 
-        leftTitleBar.setBackground(a.getDrawable(R.styleable.TitleBarView_left_title_background));
-        rightTitleBar.setBackground(a.getDrawable(R.styleable.TitleBarView_right_title_background));
+        leftTitleBar.setBackgroundResource(a.getResourceId(R.styleable.TitleBarView_left_title_background, 0));
+        rightTitleBar.setBackgroundResource(a.getResourceId(R.styleable.TitleBarView_right_title_background, 0));
+
         a.recycle();
     }
 

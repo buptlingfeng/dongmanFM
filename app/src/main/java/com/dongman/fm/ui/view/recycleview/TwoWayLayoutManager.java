@@ -295,7 +295,7 @@ public abstract class TwoWayLayoutManager extends LayoutManager {
 
         fillBefore(position - 1, recycler, extraSpaceBefore);
 
-        // This will correct for the top of the first view not
+        // This will correct for the top of the first com.dongman.fm.ui.view not
         // touching the top of the parent.
         adjustViewsStartOrEnd();
 
@@ -316,7 +316,7 @@ public abstract class TwoWayLayoutManager extends LayoutManager {
         final int end = getEndWithPadding();
         final int firstPosition = getFirstVisiblePosition();
 
-        // This is how far the end edge of the last view is from the end of the
+        // This is how far the end edge of the last com.dongman.fm.ui.view is from the end of the
         // drawable area.
         int endOffset = end - mLayoutEnd;
 
@@ -355,7 +355,7 @@ public abstract class TwoWayLayoutManager extends LayoutManager {
         final int itemCount = state.getItemCount();
         final int lastPosition = getLastVisiblePosition();
 
-        // This is how far the start edge of the first view is from the start of the
+        // This is how far the start edge of the first com.dongman.fm.ui.view is from the start of the
         // drawable area.
         int startOffset = mLayoutStart - start;
 
@@ -523,13 +523,13 @@ public abstract class TwoWayLayoutManager extends LayoutManager {
         int index;
         final int limit;
         if (direction == Direction.END) {
-            // Scrolling towards the end of the layout, child view being
+            // Scrolling towards the end of the layout, child com.dongman.fm.ui.view being
             // removed from the start.
             mLayoutStart = Integer.MAX_VALUE;
             index = 0;
             limit = removedChildEnd;
         } else {
-            // Scrolling towards the start of the layout, child view being
+            // Scrolling towards the start of the layout, child com.dongman.fm.ui.view being
             // removed from the end.
             mLayoutEnd = Integer.MIN_VALUE;
             index = childCount - 1;

@@ -14,7 +14,7 @@ public class DiscoveryFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_homepage, container, false);
+        return inflater.inflate(R.layout.homepage_fragment, container, false);
     }
 
 }

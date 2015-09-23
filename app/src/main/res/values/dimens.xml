@@ -10,4 +10,14 @@
     <dimen name="anime_average_star_heigth">20dp</dimen>
 
     <dimen name="detail_recommend_height">150dp</dimen>
+
+    <dimen name="homepage_recommend_image_width">70dp</dimen>
+    <dimen name="homepage_recommend_image_heigth">90dp</dimen>
+
+    <dimen name="homepage_title_height">50dp</dimen>
+
+    <dimen name="homepage_user_icon_size">35dp</dimen>
+
+    <dimen name="manping_user_avatar_size">50dp</dimen>
+
 </resources>

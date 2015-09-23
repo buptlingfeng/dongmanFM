@@ -43,4 +43,18 @@
         <item name="android:windowNoTitle">false</item>
     </style>
 
+    <style name="CustomTheme" parent="android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/CustomActionBar</item>
+    </style>
+
+    <style name="CustomActionBar" parent="@android:style/Widget.DeviceDefault.ActionBar">
+        <item name="android:titleTextStyle">@style/ActionBarTitle</item>
+    </style>
+
+    <style name="ActionBarTitle" parent="@android:style/TextAppearance.Holo.Large">
+        <item name="android:textColor">@color/dodgerblue</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

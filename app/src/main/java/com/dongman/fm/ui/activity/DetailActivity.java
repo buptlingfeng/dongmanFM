@@ -1,16 +1,15 @@
 package com.dongman.fm.ui.activity;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.dongman.fm.R;
-import com.dongman.fm.BaseActivity;
 import com.dongman.fm.ui.fragment.DetailFragment;
 import com.dongman.fm.ui.view.TitleBarView;
 
@@ -20,11 +19,12 @@ import com.dongman.fm.ui.view.TitleBarView;
 public class DetailActivity extends BaseActivity {
 
     private static final String TAG = "DetailActivity";
-    private static final String ANIME_URL = "anime_url";
-    private static final String ANIME_TITLE = "anime_title";
+    private static final String ANIME_ID = "id";
+    private static final String ANIME_TITLE = "name";
 
-    private String mURL = "";
+//    private String mURL = "";
     private String mTitle = "";
+    private int mID;
 
     private TitleBarView mTitleView;
 
@@ -34,13 +34,8 @@ public class DetailActivity extends BaseActivity {
         setContentView(R.layout.activity_detail);
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
-        mURL = bundle.getString(ANIME_URL);
         mTitle = bundle.getString(ANIME_TITLE);
-        if(mURL == null) {
-            Toast.makeText(this,"url 为空", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
-        }
+        mID = bundle.getInt(ANIME_ID);
         initView();
     }
 
@@ -67,13 +62,16 @@ public class DetailActivity extends BaseActivity {
             }
         });
 
-        DetailFragment detailFragment = new DetailFragment(mURL);
+        DetailFragment detailFragment = new DetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(ANIME_ID, mID);
+        detailFragment.setArguments(bundle);
         addFragment(detailFragment);
     }
 
     private void addFragment(Fragment fragment) {
 
-        FragmentManager fragmentManager = this.getFragmentManager();
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);
 //        transaction.addToBackStack(null);
