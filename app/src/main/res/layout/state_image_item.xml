@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="1dp"
+    app:cardElevation="2dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/state_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/test1" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/state_image"
+                android:layout_gravity="bottom"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <com.dongman.fm.ui.view.CircleImageView
+                    android:id="@id/user_avatar"
+                    android:layout_width="@dimen/manping_user_avatar_size"
+                    android:layout_height="@dimen/manping_user_avatar_size"
+                    android:layout_marginLeft="10dp"
+                    android:baselineAlignBottom="true"
+                    android:src="@color/blue"
+                    app:border_color="@color/white"
+                    app:border_width="1dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/user_avatar"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/user_avatar"
+                    android:text="动漫FM"
+                    android:textColor="@color/tab_top_text_2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/tab_top_text_1" />
+
+                <TextView
+                    android:id="@+id/update_time"
+                    android:textColor="@color/tab_top_text_1"
+                    android:text="3 小时"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_alignBottom="@id/user_avatar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:padding="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="标签："
+                android:textColor="@color/tab_top_text_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/relation_tag"
+                android:text="一拳超人"
+                android:textColor="@color/royalblue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="点赞(123)"
+                android:gravity="center"
+                android:layout_weight="0.5"
+                android:textColor="@color/tab_top_text_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="评论(234)"
+                android:gravity="center"
+                android:layout_weight="0.5"
+                android:textColor="@color/tab_top_text_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

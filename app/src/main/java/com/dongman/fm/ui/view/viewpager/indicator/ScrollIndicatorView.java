@@ -11,7 +11,7 @@ import com.dongman.fm.ui.view.viewpager.indicator.slidebar.ScrollBar;
 
 /**
  * 
- * @author试着飞
+ * @author 试着飞
  * @date 2014年11月1日
  * @version 1.0 主要用于多个tab可以进行滑动
  */

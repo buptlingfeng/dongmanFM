@@ -54,20 +54,25 @@
     <!--android:layout_height="wrap_content"-->
     <!--app:uik_autoScroll="false"-->
     <!--app:uik_ratio="0.5"/>-->
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@id/swipe_refresh_widget"
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+        <!--android:id="@id/swipe_refresh_widget"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" >-->
+
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@id/recycleview"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:gravity="center"-->
+            <!--android:listSelector="@android:color/transparent"-->
+            <!--android:scrollbars="none" />-->
+
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
+
+    <include layout="@layout/recycleview_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recommend_content_recycleview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:listSelector="@android:color/transparent"
-            android:scrollbars="none" />
-
-    </android.support.v4.widget.SwipeRefreshLayout>
+        android:layout_height="match_parent">
+    </include>
 
 
 </LinearLayout>

@@ -72,6 +72,7 @@ public class DetailActivity extends BaseActivity {
     private void addFragment(Fragment fragment) {
 
         FragmentManager fragmentManager = this.getSupportFragmentManager();
+        fragmentManager.popBackStack();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);
 //        transaction.addToBackStack(null);

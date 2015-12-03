@@ -10,4 +10,12 @@
 
     <item type="id" name="recycleview_container"/>
     <item type="id" name="swipe_refresh_widget"/>
+
+    <item type="id" name="fragment_container"/>
+
+    <item type="id" name="recycleview"/>
+    <item type="id" name="user_avatar"/>
+    <item type="id" name="user_name"/>
+    <item type="id" name="update_time"/>
+    <item type="id" name="main_navigation"/>
 </resources>

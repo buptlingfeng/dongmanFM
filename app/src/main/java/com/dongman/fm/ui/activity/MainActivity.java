@@ -1,116 +1,87 @@
 package com.dongman.fm.ui.activity;
 
-import android.graphics.Color;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.support.v4.app.FragmentTabHost;
+import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dongman.fm.R;
+import com.dongman.fm.ui.fragment.CommunityFragment;
 import com.dongman.fm.ui.fragment.HomePageFragment;
-import com.dongman.fm.ui.fragment.ManpingFragment;
-import com.dongman.fm.ui.fragment.SearchFragment;
-import com.dongman.fm.ui.fragment.SubjectFragment;
-import com.dongman.fm.ui.view.viewpager.indicator.FragmentListPageAdapter;
-import com.dongman.fm.ui.view.viewpager.indicator.IndicatorViewPager;
-import com.dongman.fm.ui.view.viewpager.indicator.ScrollIndicatorView;
-import com.dongman.fm.ui.view.viewpager.indicator.slidebar.ColorBar;
-import com.dongman.fm.ui.view.viewpager.indicator.transition.OnTransitionTextListener;
+import com.dongman.fm.ui.fragment.RecommendFragment;
+import com.dongman.fm.utils.FMLog;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private IndicatorViewPager mIndicatorViewPager;
-    private ScrollIndicatorView mIndicator;
-    private ViewPager mViewPager;
-    private LayoutInflater mInflater;
+    private FragmentTabHost mMainNavigation;
+    private View mIndicator;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main_activity);
-
-        mViewPager = (ViewPager) findViewById(R.id.main_viewPager);
-        mIndicator = (ScrollIndicatorView) findViewById(R.id.main_indicator);
-        mIndicator.setScrollBar(new ColorBar(this, Color.RED, 5));
-
-        // 设置滚动监听
-        int selectColorId = R.color.tab_top_text_2;
-        int unSelectColorId = R.color.tab_top_text_1;
-        mIndicator.setOnTransitionListener(new OnTransitionTextListener().setColorId(this, unSelectColorId, unSelectColorId));
-        mIndicator.setSplitAuto(true);//设置自动布局
-
-        mViewPager.setOffscreenPageLimit(2);
-        mIndicatorViewPager = new IndicatorViewPager(mIndicator,mViewPager);
-        mInflater = LayoutInflater.from(this);
-
-        List<Fragment> data = new ArrayList<>();
-        HomePageFragment homePageFragment = new HomePageFragment();
-        data.add(homePageFragment);
-        data.add(new SubjectFragment());
-        data.add(new ManpingFragment());
-        data.add(new SearchFragment());
-
-        List<String> titles = new ArrayList<>();
-        titles.add("推荐");
-        titles.add("主题");
-        titles.add("漫评");
-        titles.add("搜索");
-
-        mIndicatorViewPager.setAdapter(new ContentAdapter(titles,data, getSupportFragmentManager()));
+        initView(this);
     }
 
-    private class ContentAdapter extends IndicatorViewPager.IndicatorFragmentPagerAdapter {
+    private void initView(Context context) {
 
-        List<Fragment> mData;
-        List<String> mTitles;
+        mMainNavigation = (FragmentTabHost) findViewById(R.id.main_navigation);
+        mMainNavigation.setup(this, getSupportFragmentManager(),R.id.fragment_container);
 
-        public ContentAdapter(List<String> titles, List<Fragment> data, FragmentManager fragmentManager) {
-            super(fragmentManager);
-            mData = data;
-            mTitles = titles;
+        mIndicator = getIndicatorView("首页", R.layout.main_navigation_item);
+        mMainNavigation.addTab(mMainNavigation.newTabSpec("首页").setIndicator(mIndicator), HomePageFragment.class, null);
+
+        mIndicator = getIndicatorView("推荐", R.layout.main_navigation_item);
+        mMainNavigation.addTab(mMainNavigation.newTabSpec("推荐").setIndicator(mIndicator), RecommendFragment.class, null);
+
+        mIndicator = getIndicatorView("社区", R.layout.main_navigation_item);
+        mMainNavigation.addTab(mMainNavigation.newTabSpec("社区").setIndicator(mIndicator), CommunityFragment.class, null);
+
+        mIndicator = getIndicatorView("消息", R.layout.main_navigation_item);
+        mMainNavigation.addTab(mMainNavigation.newTabSpec("消息").setIndicator(mIndicator), HomePageFragment.class, null);
+
+        mIndicator = getIndicatorView("个人", R.layout.main_navigation_item);
+        mMainNavigation.addTab(mMainNavigation.newTabSpec("个人").setIndicator(mIndicator), HomePageFragment.class, null);
+
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode ==  KeyEvent.KEYCODE_BACK) {
+            FMLog.v(TAG, "onKeyDown back 键");
         }
+        finish();
+//        return super.onKeyDown(keyCode, event);
+        return true;
+    }
 
-        @Override
-        public int getCount() {
-            if(mData == null) {
-                return 0;
-            }
-            return mData.size();
+    private void addFragment(Fragment fragment, String tag) {
+
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        Fragment result = fragmentManager.findFragmentByTag(tag);
+        if(result != null) {
+            transaction.attach(result);
+        } else {
+            transaction.add(R.id.fragment_container, fragment, tag);
         }
+        transaction.addToBackStack(tag);
+        transaction.commit();
+    }
 
-        @Override
-        public View getViewForTab(int position, View convertView, ViewGroup container) {
-            if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.main_indicator, container, false);
-            }
-            TextView textView = (TextView) convertView;
-            textView.setText(mTitles.get(position));
-            textView.setPadding(20, 0, 20, 0);
-            Log.i(TAG, "getViewForTab");
-            return convertView;
-        }
-
-        @Override
-        public Fragment getFragmentForPage(int position) {
-            Log.i(TAG, "ContentAdapter getFragmentForPage");
-            return mData.get(position);
-        }
-
-        @Override
-        public int getItemPosition(Object object) {
-            return FragmentListPageAdapter.POSITION_NONE;
-        }
-
+    private View getIndicatorView(String name, int layoutId) {
+        View v = getLayoutInflater().inflate(layoutId, null);
+        TextView tv = (TextView) v.findViewById(R.id.navigation_title);
+        tv.setText(name);
+        return v;
     }
 }

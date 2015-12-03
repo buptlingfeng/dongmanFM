@@ -76,4 +76,11 @@
         <attr name="collapseDrawable" format="reference"/>
     </declare-styleable>
 
+    <!-- navigationView -->
+    <declare-styleable name="Nav">
+        <attr name="normal_drawable" format="reference"/>
+        <attr name="pressed_drawable" format="reference"/>
+        <attr name="nav_title" format="reference"/>
+    </declare-styleable>
+
 </resources>

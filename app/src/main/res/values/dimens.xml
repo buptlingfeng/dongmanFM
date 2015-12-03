@@ -20,4 +20,7 @@
 
     <dimen name="manping_user_avatar_size">50dp</dimen>
 
+    <dimen name="community_group_image_width">100dp</dimen>
+    <dimen name="community_group_image_heigth">140dp</dimen>
+
 </resources>

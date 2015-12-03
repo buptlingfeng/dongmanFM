@@ -6,16 +6,15 @@
 
     <!--<fragment-->
             <!--android:id="@+id/home_fragment"-->
-            <!--android:name="com.dongman.fm.ui.fragment.HomePageFragment"-->
+            <!--android:name="com.dongman.fm.ui.fragment.HomePageFragmentOldOld"-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="match_parent"-->
-            <!--tools:layout="@layout/homepage_fragment">-->
+            <!--tools:layout="@layout/homepage_fragment_focus">-->
 
     <!--</fragment>-->
 
     <FrameLayout
         android:id="@+id/fragment_container"
-        android:layout_above="@+id/main_navigation"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

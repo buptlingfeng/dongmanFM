@@ -8,16 +8,16 @@ import android.widget.FrameLayout;
 /**
  * <h1>懒加载Fragment</h1> 只有创建并显示的时候才会调用onCreateViewLazy方法<br>
  * <br>
- * 
+ *
  * 懒加载的原理onCreateView的时候Fragment有可能没有显示出来。<br>
  * 但是调用到setUserVisibleHint(boolean isVisibleToUser),isVisibleToUser =
  * true的时候就说明有显示出来<br>
  * 但是要考虑onCreateView和setUserVisibleHint的先后问题所以才有了下面的代码
- * 
+ *
  * 注意：<br>
  * 《1》原先的Fragment的回调方法名字后面要加个Lazy，比如Fragment的onCreateView方法， 就写成onCreateViewLazy <br>
  * 《2》使用该LazyFragment会导致多一层布局深度
- * 
+ *
  * @author LuckyJayce
  *
  */

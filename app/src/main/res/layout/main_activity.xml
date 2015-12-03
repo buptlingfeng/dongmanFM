@@ -1,98 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.dongman.fm.ui.view.viewpager.indicator.ScrollIndicatorView
-        android:id="@+id/main_indicator"
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:fillViewport="false" />
+        android:layout_height="0dip"
+        android:layout_weight="1" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/main_viewPager"
+    <android.support.v4.app.FragmentTabHost
+        android:id="@id/main_navigation"
+        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="wrap_content">
+        <FrameLayout
+            android:id="@+id/navigations"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+    </android.support.v4.app.FragmentTabHost>
     <!--
     <LinearLayout
-            android:id="@+id/main_navigation"
-            android:layout_alignParentBottom="true"
-            android:background="@color/gainsboro"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:id="@id/main_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navegation_bg"
+        android:orientation="horizontal">
 
         <LinearLayout
-                android:id="@+id/home_button"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="match_parent">
-            <ImageView
-                    android:src="@drawable/dm_icon_home"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+            android:id="@+id/home_button"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/dm_icon_home"
+                android:paddingTop="5dp" />
+
             <TextView
-                    android:text="首页"
-                    android:textColor="@color/steelblue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="首页"
+                android:textColor="@color/steelblue" />
         </LinearLayout>
+
         <LinearLayout
-                android:id="@+id/recommend_button"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="match_parent">
-            <ImageView
-                    android:src="@drawable/dm_icon_recommend"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+            android:id="@+id/recommend_button"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/dm_icon_recommend" />
+
             <TextView
-                    android:text="推荐"
-                    android:textColor="@color/steelblue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="推荐"
+                android:textColor="@color/steelblue" />
         </LinearLayout>
+
         <LinearLayout
-                android:id="@+id/discovery_button"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="match_parent">
+            android:id="@+id/community_button"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
             <ImageView
-                    android:src="@drawable/dm_icon_discovery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:src="@drawable/dm_icon_discovery" />
+
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/steelblue"
-                    android:text="发现"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发现"
+                android:textColor="@color/steelblue" />
         </LinearLayout>
+
         <LinearLayout
-                android:id="@+id/personal_button"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="match_parent">
+            android:id="@+id/message_button"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
             <ImageView
-                    android:src="@drawable/dm_icon_persional"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:src="@drawable/dm_icon_discovery" />
+
             <TextView
-                    android:text="我的"
-                    android:textColor="@color/steelblue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="消息"
+                android:textColor="@color/steelblue" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/personal_button"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:src="@drawable/dm_icon_persional" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的"
+                android:textColor="@color/steelblue" />
         </LinearLayout>
     </LinearLayout>
     -->
+    <!--<FrameLayout-->
+        <!--android:id="@+id/fragment_container"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
 </LinearLayout>
 

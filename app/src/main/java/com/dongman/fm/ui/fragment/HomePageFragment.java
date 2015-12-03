@@ -1,182 +1,134 @@
 package com.dongman.fm.ui.fragment;
 
+
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.view.Window;
+import android.widget.TextView;
 
 import com.dongman.fm.R;
-import com.dongman.fm.BaseFragment;
-import com.dongman.fm.data.APIConfig;
-import com.dongman.fm.network.IRequestCallBack;
-import com.dongman.fm.ui.fragment.adapter.HomePageFragmentAdapter;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import com.dongman.fm.ui.view.viewpager.indicator.FragmentListPageAdapter;
+import com.dongman.fm.ui.view.viewpager.indicator.IndicatorViewPager;
+import com.dongman.fm.ui.view.viewpager.indicator.ScrollIndicatorView;
+import com.dongman.fm.ui.view.viewpager.indicator.slidebar.ColorBar;
+import com.dongman.fm.ui.view.viewpager.indicator.transition.OnTransitionTextListener;
+import com.dongman.fm.utils.FMLog;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by liuzhiwei on 15/6/17.
+ * Created by liuzhiwei on 15/11/15.
  */
-public class HomePageFragment extends BaseFragment {
+public class HomePageFragment extends com.dongman.fm.BaseFragment {
 
     private static final String TAG = HomePageFragment.class.getName();
-    private static final int DATA_READY = 1;
-    private static final int DARA_FAILED = 2;
 
-    private Context mContext;
-    private Handler mHandler;
-
-    private EditText mInputEdit;
-    private RecyclerView mRecommendContent;
-    private LinearLayoutManager mLayoutManager;
-    private HomePageFragmentAdapter mRecommendAdapter;
-    private SwipeRefreshLayout mRefreshLayout;
-
-    private int mPageNumber = 1;
-    private boolean isLoadingMore = false;
-    private boolean isPullUpdate = false;
+    private IndicatorViewPager mIndicatorViewPager;
+    private ScrollIndicatorView mIndicator;
+    private ViewPager mViewPager;
+    private Activity mActivity;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = activity;
 
-        View root = inflater.inflate(R.layout.homepage_fragment, container, false);
-        initView(root);
-        mContext = this.getActivity();
-        return root;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mHandler = new Handler(Looper.getMainLooper()) {
+    }
 
-            @Override
-            public void handleMessage(Message msg) {
-                switch (msg.what) {
-                    case DATA_READY:
-                        mRecommendAdapter.notifyDataSetChanged();
-                        if(mRefreshLayout.isRefreshing()) {
-                            mRefreshLayout.setRefreshing(false);
-                        }
-                        break;
-                    case DARA_FAILED:
-                        Toast.makeText(getActivity(),"数据已经加载完毕",Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.homepage_fragment_container, container, false);
+        initView(root);
+        return root;
     }
 
     private void initView(View root) {
-        mInputEdit = (EditText) root.findViewById(R.id.search_input);
-        mInputEdit.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(v.getId() == mInputEdit.getId() && event.getAction() == MotionEvent.ACTION_DOWN) {
-                    Intent intent = new Intent();
-                    intent.setAction("com.dongman.fm.search");
-                    mContext.startActivity(intent);
-                }
-                return false;
-            }
-        });
+        mViewPager = (ViewPager) root.findViewById(R.id.main_viewPager);
+        mIndicator = (ScrollIndicatorView) root.findViewById(R.id.main_indicator);
+        mIndicator.setScrollBar(new ColorBar(mActivity, Color.RED, 5));
 
-        mRecommendContent = (RecyclerView) root.findViewById(R.id.recommend_content_recycleview);
-        mRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.swipe_refresh_widget);
-        mRecommendContent.setHasFixedSize(true);
-        mRecommendContent.setLongClickable(true);
-//        mRecommendContent.setOrientation(TwoWayLayoutManager.Orientation.VERTICAL);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecommendContent.setLayoutManager(mLayoutManager);
-        mRecommendContent.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
-                int totalItemCount = mRecommendAdapter.getItemCount();
-                //lastVisibleItem >= totalItemCount - 1 表示剩下1个item自动加载，各位自由选择
-                // dy>0 表示向下滑动
-                if (lastVisibleItem >= totalItemCount - 3 && dy > 0) {
-                    if (isLoadingMore) {
-                        Log.d(TAG, "ignore manually update!");
-                    } else {
-                        getData(mPageNumber++, false);//这里多线程也要手动控制isLoadingMore
-                        isLoadingMore = true;
-                    }
-                }
-            }
+        // 设置滚动监听
+        int selectColorId = R.color.tab_top_text_2;
+        int unSelectColorId = R.color.tab_top_text_1;
+        mIndicator.setOnTransitionListener(new OnTransitionTextListener().setColorId(mActivity, unSelectColorId, unSelectColorId));
+        mIndicator.setSplitAuto(true);//设置自动布局
 
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-        });
+        mViewPager.setOffscreenPageLimit(2);
+        mIndicatorViewPager = new IndicatorViewPager(mIndicator,mViewPager);
 
-        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getData(1, true);
-                isPullUpdate = false;
+        List<Fragment> data = new ArrayList<>();
 
-            }
-        });
-        mRecommendAdapter = new HomePageFragmentAdapter(getActivity());
-        mRecommendContent.setAdapter(mRecommendAdapter);
-        getData(mPageNumber, true);
+        data.add(new HomePageFocusFragment());
+        data.add(new HomePageSquareFragment());
+//        data.add(new ManpingFragment());
+//        data.add(new SearchFragment());
+
+        List<String> titles = new ArrayList<>();
+        titles.add("关注");
+        titles.add("广场");
+
+        ContentAdapter adapter = new ContentAdapter(titles, data, mActivity, getChildFragmentManager());
+        mIndicatorViewPager.setAdapter(adapter);
     }
 
-    private void getData(int pageNum, final boolean isFrist) {
-        Map<String, String> params = new HashMap<>();
-        params.put("page", Integer.toString(pageNum));
-        asyncGet(APIConfig.HOME_DATA_API, params, new IRequestCallBack(){
 
-            @Override
-            public void onFailure(Request request, IOException e) {
-                Log.i(TAG,"data 获取失败");
-                e.printStackTrace();
-            }
+    private class ContentAdapter extends IndicatorViewPager.IndicatorFragmentPagerAdapter {
 
-            @Override
-            public void onResponse(Response response) throws IOException {
-                try {//TODO 数据结构改变，增加扩展字段来表示是否已经加载完毕
-                    JSONObject data = new JSONObject(response.body().string());
-                    String isEnd = data.getString("msg");
-                    if("success".equals(isEnd)){
-                        JSONArray array = data.getJSONArray("list");
-                        if(isFrist) {
-                            mRecommendAdapter.setData(array);
-                            mPageNumber = 2;
-                        } else {
-                            mRecommendAdapter.addData(array);
-                        }
-                        mHandler.sendEmptyMessage(DATA_READY);
-                    }
-                    isLoadingMore = false;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        List<Fragment> mData;
+        List<String> mTitles;
+        LayoutInflater mInflater;
+
+        public ContentAdapter(List<String> titles, List<Fragment> data, Context context, FragmentManager fragmentManager) {
+            super(fragmentManager);
+            mData = data;
+            mTitles = titles;
+            mInflater = LayoutInflater.from(context);
+        }
+
+        @Override
+        public int getCount() {
+            if(mData == null) {
+                return 0;
             }
-        });
+            return mData.size();
+        }
+
+        @Override
+        public View getViewForTab(int position, View convertView, ViewGroup container) {
+            if (convertView == null) {
+                convertView = mInflater.inflate(R.layout.main_indicator, container, false);
+            }
+            TextView textView = (TextView) convertView;
+            textView.setText(mTitles.get(position));
+            textView.setPadding(20, 0, 20, 0);
+            FMLog.i("ContentAdapter", "getViewForTab");
+            return convertView;
+        }
+
+        @Override
+        public Fragment getFragmentForPage(int position) {
+            FMLog.i(TAG, "ContentAdapter getFragmentForPage");
+            return mData.get(position);
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return FragmentListPageAdapter.POSITION_NONE;
+        }
+
     }
-
 }
