@@ -8,19 +8,43 @@
 
     <application
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Holo.Light"
+        android:theme="@style/Theme.AppCompat.Light"
         android:name=".BaseApplication"
         android:icon="@drawable/ic_launcher">
         <activity android:name=".ui.activity.MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:logo="@drawable/icon_search_normal"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.RecommendDetailActivity"
+            android:theme="@style/test1">
+            <intent-filter>
+                <action android:name="com.dongman.fm.recommend_detail"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.activity.ThemeActivity"
+            android:theme="@style/test1">
+            <intent-filter>
+                <action android:name="com.dongman.fm.theme"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.activity.GroupActivity"
+            android:theme="@style/test1">
+            <intent-filter>
+                <action android:name="com.dongman.fm.group"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.activity.DetailActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="com.dongman.fm.detail"/>
                 <category android:name="android.intent.category.DEFAULT" />
@@ -28,7 +52,7 @@
         </activity>
         <activity android:name=".ui.activity.SearchActivity"
             android:windowSoftInputMode = "adjustPan"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="com.dongman.fm.search"/>
                 <category android:name="android.intent.category.DEFAULT" />
@@ -36,14 +60,14 @@
         </activity>
         <activity android:name=".ui.activity.ManpingActivity"
             android:logo="@drawable/icon_back"
-            android:theme="@android:style/Theme.Holo.Light">
+            android:theme="@style/test1">
             <intent-filter>
                 <action android:name="com.dongman.fm.manping"/>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.SubjectActivity"
-            android:theme="@android:style/Theme.Holo.Light">
+            android:theme="@style/test1">
             <intent-filter>
                 <action android:name="com.dongman.fm.subject"/>
                 <category android:name="android.intent.category.DEFAULT" />

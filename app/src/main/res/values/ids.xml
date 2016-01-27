@@ -18,4 +18,9 @@
     <item type="id" name="user_name"/>
     <item type="id" name="update_time"/>
     <item type="id" name="main_navigation"/>
+    <item type="id" name="main_viewPager"/>
+
+    <item type="id" name="back"/>
+
+    <item type="id" name="search_input"/>
 </resources>

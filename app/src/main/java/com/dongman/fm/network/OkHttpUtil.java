@@ -3,12 +3,12 @@ package com.dongman.fm.network;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by liuzhiwei on 15/7/12.
@@ -29,9 +28,9 @@ public class OkHttpUtil {
 //    public static final MediaType BYTE_TYPE = MediaType.parse("application/byte");
     private static final OkHttpClient mOkHttpClient = new OkHttpClient();
 
-    static{
-        mOkHttpClient.setConnectTimeout(30, TimeUnit.SECONDS);
-    }
+//    static{
+//        mOkHttpClient.setConnectTimeout(30, TimeUnit.SECONDS);
+//    }
 
     public static Response get(String url) throws IOException{
 

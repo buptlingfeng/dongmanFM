@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:background="@color/default_bg_color"
+        android:visibility="gone"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <Button
+            android:id="@id/back"
+            android:background="@drawable/iconfont_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:id="@id/title"
+            android:text="TMA 弱爆了"
+            style="@style/ActionBarTitle"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <WebView
+                android:id="@+id/webView1"
+                android:scrollbars="none"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="阅读(109)"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="点赞(40)"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <include
+                android:id="@+id/review_item1"
+                layout="@layout/review_item"/>
+            <include
+                android:id="@+id/review_item2"
+                layout="@layout/review_item"/>
+            <include
+                android:id="@+id/review_item3"
+                layout="@layout/review_item"/>
+
+            <TextView
+                android:id="@+id/extra_action"
+                android:text="@string/more_reviews"
+                android:background="@color/white"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

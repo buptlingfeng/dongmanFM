@@ -21,7 +21,7 @@ import org.json.JSONObject;
 /**
  * Created by liuzhiwei on 15/9/8.
  */
-public class SearchFragment extends LazyFragment {
+public class SearchFragment extends BaseFragment {
 
     private Context mContext;
     private EditText mInputEdit;
@@ -30,8 +30,8 @@ public class SearchFragment extends LazyFragment {
 
 
     @Override
-    protected void onCreateViewLazy(Bundle savedInstanceState) {
-        super.onCreateViewLazy(savedInstanceState);
+    protected void onCreateView(Bundle savedInstanceState) {
+        super.onCreateView(savedInstanceState);
         setContentView(R.layout.search_fragment);
         mContext = getActivity();
         mInputEdit = (EditText) findViewById(R.id.search_input);
@@ -61,11 +61,6 @@ public class SearchFragment extends LazyFragment {
         }
         mAdapter.setData(data);
         mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    protected void onDestroyViewLazy() {
-        super.onDestroyViewLazy();
     }
 
     class RecommendWordsAdapter extends BaseAdapter {

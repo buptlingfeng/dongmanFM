@@ -4,12 +4,7 @@
     android:layout_height="match_parent"
     android:background="#F2F1EE"
     android:orientation="vertical">
-    <!--<com.dongman.fm.ui.com.dongman.fm.ui.view.Banner-->
-    <!--android:id="@+id/banner"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--app:uik_autoScroll="false"-->
-    <!--app:uik_ratio="0.5"/>-->
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_widget"
         android:layout_width="match_parent"

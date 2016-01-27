@@ -66,7 +66,7 @@ public class CommentAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.detail_review_item, null);
+            convertView = mInflater.inflate(R.layout.review_item, null);
             viewHolder = new ViewHolder();
             viewHolder.avatar = (CircleImageView) convertView.findViewById(R.id.comment_avatar);
             viewHolder.content = (TextView) convertView.findViewById(R.id.comment_content);

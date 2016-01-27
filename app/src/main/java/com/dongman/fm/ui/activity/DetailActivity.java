@@ -66,17 +66,7 @@ public class DetailActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putInt(ANIME_ID, mID);
         detailFragment.setArguments(bundle);
-        addFragment(detailFragment);
-    }
-
-    private void addFragment(Fragment fragment) {
-
-        FragmentManager fragmentManager = this.getSupportFragmentManager();
-        fragmentManager.popBackStack();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-//        transaction.addToBackStack(null);
-        transaction.commit();
+        addFragment(detailFragment,"detailFragment");
     }
 
 }

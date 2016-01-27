@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <FrameLayout
         android:padding="3dp"
         android:id="@+id/anime_detail_info_header"
         android:background="@color/white"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/little_image_width"
         android:layout_height="wrap_content">
 
         <ImageView
@@ -17,24 +17,62 @@
             android:src="@drawable/holder"
             android:layout_width="@dimen/little_image_width"
             android:layout_height="@dimen/little_image_heigth" />
-        <TextView
-            android:id="@+id/anime_name"
-            android:layout_below="@id/anime_image"
-            android:gravity="center"
-            android:text="海贼王"
-            android:textSize="14sp"
-            android:maxLines="1"
-            android:layout_width="@dimen/little_image_width"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/anime_score"
-            android:layout_below="@id/anime_name"
-            android:gravity="center"
-            android:text="7.8分"
-            android:textColor="@color/red"
-            android:layout_width="@dimen/little_image_width"
-            android:layout_height="wrap_content" />
 
-    </RelativeLayout>
+        <LinearLayout
+            android:background="#601a181a"
+            android:id="@+id/anime_average_star_container"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/icon_star_yellow"
+                android:layout_width="@dimen/anime_average_star_small_heigth"
+                android:layout_height="@dimen/anime_average_star_small_heigth" />
+            <ImageView
+                android:src="@drawable/icon_star_grey"
+                android:layout_width="@dimen/anime_average_star_small_heigth"
+                android:layout_height="@dimen/anime_average_star_small_heigth" />
+            <ImageView
+                android:src="@drawable/icon_star_grey"
+                android:layout_width="@dimen/anime_average_star_small_heigth"
+                android:layout_height="@dimen/anime_average_star_small_heigth" />
+            <ImageView
+                android:src="@drawable/icon_star_grey"
+                android:layout_width="@dimen/anime_average_star_small_heigth"
+                android:layout_height="@dimen/anime_average_star_small_heigth" />
+            <ImageView
+                android:src="@drawable/icon_star_grey"
+                android:layout_width="@dimen/anime_average_star_small_heigth"
+                android:layout_height="@dimen/anime_average_star_small_heigth" />
+            <TextView
+                android:id="@+id/anime_score"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:text="2.0分"
+                android:textSize="10sp"
+                android:textColor="@color/red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <!--<TextView-->
+            <!--android:id="@+id/anime_score"-->
+            <!--android:layout_below="@id/anime_name"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="10sp"-->
+            <!--android:text="7.8分"-->
+            <!--android:textColor="@color/red"-->
+            <!--android:layout_width="@dimen/little_image_width"-->
+            <!--android:layout_height="wrap_content" />-->
 
+    </FrameLayout>
+    <TextView
+        android:id="@+id/anime_name"
+        android:layout_below="@id/anime_image"
+        android:gravity="center"
+        android:text="海贼王"
+        android:textSize="14sp"
+        android:maxLines="1"
+        android:layout_width="@dimen/little_image_width"
+        android:layout_height="wrap_content" />
 </LinearLayout>

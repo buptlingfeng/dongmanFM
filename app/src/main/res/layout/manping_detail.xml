@@ -74,35 +74,73 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
+        <!--<LinearLayout-->
+            <!--android:id="@+id/vote_container"-->
+            <!--android:layout_below="@id/manping_detail_container"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:weightSum="1">-->
+            <!--<TextView-->
+                <!--android:id="@+id/manping_detail_vote"-->
+                <!--android:text="喜欢(11)"-->
+                <!--android:textColor="@color/text_normal"-->
+                <!--android:gravity="center"-->
+                <!--android:background="@drawable/btn_3rd_normal_holo_light"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:layout_weight="0.5" />-->
+        <!--</LinearLayout>-->
+
         <LinearLayout
-            android:id="@+id/vote_container"
+            android:id="@+id/divider_text"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="40dp"
             android:layout_below="@id/manping_detail_container"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:weightSum="1">
-            <TextView
-                android:id="@+id/manping_detail_vote"
-                android:text="喜欢(11)"
-                android:textColor="@color/text_normal"
+            android:layout_weight="2">
+            <LinearLayout
+                android:layout_weight="1"
                 android:gravity="center"
-                android:background="@drawable/btn_3rd_normal_holo_light"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_weight="0.5" />
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/dianzan"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_width" />
+                <TextView
+                    android:text="(324)"
+                    style="@style/third_title"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/huifu"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_width" />
+                <TextView
+                    android:id="@+id/manping_detail_vote"
+                    android:text="(24)"
+                    style="@style/third_title"/>
+            </LinearLayout>
         </LinearLayout>
-        <TextView
-            android:layout_below="@id/vote_container"
-            android:text="回复"
-            android:id="@+id/divider_text"
-            android:textSize="16sp"
-            android:paddingLeft="10dp"
-            android:layout_marginTop="40dp"
-            android:textColor="@color/text_grey"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+
+        <!--<TextView-->
+            <!--android:id="@+id/divider_text"-->
+            <!--android:text="回复"-->
+            <!--android:textSize="16sp"-->
+            <!--android:paddingLeft="10dp"-->
+            <!--android:layout_below="@id/vote_container"-->
+            <!--android:layout_marginTop="40dp"-->
+            <!--android:textColor="@color/text_grey"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
         <com.dongman.fm.ui.view.CustomListView
             android:id="@+id/manping_detail_comments_list"
             android:layout_below="@id/divider_text"

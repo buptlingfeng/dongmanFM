@@ -30,15 +30,16 @@ public class ManpingActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putString("id",mID);
         manpingDetailFragment.setArguments(bundle);
-        addFragment(manpingDetailFragment);
+        addFragment(manpingDetailFragment, "manpingDetail");
     }
 
-    private void addFragment(Fragment fragment) {
+    @Override
+    public void onBackPressed() {
 
-        FragmentManager fragmentManager = this.getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-//        transaction.addToBackStack(null);
-        transaction.commit();
+        if(getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            this.finish();
+        }
     }
 }

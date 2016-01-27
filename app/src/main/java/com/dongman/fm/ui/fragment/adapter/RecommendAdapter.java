@@ -1,13 +1,14 @@
 package com.dongman.fm.ui.fragment.adapter;
 
-import android.content.Context;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.dongman.fm.R;
-import com.dongman.fm.utils.FMLog;
 
 /**
  * Created by liuzhiwei
@@ -15,19 +16,21 @@ import com.dongman.fm.utils.FMLog;
 public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.RecommendViewHolder> {
     private static final String TAG = RecommendAdapter.class.getName();
 
-    private Context mContext;
+    private Activity mActivity;
     private LayoutInflater mInflater;
 
-    public RecommendAdapter(Context context) {
-        mContext = context;
-        mInflater = LayoutInflater.from(mContext);
+    public RecommendAdapter(Activity activity) {
+        mActivity = activity;
+        mInflater = LayoutInflater.from(activity);
     }
 
     @Override
     public RecommendViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         int id = 0;
-        FMLog.d(TAG, "ViewType + : " + viewType);
         switch (viewType) {
+            case 5:
+                id = R.layout.state_recommend_item;
+                break;
             case 4:
                 id = R.layout.state_image_item;
                 break;
@@ -57,23 +60,38 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.Reco
 
     @Override
     public int getItemViewType(int position) {
-        return position % 5;
+        return position % 6;
     }
 
     @Override
     public int getItemCount() {
-        return 11;
+        return 14;
     }
 
 
 
     class RecommendViewHolder extends RecyclerView.ViewHolder {
+
+        View item;
+
         public RecommendViewHolder(View itemView) {
             super(itemView);
+            item = itemView;
         }
 
         public void bindView(int postion) {
-
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setAction("com.dongman.fm.recommend_detail");
+                    Bundle bundle = new Bundle();
+                    bundle.putString("title", "逢真纪");
+                    bundle.putString("url", "http://192.168.11.100/files/index.html");
+                    intent.putExtra("info", bundle);
+                    mActivity.startActivity(intent);
+                }
+            });
         }
     }
 }

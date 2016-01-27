@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.dongman.fm.R;
 import com.dongman.fm.data.APIConfig;
 import com.dongman.fm.network.IRequestCallBack;
-import com.dongman.fm.BaseFragment;
 import com.dongman.fm.ui.fragment.adapter.CommentAdapter;
 import com.dongman.fm.ui.fragment.adapter.DetailRecommendAdapter;
 import com.dongman.fm.ui.view.CustomListView;
@@ -27,8 +26,8 @@ import com.dongman.fm.ui.view.ExpandableTextView;
 import com.dongman.fm.ui.view.loading.Titanic;
 import com.dongman.fm.ui.view.loading.TitanicTextView;
 import com.dongman.fm.ui.view.recycleview.widget.TwoWayView;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 import org.json.JSONArray;

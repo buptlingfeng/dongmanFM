@@ -1,6 +1,8 @@
 package com.dongman.fm.ui.fragment.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -47,7 +49,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.Comm
 
     @Override
     public void onBindViewHolder(CommunityViewHolder holder, int position) {
-        holder.bindView(position, getItemViewType(position));
+        holder.bindView(position);
     }
 
     @Override
@@ -71,6 +73,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.Comm
 
         public CommunityViewHolder(View itemView, int type) {
             super(itemView);
+            root = itemView;
             viewType = type;
             switch (viewType) {
                 case 1:
@@ -104,13 +107,25 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.Comm
             root = itemView;
         }
 
-        public void bindView(int position, int type) {
-            switch (type) {
+        public void bindView(int position) {
+            switch (viewType) {
                 case 1:
 
                     break;
                 case 2:
-
+                    //初始化跳转逻辑 调转到相应的页面
+                    //TODO 传递的参数加到bundle中 主要是name
+                    root.findViewById(R.id.all_group_indicator).setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent();
+                            intent.setAction("com.dongman.fm.group");
+                            Bundle data = new Bundle();
+                            data.putInt("type", 1);
+                            intent.putExtra("data", data);
+                            mContext.startActivity(intent);
+                        }
+                    });
                     break;
                 default:
                     break;
@@ -197,6 +212,17 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.Comm
 
         public void bindView(int positon) {
             // TODO: 增加点击响应
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setAction("com.dongman.fm.group");
+                    Bundle data = new Bundle();
+                    data.putInt("type", 2);
+                    intent.putExtra("data", data);
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
 }

@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dongman.fm.BaseFragment;
-
 /**
  * Created by liuzhiwei on 15/8/14.
  */

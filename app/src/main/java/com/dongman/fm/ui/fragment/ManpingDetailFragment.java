@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.dongman.fm.BaseFragment;
 import com.dongman.fm.R;
 import com.dongman.fm.data.APIConfig;
 import com.dongman.fm.image.ImageUtils;
@@ -20,8 +19,8 @@ import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.ui.fragment.adapter.CommentAdapter;
 import com.dongman.fm.ui.view.CircleImageView;
 import com.dongman.fm.ui.view.CustomListView;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -106,7 +105,7 @@ public class ManpingDetailFragment extends BaseFragment {
                             String resultContent = manpingContent.replaceAll("<p>","\r\n     ");
                             mManpingContent.setText(resultContent);
                             String votes = mBasicData.getString("vote_count");
-                            mManpingVote.setText("喜欢（" + votes + "）");
+                            mManpingVote.setText("(" + votes + ")");
 
                             mCommentAdapter.setData(mComments);
                             mCommentAdapter.notifyDataSetChanged();

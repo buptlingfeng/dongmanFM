@@ -9,6 +9,11 @@
     <dimen name="anime_average_star_width">20dp</dimen>
     <dimen name="anime_average_star_heigth">20dp</dimen>
 
+    <dimen name="anime_average_star_small_width">10dp</dimen>
+    <dimen name="anime_average_star_small_heigth">10dp</dimen>
+
+    <dimen name="anime_average_star_middle">15dp</dimen>
+
     <dimen name="detail_recommend_height">150dp</dimen>
 
     <dimen name="homepage_recommend_image_width">70dp</dimen>
@@ -23,4 +28,8 @@
     <dimen name="community_group_image_width">100dp</dimen>
     <dimen name="community_group_image_heigth">140dp</dimen>
 
+    <dimen name="recommend_img_width">103dp</dimen>
+    <dimen name="recommend_img_heigth">72dp</dimen>
+    
+    <dimen name="fm_card_margin">0dp</dimen>
 </resources>

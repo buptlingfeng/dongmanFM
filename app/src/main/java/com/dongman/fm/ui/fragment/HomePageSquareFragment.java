@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dongman.fm.BaseFragment;
 import com.dongman.fm.R;
 import com.dongman.fm.ui.fragment.adapter.HomePageSquareFragmentAdapter;
 import com.dongman.fm.utils.FMLog;

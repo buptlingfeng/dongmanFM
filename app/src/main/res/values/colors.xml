@@ -155,4 +155,10 @@
     <color name="tab_top_text_1">#aaa</color>
     <color name="tab_top_text_2">#000</color>
     <color name="navegation_bg">#FBFFFD</color>
+
+    <color name="default_bg_color">#1BB48B</color>
+
+    <color name="nav_default_color">#607D8B</color>
+
+    <color name="theme_color">#009688</color>
 </resources>

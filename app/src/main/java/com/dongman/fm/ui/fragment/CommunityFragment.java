@@ -1,16 +1,16 @@
 package com.dongman.fm.ui.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dongman.fm.BaseFragment;
 import com.dongman.fm.R;
 import com.dongman.fm.ui.fragment.adapter.CommunityAdapter;
 import com.dongman.fm.utils.FMLog;
@@ -22,7 +22,7 @@ public class CommunityFragment extends BaseFragment {
 
     private static final String TAG = CommunityFragment.class.getName();
 
-    private Context mContext;
+    private Activity mActivity;
     private RecyclerView mRecycleView;
     private LinearLayoutManager mLinearLayoutManager;
     private SwipeRefreshLayout mRefreshLayout;
@@ -33,8 +33,13 @@ public class CommunityFragment extends BaseFragment {
 
     @Override
     public void onAttach(Activity activity) {
-        mContext = activity;
+        mActivity = activity;
         super.onAttach(activity);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -59,12 +64,7 @@ public class CommunityFragment extends BaseFragment {
                 FMLog.d(TAG, "onRefresh");
             }
         });
-        mAdater = new CommunityAdapter(mContext);
+        mAdater = new CommunityAdapter(mActivity);
         mRecycleView.setAdapter(mAdater);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 }

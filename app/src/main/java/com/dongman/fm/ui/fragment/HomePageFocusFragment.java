@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dongman.fm.BaseFragment;
 import com.dongman.fm.R;
 import com.dongman.fm.ui.fragment.adapter.HomePageFocusFragmentAdapter;
 import com.dongman.fm.utils.FMLog;
@@ -21,7 +20,7 @@ import com.dongman.fm.utils.FMLog;
  */
 public class HomePageFocusFragment extends BaseFragment {
 
-    private static final String TAG = HomePageFocusFragmentAdapter.class.getName();
+    private static final String TAG = HomePageFocusFragmentAdapter.class.getSimpleName();
 
     private RecyclerView mRecycleView;
     private HomePageFocusFragmentAdapter mAdapter;
@@ -55,8 +54,10 @@ public class HomePageFocusFragment extends BaseFragment {
         mRecycleView.setHasFixedSize(true);
         mRecycleView.setLongClickable(true);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
-//        mLinearLayoutManager.setOrientation(OrientationHelper.HORIZONTAL);
         mRecycleView.setLayoutManager(mLinearLayoutManager);
+
+        mRefreshLayout.setColorSchemeResources(android.R.color.holo_red_light, android.R.color.holo_green_light,
+                android.R.color.holo_blue_light, android.R.color.holo_orange_light);
 
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

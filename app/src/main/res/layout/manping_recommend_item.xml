@@ -4,6 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="1dp"
     app:cardElevation="2dp"
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="false"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <RelativeLayout
@@ -13,69 +15,14 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:id="@+id/homepage_recommend_item_image_container"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:paddingRight="10dp"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/homepage_recommend_item_image"
-                android:scaleType="fitXY"
-                android:src="@drawable/holder"
-                android:layout_width="@dimen/homepage_recommend_image_width"
-                android:layout_height="@dimen/homepage_recommend_image_heigth"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
-            <TextView
-                android:id="@+id/anime_name"
-                android:textSize="15sp"
-                android:gravity="center"
-                android:textColor="#555555"
-                android:singleLine="true"
-                android:text="海贼王"
-                android:layout_width="@dimen/homepage_recommend_image_width"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/homepage_recommend_item_image"
-                android:layout_alignLeft="@+id/homepage_recommend_item_image"
-                android:layout_alignStart="@+id/homepage_recommend_item_image" />
-            <TextView
-                android:layout_below="@id/anime_name"
-                android:text="7.8分"
-                android:textSize="15sp"
-                android:textColor="@color/red"
-                android:gravity="center"
-                android:layout_width="@dimen/homepage_recommend_image_width"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/homepage_recommend_item_image"
-                android:layout_alignStart="@+id/homepage_recommend_item_image" />
-        </RelativeLayout>
-        <TextView
-            android:id="@+id/homepage_recommend_item_abstract"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/homepage_recommend_item_image_container"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:textColor="#4F4F4F"
-            android:textSize="20sp"
-            android:text="大圣归来，悲情的英雄"
-            android:maxLines="2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="10dp"
-            android:layout_below="@id/homepage_recommend_item_abstract"
-            android:layout_alignLeft="@+id/homepage_recommend_item_abstract">
+            android:id="@+id/user_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <com.dongman.fm.ui.view.CircleImageView
                 android:id="@+id/avatar_img"
@@ -87,69 +34,158 @@
 
             <TextView
                 android:id="@+id/user_name"
-                android:text="《大圣归来》"
-                android:textColor="#999999"
-                android:textSize="15sp"
+                android:text="小了个豆丁"
+                style="@style/sub_title"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:layout_alignLeft="@+id/homepage_recommend_item_abstract"
                 android:layout_alignStart="@+id/homepage_recommend_item_abstract" />
+
+            <TextView
+                android:id="@+id/create_time"
+                style="@style/third_title"
+                android:layout_marginRight="20dp"
+                android:text="2015-07-31"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/anime_grade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <!--<View-->
-        <!--android:layout_below="@id/homepage_recommend_item_image"-->
-        <!--android:layout_toLeftOf="@id/homepage_recommend_item_image"-->
-        <!--android:layout_marginRight="10dp"-->
-        <!--android:background="@color/grey"-->
-        <!--android:layout_marginTop="5dp"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0.5dp"/>-->
         <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@id/homepage_recommend_item_abstract"
-            android:orientation="horizontal"
-            android:weightSum="9"
-            android:layout_width="wrap_content"
+            android:layout_below="@id/user_info"
+            android:layout_toRightOf="@+id/homepage_recommend_item_image_container"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/comment_count"
-                android:layout_toRightOf="@+id/data"
-                android:layout_marginRight="20dp"
-                android:textColor="#D0D0D0"
-                android:textSize="15sp"
-                android:text="评论：232"
-                android:layout_weight="3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/vote_count"
-                android:layout_toRightOf="@+id/data"
-                android:layout_marginRight="20dp"
-                android:textColor="#D0D0D0"
-                android:textSize="15sp"
-                android:text="赞：232"
-                android:layout_weight="3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
+                android:id="@+id/homepage_recommend_item_abstract"
+                android:textColor="#4F4F4F"
+                style="@style/sub_title"
+                android:maxLines="2"
+                android:text="大圣归来，悲情的英雄"
+                android:gravity="left"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/anime_grade"
+                android:layout_toEndOf="@+id/anime_grade" />
             <TextView
+                android:text="BOSS级大寒潮来袭，现在一定有很多小伙伴们都很怀念夏天吧，动漫FM在此大寒之际，特献上，一想到夏天就会想起来的动漫，夏天的炎热VS冬天的寒冷，冰火两重天，一边欣赏雪景，一边补番，岂不快哉！"
+                android:maxLines="4"
+                android:ellipsize="end"
+                android:layout_marginTop="20dp"
+                style="@style/third_title"
+                android:gravity="left"
+                android:textColor="@color/gray"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/homepage_recommend_item_image_container"
+            android:layout_below="@id/user_info"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_width="@dimen/community_group_image_width"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/homepage_recommend_item_image"
+                android:scaleType="fitXY"
+                android:src="@drawable/holder"
+                android:layout_width="@dimen/community_group_image_width"
+                android:layout_height="@dimen/community_group_image_heigth"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                android:id="@+id/create_time"
-                android:textColor="#D0D0D0"
-                android:textSize="15sp"
-                android:text="2015-07-31"
-                android:layout_weight="3"
+                android:layout_alignParentStart="true" />
+            <TextView
+                android:id="@+id/anime_name"
+                android:background="#601a181a"
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:singleLine="true"
+                style="@style/third_title"
+                android:textColor="@color/white"
+                android:text="海贼王"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/homepage_recommend_item_image"
+                android:layout_alignLeft="@+id/homepage_recommend_item_image"
+                android:layout_alignStart="@+id/homepage_recommend_item_image" />
+            <!--<TextView-->
+                <!--android:layout_below="@id/anime_name"-->
+                <!--android:text="7.8分"-->
+                <!--style="@style/third_title"-->
+                <!--android:textColor="@color/red"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignLeft="@+id/homepage_recommend_item_image"-->
+                <!--android:layout_alignStart="@+id/homepage_recommend_item_image" />-->
+        </FrameLayout>
+
+        <View
+            android:id="@+id/seperartor"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/homepage_recommend_item_image_container"
+            android:background="#EEEEEE"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_below="@id/seperartor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_weight="1"
+                android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/dianzan"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_width" />
+                <TextView
+                    android:id="@+id/comment_count"
+                    android:text="(324)"
+                    style="@style/third_title"/>
+            </LinearLayout>
+
+            <View
+                android:background="#EEEEEE"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/huifu"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_width" />
+                <TextView
+                    android:id="@+id/vote_count"
+                    android:text="(24)"
+                    style="@style/third_title"/>
+            </LinearLayout>
+
         </LinearLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

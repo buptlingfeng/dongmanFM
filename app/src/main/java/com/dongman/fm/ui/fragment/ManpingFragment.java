@@ -22,8 +22,8 @@ import com.dongman.fm.data.APIConfig;
 import com.dongman.fm.image.ImageUtils;
 import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.ui.view.CircleImageView;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +36,7 @@ import java.util.Map;
 /**
  * Created by liuzhiwei on 15/9/8.
  */
-public class ManpingFragment extends LazyFragment {
+public class ManpingFragment extends BaseFragment {
 
     private static final String TAG = ManpingFragment.class.getSimpleName();
 
@@ -58,8 +58,8 @@ public class ManpingFragment extends LazyFragment {
 
 
     @Override
-    protected void onCreateViewLazy(Bundle savedInstanceState) {
-        super.onCreateViewLazy(savedInstanceState);
+    protected void onCreateView(Bundle savedInstanceState) {
+        super.onCreateView(savedInstanceState);
         setContentView(R.layout.fragment_manping);
         mContext = getActivity();
         mRecycleView = (RecyclerView) findViewById(R.id.recycleview_container);
@@ -156,10 +156,6 @@ public class ManpingFragment extends LazyFragment {
         });
     }
 
-    @Override
-    protected void onDestroyViewLazy() {
-        super.onDestroyViewLazy();
-    }
 
     class ManpingAdapter extends RecyclerView.Adapter<ManpingViewHolder> {
 

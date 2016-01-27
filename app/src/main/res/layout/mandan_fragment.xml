@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/manping_detail_head_container"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.dongman.fm.ui.view.CircleImageView
+                android:id="@+id/user_avatar"
+                android:src="@color/blue"
+                android:layout_width="@dimen/manping_user_avatar_size"
+                android:layout_height="@dimen/manping_user_avatar_size" />
+            <TextView
+                android:id="@+id/mandan_info"
+                android:gravity="center_vertical"
+                android:text="凌风创建/73434人关注"
+                android:textSize="18sp"
+                android:textColor="#555555"
+                android:layout_alignBaseline="@id/user_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/user_avatar"/>
+            <TextView
+                android:id="@+id/mandan_updatetime"
+                android:text="2015-08-13"
+                android:textColor="@color/text_grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:src="@drawable/icon_below"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <include layout="@layout/recycleview_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </include>
+
+</LinearLayout>

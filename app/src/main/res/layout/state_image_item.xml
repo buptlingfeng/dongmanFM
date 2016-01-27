@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="1dp"
     app:cardElevation="2dp"
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="false"
+    android:foreground="?attr/selectableItemBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -73,37 +76,46 @@
             android:layout_height="wrap_content">
             <TextView
                 android:text="标签："
-                android:textColor="@color/tab_top_text_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                style="@style/third_title"
+                android:textColor="@color/tab_top_text_1"/>
             <TextView
                 android:id="@+id/relation_tag"
                 android:text="一拳超人"
-                android:textColor="@color/royalblue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                style="@style/third_title"
+                android:textColor="@color/royalblue" />
         </LinearLayout>
 
         <LinearLayout
-            android:padding="10dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="点赞(123)"
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
+            <LinearLayout
+                android:layout_weight="1"
                 android:gravity="center"
-                android:layout_weight="0.5"
-                android:textColor="@color/tab_top_text_1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:text="评论(234)"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/dianzan"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_width" />
+                <TextView
+                    android:text="(324)"
+                    style="@style/third_title"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
                 android:gravity="center"
-                android:layout_weight="0.5"
-                android:textColor="@color/tab_top_text_1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/huifu"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_width" />
+                <TextView
+                    android:text="(24)"
+                    style="@style/third_title"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>

@@ -1,5 +1,6 @@
 package com.dongman.fm.ui.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,9 +13,9 @@ import android.widget.ImageView;
 import com.dongman.fm.image.ImageUtils;
 import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.network.OkHttpUtil;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -25,6 +26,14 @@ public class BaseFragment extends Fragment {
 	private View contentView;
 	private Context context;
 	private ViewGroup container;
+	protected boolean isRendered = false;
+
+	protected BackHandledInterface mBackHandledInterface;
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +42,7 @@ public class BaseFragment extends Fragment {
 	}
 
 	@Override
-	public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		this.inflater = inflater;
 		this.container = container;
 		onCreateView(savedInstanceState);
@@ -47,11 +56,20 @@ public class BaseFragment extends Fragment {
 	}
 
 	@Override
+	public void onStart() {
+		super.onStart();
+	}
+
+	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		contentView = null;
 		container = null;
 		inflater = null;
+	}
+
+	public boolean onBackPressed() {
+		return false;
 	}
 
 	public Context getApplicationContext() {

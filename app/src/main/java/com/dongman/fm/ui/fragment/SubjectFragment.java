@@ -21,8 +21,8 @@ import com.dongman.fm.R;
 import com.dongman.fm.data.APIConfig;
 import com.dongman.fm.image.ImageUtils;
 import com.dongman.fm.network.IRequestCallBack;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +35,7 @@ import java.util.Map;
 /**
  * Created by liuzhiwei on 15/9/8.
  */
-public class SubjectFragment extends LazyFragment {
+public class SubjectFragment extends BaseFragment {
 
     private static final String TAG = SubjectFragment.class.getSimpleName();
 
@@ -56,8 +56,8 @@ public class SubjectFragment extends LazyFragment {
     private boolean isPullUpdate = false;
 
     @Override
-    protected void onCreateViewLazy(Bundle savedInstanceState) {
-        super.onCreateViewLazy(savedInstanceState);
+    protected void onCreateView(Bundle savedInstanceState) {
+        super.onCreateView(savedInstanceState);
         setContentView(R.layout.fragment_subjects);
         mContext = getActivity();
         mRecycleView = (RecyclerView) findViewById(R.id.recycleview_container);
@@ -117,11 +117,6 @@ public class SubjectFragment extends LazyFragment {
             }
         });
         getData(1, true);
-    }
-
-    @Override
-    public void onDestroyViewLazy() {
-        super.onDestroyViewLazy();
     }
 
     private void getData(int pageNum, final boolean isFrist) {

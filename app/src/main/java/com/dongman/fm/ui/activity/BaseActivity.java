@@ -2,17 +2,20 @@ package com.dongman.fm.ui.activity;
 
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.dongman.fm.R;
 import com.dongman.fm.image.ImageUtils;
 import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.network.OkHttpUtil;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 import java.io.IOException;
@@ -91,6 +94,21 @@ public class BaseActivity extends AppCompatActivity {
         };
 
         OkHttpUtil.asyncGet(request,callback);
+    }
+
+    public void addFragment(Fragment fragment, String tag) {
+
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        Fragment result = fragmentManager.findFragmentByTag(tag);
+//        if(result != null) {
+//
+//        } else {
+//            transaction.add(R.id.fragment_container, fragment, tag);
+//        }
+        transaction.replace(R.id.fragment_container,fragment, tag);
+        transaction.addToBackStack(tag);
+        transaction.commit();
     }
 
 }

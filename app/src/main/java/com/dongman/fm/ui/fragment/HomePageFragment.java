@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.TextView;
 
 import com.dongman.fm.R;
@@ -28,7 +27,7 @@ import java.util.List;
 /**
  * Created by liuzhiwei on 15/11/15.
  */
-public class HomePageFragment extends com.dongman.fm.BaseFragment {
+public class HomePageFragment extends BaseFragment {
 
     private static final String TAG = HomePageFragment.class.getName();
 
@@ -41,7 +40,7 @@ public class HomePageFragment extends com.dongman.fm.BaseFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = activity;
-
+//        ((AppCompatActivity) mActivity).getSupportActionBar().hide();
     }
 
     @Override
@@ -62,9 +61,9 @@ public class HomePageFragment extends com.dongman.fm.BaseFragment {
         mIndicator.setScrollBar(new ColorBar(mActivity, Color.RED, 5));
 
         // 设置滚动监听
-        int selectColorId = R.color.tab_top_text_2;
+        int selectColorId = R.color.red;
         int unSelectColorId = R.color.tab_top_text_1;
-        mIndicator.setOnTransitionListener(new OnTransitionTextListener().setColorId(mActivity, unSelectColorId, unSelectColorId));
+        mIndicator.setOnTransitionListener(new OnTransitionTextListener().setColorId(mActivity, selectColorId, unSelectColorId));
         mIndicator.setSplitAuto(true);//设置自动布局
 
         mViewPager.setOffscreenPageLimit(2);
@@ -73,9 +72,8 @@ public class HomePageFragment extends com.dongman.fm.BaseFragment {
         List<Fragment> data = new ArrayList<>();
 
         data.add(new HomePageFocusFragment());
-        data.add(new HomePageSquareFragment());
-//        data.add(new ManpingFragment());
-//        data.add(new SearchFragment());
+//        data.add(new HomePageSquareFragment());
+        data.add(new ThemeFragment());
 
         List<String> titles = new ArrayList<>();
         titles.add("关注");

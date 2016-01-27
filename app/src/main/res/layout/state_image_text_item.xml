@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    app:cardCornerRadius="1dp"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="false"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -25,10 +30,9 @@
                 app:border_width="1dp" />
             <TextView
                 android:id="@id/user_name"
-                style="@style/text_title_second_style"
+                style="@style/translation_title"
+                android:textColor="@color/dodgerblue"
                 android:text="动漫FM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/user_avatar" />
@@ -40,32 +44,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/tab_top_text_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:padding="5dp"
-                android:src="@drawable/test3"
-                android:scaleType="centerCrop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <ImageView
-                android:padding="5dp"
-                android:src="@drawable/test3"
-                android:scaleType="centerCrop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <ImageView
-                android:padding="5dp"
-                android:src="@drawable/test3"
-                android:scaleType="centerCrop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                style="@style/third_title"
+                android:layout_width="match_parent" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,32 +60,67 @@
                 android:padding="10dp"
                 android:text="今天好开心哇好开心，求点赞今天好开心哇好开心，求点赞今天好开心哇好开心，求点赞今天好开心哇好开心，求点赞"
                 android:textColor="@color/tab_top_text_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/third_title"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
         </LinearLayout>
 
         <LinearLayout
-            android:padding="10dp"
-            android:layout_weight="1"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:text="点赞(123)"
-                android:gravity="center"
-                android:layout_weight="0.5"
-                android:textColor="@color/tab_top_text_1"
+            <ImageView
+                android:padding="5dp"
+                android:src="@drawable/test3"
+                android:scaleType="centerCrop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <TextView
-                android:text="评论(234)"
-                android:gravity="center"
-                android:layout_weight="0.5"
-                android:textColor="@color/tab_top_text_1"
+            <ImageView
+                android:padding="5dp"
+                android:src="@drawable/test3"
+                android:scaleType="centerCrop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+            <ImageView
+                android:padding="5dp"
+                android:src="@drawable/test3"
+                android:scaleType="centerCrop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
+            <LinearLayout
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/dianzan"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_width" />
+                <TextView
+                    android:text="(324)"
+                    style="@style/third_title"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/huifu"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_width" />
+                <TextView
+                    android:text="(24)"
+                    style="@style/third_title"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>

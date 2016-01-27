@@ -18,6 +18,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Random;
+
 
 /**
  * Created by liuzhiwei on 15/8/6.
@@ -193,7 +195,7 @@ public class HomePageFragmentAdapter extends RecyclerView.Adapter<HomePageFragme
             }
         }
     }
-
+    static int index = 1;
     public class TopicViewHolder extends BaseViewHolder {
 
         TextView title;
@@ -209,6 +211,7 @@ public class HomePageFragmentAdapter extends RecyclerView.Adapter<HomePageFragme
         @Override
         public void bindView(final JSONObject obj) {
             try {
+                index ++;
                 data = obj;
                 title.setText(obj.getString("title"));
                 ImageUtils.getImage(mContext, obj.getString("img_url"), imageView);
@@ -216,6 +219,12 @@ public class HomePageFragmentAdapter extends RecyclerView.Adapter<HomePageFragme
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(index % 2 == 0) {
+                            Intent intent = new Intent();
+                            intent.setAction("com.dongman.fm.theme");
+                            mContext.startActivity(intent);
+                            return;
+                        }
                         Intent intent = new Intent();
                         intent.setAction("com.dongman.fm.subject");
                         intent.putExtra("id", id);

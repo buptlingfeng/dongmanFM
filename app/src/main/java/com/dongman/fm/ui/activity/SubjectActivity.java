@@ -21,8 +21,8 @@ import com.dongman.fm.data.APIConfig;
 import com.dongman.fm.image.ImageUtils;
 import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.ui.view.RecyclerViewHeader;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,7 +66,9 @@ public class SubjectActivity extends BaseActivity {
         mAdapter = new AnimesAdapter(this);
         mRecycleView.setAdapter(mAdapter);
 
-        mRecycleView.addItemDecoration(new SpacesItemDecoration(10, 10, 10, 10));
+        mRecycleView.addItemDecoration(new SpacesItemDecoration(30, 20, 20, 10));
+
+//        mRecycleView.addItemDecoration(new GridSpacingItemDecoration(3, 40, true));
 
         mHandler = new Handler(Looper.getMainLooper()) {
 
@@ -108,7 +110,9 @@ public class SubjectActivity extends BaseActivity {
             TextView expandableText = (TextView) mHeader.findViewById(R.id.expandable_text);
 
             subjectTitle.setText(object.getString("title"));
-            createTime.setText(object.getString("create_time"));
+            String time = object.getString("create_time");
+            time = time.split(" ")[0];
+            createTime.setText(time);
             subjectTotalAnimes.setText("" + object.getInt("subject_count"));
             ImageUtils.getImage(this, object.getString("img_url"), subjectImg);
             expandableText.setText(object.getString("summary"));
@@ -237,10 +241,47 @@ public class SubjectActivity extends BaseActivity {
             outRect.left = left;
             outRect.right = right;
             outRect.bottom = bottom;
+            outRect.top = top;
 
             // Add top margin only for the first item to avoid double left between items
             if(parent.getChildLayoutPosition(view) == 0)
                 outRect.top = top;
+        }
+    }
+
+
+    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
+
+        private int spanCount;
+        private int spacing;
+        private boolean includeEdge;
+
+        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
+            this.spanCount = spanCount;
+            this.spacing = spacing;
+            this.includeEdge = includeEdge;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            int position = parent.getChildAdapterPosition(view); // item position
+            int column = position % spanCount; // item column
+
+            if (includeEdge) {
+                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
+                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
+
+                if (position < spanCount) { // top edge
+                    outRect.top = spacing;
+                }
+                outRect.bottom = spacing; // item bottom
+            } else {
+                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
+                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
+                if (position >= spanCount) {
+                    outRect.top = spacing; // item top
+                }
+            }
         }
     }
 
