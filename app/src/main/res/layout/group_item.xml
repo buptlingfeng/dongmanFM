@@ -1,88 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="1dp"
-    app:cardElevation="2dp"
-    app:cardUseCompatPadding="true"
-    app:cardPreventCornerOverlap="false"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp"
+    android:background="@color/white"
+    android:layout_gravity="center_vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:padding="10dp"
-        android:layout_gravity="center_vertical"
+    <ImageView
+        android:id="@+id/group_item_image"
+        android:layout_alignParentLeft="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/holder"
+        android:layout_width="@dimen/homepage_recommend_image_width"
+        android:layout_height="@dimen/homepage_recommend_image_heigth"
+        android:layout_alignParentTop="true" />
+
+    <LinearLayout
+        android:layout_toRightOf="@id/group_item_image"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/group_item_image"
-            android:layout_alignParentLeft="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/holder"
-            android:layout_width="@dimen/homepage_recommend_image_width"
-            android:layout_height="@dimen/homepage_recommend_image_heigth"
-            android:layout_alignParentTop="true" />
-
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/group_title"
+            style="@style/text_title_second_style"
+            android:text="一拳超人（吐槽小组）"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/group_introduction"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="我又不是为了得到你们的承认才当英雄的，是因为我想当才当的"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <LinearLayout
-            android:layout_toRightOf="@id/group_item_image"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
+            android:weightSum="2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/group_title"
-                style="@style/text_title_second_style"
-                android:text="一拳超人（吐槽小组）"
-                android:layout_gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/group_introduction"
-                android:gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="我又不是为了得到你们的承认才当英雄的，是因为我想当才当的"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
             <LinearLayout
-                android:weightSum="2"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:src="@drawable/people"
-                        android:layout_width="@dimen/homepage_user_icon_size"
-                        android:layout_height="@dimen/homepage_user_icon_size" />
-                    <TextView
-                        android:text="438"
-                        android:layout_marginLeft="10dp"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:src="@drawable/article"
-                        android:layout_width="@dimen/homepage_user_icon_size"
-                        android:layout_height="@dimen/homepage_user_icon_size" />
-                    <TextView
-                        android:text="48"
-                        android:layout_marginLeft="10dp"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                <ImageView
+                    android:src="@drawable/people"
+                    android:layout_width="@dimen/homepage_user_icon_size"
+                    android:layout_height="@dimen/homepage_user_icon_size" />
+                <TextView
+                    android:text="438"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/article"
+                    android:layout_width="@dimen/homepage_user_icon_size"
+                    android:layout_height="@dimen/homepage_user_icon_size" />
+                <TextView
+                    android:text="48"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
+    </LinearLayout>
 
-    </RelativeLayout>
-
-</android.support.v7.widget.CardView>
+</RelativeLayout>

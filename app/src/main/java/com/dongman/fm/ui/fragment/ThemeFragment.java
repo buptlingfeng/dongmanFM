@@ -41,7 +41,7 @@ public class ThemeFragment extends BaseFragment {
     private Handler mHandler;
 
 //    private EditText mInputEdit;
-    private RecyclerView mRecommendContent;
+    private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private HomePageFragmentAdapter mRecommendAdapter;
     private SwipeRefreshLayout mRefreshLayout;
@@ -97,13 +97,13 @@ public class ThemeFragment extends BaseFragment {
 //            }
 //        });
 
-        mRecommendContent = (RecyclerView) root.findViewById(R.id.recycleview);
+        mRecyclerView = (RecyclerView) root.findViewById(R.id.recycleview);
         mRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.swipe_refresh_widget);
-        mRecommendContent.setHasFixedSize(true);
-        mRecommendContent.setLongClickable(true);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLongClickable(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecommendContent.setLayoutManager(mLayoutManager);
-        mRecommendContent.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -136,7 +136,7 @@ public class ThemeFragment extends BaseFragment {
             }
         });
         mRecommendAdapter = new HomePageFragmentAdapter(getActivity());
-        mRecommendContent.setAdapter(mRecommendAdapter);
+        mRecyclerView.setAdapter(mRecommendAdapter);
         getData(mPageNumber, true);
     }
 

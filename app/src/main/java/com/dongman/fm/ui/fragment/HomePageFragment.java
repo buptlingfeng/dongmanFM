@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,7 @@ import java.util.List;
  */
 public class HomePageFragment extends BaseFragment {
 
-    private static final String TAG = HomePageFragment.class.getName();
+    private static final String TAG = "HomePageFragment";
 
     private IndicatorViewPager mIndicatorViewPager;
     private ScrollIndicatorView mIndicator;
@@ -40,7 +41,6 @@ public class HomePageFragment extends BaseFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = activity;
-//        ((AppCompatActivity) mActivity).getSupportActionBar().hide();
     }
 
     @Override
@@ -72,8 +72,7 @@ public class HomePageFragment extends BaseFragment {
         List<Fragment> data = new ArrayList<>();
 
         data.add(new HomePageFocusFragment());
-//        data.add(new HomePageSquareFragment());
-        data.add(new ThemeFragment());
+        data.add(new HomePageSquareFragment());
 
         List<String> titles = new ArrayList<>();
         titles.add("关注");
@@ -113,13 +112,12 @@ public class HomePageFragment extends BaseFragment {
             TextView textView = (TextView) convertView;
             textView.setText(mTitles.get(position));
             textView.setPadding(20, 0, 20, 0);
-            FMLog.i("ContentAdapter", "getViewForTab");
+            FMLog.i(TAG, "getViewForTab : " + position);
             return convertView;
         }
 
         @Override
         public Fragment getFragmentForPage(int position) {
-            FMLog.i(TAG, "ContentAdapter getFragmentForPage");
             return mData.get(position);
         }
 

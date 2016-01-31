@@ -2,18 +2,19 @@ package com.dongman.fm.ui.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.dongman.fm.R;
-import com.dongman.fm.ui.fragment.adapter.CommunityAdapter;
-import com.dongman.fm.utils.FMLog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by liuzhiwei on 15/12/2.
@@ -23,10 +24,9 @@ public class CommunityFragment extends BaseFragment {
     private static final String TAG = CommunityFragment.class.getName();
 
     private Activity mActivity;
-    private RecyclerView mRecycleView;
-    private LinearLayoutManager mLinearLayoutManager;
-    private SwipeRefreshLayout mRefreshLayout;
-    private CommunityAdapter mAdater;
+    private ViewPager mViewPager;
+
+    private TextView mNav1, mNav2;
 
     public CommunityFragment() {
     }
@@ -51,20 +51,69 @@ public class CommunityFragment extends BaseFragment {
 
     private void initView(View root){
 
-        mRecycleView = (RecyclerView) root.findViewById(R.id.recycleview);
-        mRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.swipe_refresh_widget);
-        mRecycleView.setHasFixedSize(true);
-        mRecycleView.setLongClickable(true);
-        mLinearLayoutManager = new LinearLayoutManager(getActivity());
-        mRecycleView.setLayoutManager(mLinearLayoutManager);
+        List<Fragment> data = new ArrayList<>();
+        data.add(new CommunityHotSpotFragment());
+        data.add(new CommunityGroupFragment());
 
-        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                FMLog.d(TAG, "onRefresh");
-            }
-        });
-        mAdater = new CommunityAdapter(mActivity);
-        mRecycleView.setAdapter(mAdater);
+        mViewPager = (ViewPager) root.findViewById(R.id.main_viewPager);
+        CommunityPagerAdapter adapter = new CommunityPagerAdapter(getChildFragmentManager());
+        adapter.setData(data);
+        mViewPager.setAdapter(adapter);
+        mViewPager.addOnPageChangeListener(new PageChangeListener());
+        mViewPager.setOffscreenPageLimit(1);
+    }
+
+//    private void changeStatus(TextView nav, int position) {
+//        if(mCurrentTab != nav) {
+//            mCurrentTab.setTextColor(mActivity.getResources().getColor(R.color.nav_default_color));
+//            nav.setTextColor(mActivity.getResources().getColor(R.color.red));
+//            mViewPager.setCurrentItem(position);
+//            mCurrentTab = nav;
+//        }
+//    }
+
+    class CommunityPagerAdapter extends FragmentPagerAdapter {
+
+        private List<Fragment> mData;
+
+        public CommunityPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        public void setData(List<Fragment> data) {
+            mData = data;
+        }
+
+        @Override
+        public int getCount() {
+            return mData.size();
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mData.get(position);
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            return super.instantiateItem(container, position);
+        }
+    }
+
+    class PageChangeListener implements ViewPager.OnPageChangeListener {
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
     }
 }

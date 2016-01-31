@@ -28,7 +28,7 @@ public class RecommendFragment extends BaseFragment {
 
     private static final String TAG = RecommendFragment.class.getName();
 
-    private TextView mNav1, mNav2, mNav3, mNav4;
+    private TextView mNav1, mNav2, mNav3, mNav4, mNav5;
     private ViewPager mViewPager;
     private EditText mInputEdit;
     private TextView mCurrentTab;
@@ -60,11 +60,13 @@ public class RecommendFragment extends BaseFragment {
         mNav2 = (TextView)root.findViewById(R.id.nav2);
         mNav3 = (TextView)root.findViewById(R.id.nav3);
         mNav4 = (TextView)root.findViewById(R.id.nav4);
+        mNav5 = (TextView)root.findViewById(R.id.nav5);
 
         mNav1.setOnClickListener(listener);
         mNav2.setOnClickListener(listener);
         mNav3.setOnClickListener(listener);
         mNav4.setOnClickListener(listener);
+        mNav5.setOnClickListener(listener);
 
 
         mInputEdit = (EditText) root.findViewById(R.id.search_input);
@@ -84,6 +86,7 @@ public class RecommendFragment extends BaseFragment {
         List<Fragment> data = new ArrayList<>();
         data.add(new RecommendHotFragmet());
         data.add(new RecommendThemeFragmet());
+        data.add(new ThemeFragment());
         data.add(new RecommendNewsFragmet());
         data.add(new RecommendChartletFragmet());
         mViewPager = (ViewPager) root.findViewById(R.id.main_viewPager);
@@ -119,6 +122,8 @@ public class RecommendFragment extends BaseFragment {
                 case R.id.nav4:
                     changeStatus(mNav4, 3);
                     break;
+                case R.id.nav5:
+                    changeStatus(mNav5, 4);
                 default:
                     break;
             }
@@ -183,6 +188,9 @@ public class RecommendFragment extends BaseFragment {
                     break;
                 case 3:
                     changeStatus(mNav4, 3);
+                    break;
+                case 4:
+                    changeStatus(mNav5, 4);
                     break;
                 default:
                     break;

@@ -73,12 +73,30 @@ public class GroupDetailFragment extends BaseFragment {
 
         @Override
         public int getItemViewType(int position) {
-            return super.getItemViewType(position);
+            return position % 4;
+//            return super.getItemViewType(position);
         }
 
         @Override
         public PostItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = mInflater.inflate(R.layout.post_item_layout, null, false);
+            int id = 0;
+            switch (viewType) {
+                case 0:
+                    id = R.layout.state_recommend_item;
+                    break;
+                case 1:
+                    id = R.layout.state_image_item;
+                    break;
+                case 2:
+                    id = R.layout.post_item_layout;
+                    break;
+                case 3:
+                    id = R.layout.state_text_item;
+                    break;
+                default:
+                    break;
+            }
+            View view = mInflater.inflate(id, null, false);
             return new PostItemViewHolder(view);
         }
 
@@ -111,7 +129,7 @@ public class GroupDetailFragment extends BaseFragment {
             view.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    RecommendDetailFragment fragment = new RecommendDetailFragment();
+                    TopicDetailFragment fragment = new TopicDetailFragment();
                     Bundle bundle = new Bundle();
                     bundle.putString("url", "http://192.168.11.100/files/index.html");
                     bundle.putString("title","一拳超人为什么这么牛逼");

@@ -51,10 +51,10 @@ public class MainActivity extends BaseActivity implements BackHandledInterface{
         icon.setImageResource(R.drawable.icon_tuijian);
         mMainNavigation.addTab(mMainNavigation.newTabSpec("推荐").setIndicator(mRecommend), RecommendFragment.class, null);
 
-        mCommmunity = getIndicatorView("社区", R.layout.main_navigation_item);
+        mCommmunity = getIndicatorView("小组", R.layout.main_navigation_item);
         icon = (ImageView) mCommmunity.findViewById(R.id.navigation_icon);
         icon.setImageResource(R.drawable.icon_shequ);
-        mMainNavigation.addTab(mMainNavigation.newTabSpec("社区").setIndicator(mCommmunity), CommunityFragment.class, null);
+        mMainNavigation.addTab(mMainNavigation.newTabSpec("小组").setIndicator(mCommmunity), CommunityFragment.class, null);
 
         mMessage = getIndicatorView("消息", R.layout.main_navigation_item);
         icon = (ImageView) mMessage.findViewById(R.id.navigation_icon);

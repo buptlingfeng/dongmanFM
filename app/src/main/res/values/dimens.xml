@@ -32,4 +32,6 @@
     <dimen name="recommend_img_heigth">72dp</dimen>
     
     <dimen name="fm_card_margin">0dp</dimen>
+
+    <dimen name="item_image_size">60dp</dimen>
 </resources>
