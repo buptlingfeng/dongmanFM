@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:padding="10dp"
+        android:id="@+id/anime_detail_info_header"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/detail_anime_image"
+            android:scaleType="fitXY"
+            android:src="@drawable/holder"
+            android:layout_width="@dimen/little_image_width"
+            android:layout_height="@dimen/little_image_heigth" />
+        <LinearLayout
+            android:id="@+id/anime_average_star_container"
+            android:layout_toRightOf="@id/detail_anime_image"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/icon_star_yellow"
+                android:layout_width="@dimen/anime_average_star_width"
+                android:layout_height="@dimen/anime_average_star_heigth" />
+            <ImageView
+                android:src="@drawable/icon_star_grey"
+                android:layout_width="@dimen/anime_average_star_width"
+                android:layout_height="@dimen/anime_average_star_heigth" />
+            <ImageView
+                android:src="@drawable/icon_star_grey"
+                android:layout_width="@dimen/anime_average_star_width"
+                android:layout_height="@dimen/anime_average_star_heigth" />
+            <ImageView
+                android:src="@drawable/icon_star_grey"
+                android:layout_width="@dimen/anime_average_star_width"
+                android:layout_height="@dimen/anime_average_star_heigth" />
+            <ImageView
+                android:src="@drawable/icon_star_grey"
+                android:layout_width="@dimen/anime_average_star_width"
+                android:layout_height="@dimen/anime_average_star_heigth" />
+            <TextView
+                android:id="@+id/anime_average"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_gravity="center_vertical"
+                android:text="9.0分"
+                android:textColor="@color/tab_top_text_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <View
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@color/tab_top_text_1"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:id="@+id/average_count"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:text="80人评价"
+                android:textColor="@color/tab_top_text_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/anime_subtype"
+            android:layout_below="@id/anime_average_star_container"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/detail_anime_image"
+            android:layout_marginLeft="20dp"
+            android:text="篇幅："
+            style="@style/detail_anime_info_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/anime_genres"
+            android:layout_below="@id/anime_subtype"
+            android:layout_toRightOf="@id/detail_anime_image"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="热血/动作/格斗/英雄/怪物/超能力"
+            style="@style/detail_anime_info_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/anime_casts"
+            android:layout_below="@id/anime_genres"
+            android:layout_toRightOf="@id/detail_anime_image"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="声优："
+            style="@style/detail_anime_info_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/anime_summary_title"
+        android:layout_below="@id/anime_detail_info_header"
+        android:text="动漫详情..."
+        android:textColor="@color/tab_top_text_1"
+        android:textSize="20sp"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/anime_summary_detail"
+        android:text="主人公埼玉原本是一名整日奔波于求职的普通人。3年前的一天偶然遇到了要对淘气少年下杀手的异变螃蟹人后，回忆起年少年时“想要成为英雄”的梦想，最终拼尽全力救下了淘气 "
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-light"
+        android:textSize="12sp"
+        android:textColor="#666666"/>
+</LinearLayout>

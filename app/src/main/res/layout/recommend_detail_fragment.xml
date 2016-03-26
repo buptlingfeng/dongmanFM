@@ -1,34 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <FrameLayout
-        android:background="@color/default_bg_color"
-        android:visibility="gone"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <Button
-            android:id="@id/back"
-            android:background="@drawable/iconfont_back"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
-        <TextView
-            android:id="@id/title"
-            android:text="TMA 弱爆了"
-            style="@style/ActionBarTitle"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </FrameLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,34 +14,88 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_weight="2"
+                android:id="@+id/relative_manping_container"
+                android:layout_below="@id/manping_detail_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
                 <TextView
-                    android:text="阅读(109)"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
+                    android:text="相关动漫"
+                    style="@style/sub_title"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
+                    android:gravity="left"
+                    android:textColor="@color/text_grey"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
-                <TextView
-                    android:text="点赞(40)"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycleview"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:background="@color/white"
                     android:gravity="center"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:listSelector="@android:color/transparent"
+                    android:scrollbars="none">
+                </android.support.v7.widget.RecyclerView>
             </LinearLayout>
-            <include
-                android:id="@+id/review_item1"
-                layout="@layout/review_item"/>
-            <include
-                android:id="@+id/review_item2"
-                layout="@layout/review_item"/>
-            <include
-                android:id="@+id/review_item3"
-                layout="@layout/review_item"/>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/divider_text"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/relative_manping_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/dianzan"
+                        android:layout_width="@dimen/anime_average_star_width"
+                        android:layout_height="@dimen/anime_average_star_width" />
+                    <TextView
+                        android:text="(324)"
+                        style="@style/third_title"/>
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/huifu"
+                        android:layout_width="@dimen/anime_average_star_width"
+                        android:layout_height="@dimen/anime_average_star_width" />
+                    <TextView
+                        android:id="@+id/manping_detail_vote"
+                        android:text="(24)"
+                        style="@style/third_title"/>
+                </LinearLayout>
+            </LinearLayout>
+            <!--<include-->
+                <!--android:id="@+id/review_item1"-->
+                <!--layout="@layout/review_item"/>-->
+            <!--<include-->
+                <!--android:id="@+id/review_item2"-->
+                <!--layout="@layout/review_item"/>-->
+            <!--<include-->
+                <!--android:id="@+id/review_item3"-->
+                <!--layout="@layout/review_item"/>-->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/comments_recycleview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:listSelector="@android:color/transparent"
+                android:scrollbars="none">
+            </android.support.v7.widget.RecyclerView>
             <TextView
                 android:id="@+id/extra_action"
                 android:text="@string/more_reviews"
@@ -76,6 +104,5 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
         </LinearLayout>
-    </ScrollView>
 
-</LinearLayout>
+</ScrollView>

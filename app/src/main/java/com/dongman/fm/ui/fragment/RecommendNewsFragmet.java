@@ -2,16 +2,31 @@ package com.dongman.fm.ui.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.dongman.fm.R;
+import com.dongman.fm.data.APIConfig;
+import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.ui.fragment.adapter.RecommendAdapter;
 import com.dongman.fm.utils.FMLog;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by liuzhiwei on 15/12/13.
@@ -26,6 +41,8 @@ public class RecommendNewsFragmet extends BaseFragment {
     private SwipeRefreshLayout mRefreshLayout;
     private RecommendAdapter mAdapter;
 
+    private Handler mHandler;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -34,6 +51,19 @@ public class RecommendNewsFragmet extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mHandler = new Handler() {
+
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case REFRESH_UI:
+                        mAdapter.notifyDataSetChanged();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
     }
 
     @Override
@@ -68,7 +98,43 @@ public class RecommendNewsFragmet extends BaseFragment {
 
         mAdapter = new RecommendAdapter(getActivity());
         mRecycleView.setAdapter(mAdapter);
+
+        getData("zixun");
     }
+
+    private void getData(String type) {
+        Map<String, String> params = new HashMap<>();
+        params.put("page", "1");
+        params.put("size", "10");
+        params.put("type", type);
+
+        asyncGet(APIConfig.ARTICAL_LIST, params, new IRequestCallBack() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                Log.e(TAG, "onFailure");
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                try {//TODO 数据结构改变，增加扩展字段来表示是否已经加载完毕
+                    JSONObject data = new JSONObject(response.body().string());
+
+                    data = data.getJSONObject("data");
+                    JSONArray list = null;
+                    if (data != null) {
+                        list = data.getJSONArray("list");
+                    }
+                    if(list != null) {
+                        mAdapter.setData(list);
+                        mHandler.sendEmptyMessage(REFRESH_UI);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
 
     @Override
     public void onDetach() {

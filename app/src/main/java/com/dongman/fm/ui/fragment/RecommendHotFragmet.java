@@ -10,8 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dongman.fm.R;
+import com.dongman.fm.data.APIConfig;
+import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.ui.fragment.adapter.RecommendAdapter;
 import com.dongman.fm.utils.FMLog;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by liuzhiwei on 15/12/13.
@@ -73,5 +82,23 @@ public class RecommendHotFragmet extends BaseFragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    private void getData(int page, String type, int size) {
+        Map<String, String> params = new HashMap<>();
+        params.put("page", page + "");
+        params.put("type", type);
+        params.put("size", size + "");
+        asyncGet(APIConfig.ARTICAL_LIST, params, new IRequestCallBack() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+
+            }
+        });
     }
 }

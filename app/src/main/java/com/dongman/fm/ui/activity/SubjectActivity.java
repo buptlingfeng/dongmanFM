@@ -1,34 +1,38 @@
 package com.dongman.fm.ui.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dongman.fm.R;
 import com.dongman.fm.data.APIConfig;
+import com.dongman.fm.data.CommentData;
+import com.dongman.fm.data.RelativeRecommend;
+import com.dongman.fm.data.TopicInfo;
 import com.dongman.fm.image.ImageUtils;
 import com.dongman.fm.network.IRequestCallBack;
-import com.dongman.fm.ui.view.RecyclerViewHeader;
+import com.dongman.fm.ui.fragment.adapter.CommentsAdapter;
+import com.dongman.fm.ui.fragment.adapter.RelativeAdapter;
+import com.dongman.fm.ui.view.FullyLinearLayoutManager;
+import com.dongman.fm.ui.view.SpacesItemDecoration;
+
 import okhttp3.Request;
 import okhttp3.Response;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by liuzhiwei on 15/8/14.
@@ -39,14 +43,36 @@ public class SubjectActivity extends BaseActivity {
     private static final int DATA_ARRIVE = 1;
     private static final int DATA_FAILED = 2;
 
-    private RecyclerView mRecycleView;
-    private GridLayoutManager mGridLayoutManager;
-    private RecyclerViewHeader mHeader;
-    private AnimesAdapter mAdapter;
-
     private Handler mHandler;
 
     private String mID;
+
+    private RecyclerView mAnimesRecycleView;
+    private RelativeAdapter mAnimesAdapter;
+    private LinearLayoutManager mAnimesLinearLayoutManager;
+
+    private RecyclerView mTopicRecycleView;
+    private RelativeAdapter mTopicAdapter;
+    private LinearLayoutManager mTopicsLinearLayoutManager;
+
+    private View mCommentsContainer;
+    private RecyclerView mCommentsRecycleView;
+    private FullyLinearLayoutManager mCommentLayoutManager;
+    private CommentsAdapter mCommentAdapter;
+
+
+    private TopicInfo mTopicInfo;
+    private List<RelativeRecommend> mAnimes;
+    private List<RelativeRecommend> mTopics;
+    private List<CommentData> mComments;
+
+    private TextView mTitleView;
+    private TextView mCreateTimeView;
+    private TextView mAnimeCountView;
+    private TextView mSummaryView;
+    private ImageView mImageView;
+
+    private TextView mMoreComments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,17 +84,38 @@ public class SubjectActivity extends BaseActivity {
     }
 
     private void init() {
-        mRecycleView = (RecyclerView) findViewById(R.id.recycleview_container);
-        mGridLayoutManager = new GridLayoutManager(this, 3);
-        mRecycleView.setLayoutManager(mGridLayoutManager);
-        mHeader = RecyclerViewHeader.fromXml(this, R.layout.subject_header_item);
-        mHeader.attachTo(mRecycleView);
-        mAdapter = new AnimesAdapter(this);
-        mRecycleView.setAdapter(mAdapter);
 
-        mRecycleView.addItemDecoration(new SpacesItemDecoration(30, 20, 20, 10));
+        mTitleView = (TextView) findViewById(R.id.topic_title);
+        mCreateTimeView = (TextView) findViewById(R.id.create_time);
+        mAnimeCountView = (TextView) findViewById(R.id.subject_total_animes);
+        mSummaryView = (TextView) findViewById(R.id.expandable_text);
+        mImageView = (ImageView) findViewById(R.id.subject_img);
 
-//        mRecycleView.addItemDecoration(new GridSpacingItemDecoration(3, 40, true));
+        mMoreComments = (TextView) findViewById(R.id.footer_hint_words);
+
+        mAnimesRecycleView = (RecyclerView) findViewById(R.id.animes_recycleview);
+        mAnimesAdapter = new RelativeAdapter(this, RelativeAdapter.ANIMES);
+        mAnimesLinearLayoutManager = new LinearLayoutManager(this);
+        mAnimesLinearLayoutManager.setOrientation(OrientationHelper.HORIZONTAL);
+        mAnimesRecycleView.setLayoutManager(mAnimesLinearLayoutManager);
+        mAnimesRecycleView.setAdapter(mAnimesAdapter);
+        mAnimesRecycleView.addItemDecoration(new SpacesItemDecoration(20, 0, 10, 10));
+
+        mTopicRecycleView = (RecyclerView) findViewById(R.id.topic_recycleview);
+        mTopicAdapter = new RelativeAdapter(this, RelativeAdapter.MANTIE);
+        mTopicsLinearLayoutManager = new LinearLayoutManager(this);
+        mTopicsLinearLayoutManager.setOrientation(OrientationHelper.HORIZONTAL);
+        mTopicRecycleView.setLayoutManager(mTopicsLinearLayoutManager);
+        mTopicRecycleView.setAdapter(mTopicAdapter);
+        mTopicRecycleView.addItemDecoration(new SpacesItemDecoration(20, 0, 10, 10));
+
+        mCommentsContainer = findViewById(R.id.comments_container);
+        mCommentsRecycleView = (RecyclerView) findViewById(R.id.comments_recycleview);
+        mCommentLayoutManager = new FullyLinearLayoutManager(this);
+        mCommentLayoutManager.setOrientation(OrientationHelper.VERTICAL);
+        mCommentAdapter = new CommentsAdapter(this);
+        mCommentsRecycleView.setAdapter(mCommentAdapter);
+
 
         mHandler = new Handler(Looper.getMainLooper()) {
 
@@ -76,9 +123,28 @@ public class SubjectActivity extends BaseActivity {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case DATA_ARRIVE:
-                        JSONObject basic = (JSONObject)msg.obj;
-                        createHeader(basic);
-                        mAdapter.notifyDataSetChanged();
+                        mTitleView.setText(mTopicInfo.title);
+                        mCreateTimeView.setText(mTopicInfo.createTime);
+                        mAnimeCountView.setText(mTopicInfo.subjectCount + "部动画");
+                        mSummaryView.setText(mTopicInfo.summary);
+                        ImageUtils.getImage(SubjectActivity.this, mTopicInfo.imageUrl, mImageView);
+
+                        mAnimesAdapter.setData(mAnimes);
+                        mAnimesAdapter.notifyDataSetChanged();
+
+                        if (mTopics != null && mTopics.size() > 0) {
+                            mTopicAdapter.setData(mTopics);
+                            mTopicAdapter.notifyDataSetChanged();
+                        }
+
+                        if (mComments != null && mComments.size() > 0) {
+                            mCommentAdapter.setData(mComments);
+                            mCommentAdapter.notifyDataSetChanged();
+                        } else {
+                            mCommentsContainer.setVisibility(View.GONE);
+                            mMoreComments.setText("快来抢沙发~");
+                        }
+
                         break;
                     case DATA_FAILED:
                         break;
@@ -101,30 +167,6 @@ public class SubjectActivity extends BaseActivity {
         super.onStop();
     }
 
-    private void createHeader(JSONObject object) {
-        try {
-            TextView subjectTitle = (TextView) mHeader.findViewById(R.id.subject_title);
-            TextView createTime   = (TextView) mHeader.findViewById(R.id.create_time);
-            TextView subjectTotalAnimes = (TextView) mHeader.findViewById(R.id.subject_total_animes);
-            ImageView subjectImg  = (ImageView) mHeader.findViewById(R.id.subject_img);
-            TextView expandableText = (TextView) mHeader.findViewById(R.id.expandable_text);
-
-            subjectTitle.setText(object.getString("title"));
-            String time = object.getString("create_time");
-            time = time.split(" ")[0];
-            createTime.setText(time);
-            subjectTotalAnimes.setText("" + object.getInt("subject_count"));
-            ImageUtils.getImage(this, object.getString("img_url"), subjectImg);
-            expandableText.setText(object.getString("summary"));
-            mHeader.requestLayout();
-        }catch (Exception e) {
-            if(e != null)
-                e.printStackTrace();
-        }
-
-
-    }
-
     private void getData() {
 
         asyncGet(APIConfig.TOPIC_DETAIL, "id", mID, new IRequestCallBack() {
@@ -136,153 +178,51 @@ public class SubjectActivity extends BaseActivity {
 
             @Override
             public void onResponse(Response response) throws IOException {
-                Message message = mHandler.obtainMessage();
+
                 try {//TODO 数据结构改变，增加扩展字段来表示是否已经加载完毕
-                    JSONObject object = new JSONObject(response.body().string());
+                    JSONObject data = new JSONObject(response.body().string());
+                    data = data.getJSONObject("data");
 
-                    JSONObject basic = object.getJSONObject("basic");
-                    message.obj = basic;
+                    JSONObject basicInfo = data.getJSONObject("topic");
+                    mTopicInfo = TopicInfo.create(basicInfo);
 
-                    if(!object.isNull("subject") ) {
-                        JSONArray animes = object.getJSONArray("subject");
-                        mAdapter.setData(animes);
-                        message.what = DATA_ARRIVE;
-                    } else {
-                        message.what = DATA_FAILED;
+                    //处理推荐动漫逻辑
+                    JSONArray relativeSubjects = data.getJSONArray("subject");
+                    if (relativeSubjects != null && relativeSubjects.length() > 0) {
+                        mAnimes = new ArrayList<>(relativeSubjects.length());
+                        for (int i = 0; i < relativeSubjects.length(); i++) {
+                            JSONObject object = relativeSubjects.getJSONObject(i);
+                            RelativeRecommend animeInfo = RelativeRecommend.create(object);
+                            mAnimes.add(animeInfo);
+                        }
                     }
+
+                    //处理推荐盘点
+                    JSONArray relativeTopics = data.getJSONArray("relative");
+                    if (relativeTopics != null && relativeTopics.length() > 0) {
+                        mTopics = new ArrayList<>(relativeTopics.length());
+                        for (int i = 0; i < relativeTopics.length(); i++) {
+                            JSONObject object = relativeTopics.getJSONObject(i);
+                            RelativeRecommend animeInfo = RelativeRecommend.create(object);
+                            mTopics.add(animeInfo);
+                        }
+                    }
+
+                    //处理评论逻辑
+                    JSONArray comments = data.getJSONArray("comments");
+                    if (comments != null && comments.length() > 0) {
+                        mComments = new ArrayList<>();
+                        for (int i = 0; i < comments.length(); i++) {
+                            JSONObject object = comments.getJSONObject(i);
+                            CommentData comment = CommentData.create(object);
+                            mComments.add(comment);
+                        }
+                    }
+                    mHandler.sendEmptyMessage(DATA_ARRIVE);
                 } catch (Exception e) {
                     e.printStackTrace();
-                } finally {
-                    mHandler.sendMessage(message);
                 }
             }
         });
     }
-
-    class AnimesAdapter extends RecyclerView.Adapter<AnimeViewHolder> {
-
-        JSONArray mData;
-        Context mContext;
-        LayoutInflater mInflater;
-
-        public AnimesAdapter(Context context) {
-            mContext = context;
-            mInflater = LayoutInflater.from(context);
-        }
-
-        public AnimesAdapter setData(JSONArray array) {
-            mData = array;
-            return this;
-        }
-
-        @Override
-        public AnimeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new AnimeViewHolder(mInflater.inflate(R.layout.subject_anime_item,null,false));
-        }
-
-        @Override
-        public void onBindViewHolder(AnimeViewHolder holder, int position) {
-            try {
-                holder.bindView(mData.getJSONObject(position));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public int getItemCount() {
-            if(mData == null) {
-                return 0;
-            } else {
-                return mData.length();
-            }
-        }
-    }
-
-    class AnimeViewHolder extends RecyclerView.ViewHolder{
-        ImageView imageView;
-        TextView  title;
-        TextView  score;
-        public AnimeViewHolder(View itemView) {
-            super(itemView);
-            imageView = (ImageView) itemView.findViewById(R.id.anime_image);
-            title     = (TextView)  itemView.findViewById(R.id.anime_name);
-            score     = (TextView)  itemView.findViewById(R.id.anime_score);
-        }
-
-        public void bindView(JSONObject data) {
-            try{
-                ImageUtils.getImage(SubjectActivity.this, data.getString("img_url"), imageView);
-                title.setText(data.getString("title"));
-                score.setText(data.getString("total_score") + "分");
-            } catch (Exception e){
-
-            }
-        }
-
-    }
-
-    public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
-        private int left;
-        private int right;
-        private int top;
-        private int bottom;
-
-        public SpacesItemDecoration(int left, int right, int top, int bottom) {
-            this.left = left;
-            this.right = right;
-            this.top = top;
-            this.bottom = bottom;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view,
-                                   RecyclerView parent, RecyclerView.State state) {
-            outRect.left = left;
-            outRect.right = right;
-            outRect.bottom = bottom;
-            outRect.top = top;
-
-            // Add top margin only for the first item to avoid double left between items
-            if(parent.getChildLayoutPosition(view) == 0)
-                outRect.top = top;
-        }
-    }
-
-
-    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
-
-        private int spanCount;
-        private int spacing;
-        private boolean includeEdge;
-
-        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
-            this.spanCount = spanCount;
-            this.spacing = spacing;
-            this.includeEdge = includeEdge;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            int position = parent.getChildAdapterPosition(view); // item position
-            int column = position % spanCount; // item column
-
-            if (includeEdge) {
-                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
-                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
-
-                if (position < spanCount) { // top edge
-                    outRect.top = spacing;
-                }
-                outRect.bottom = spacing; // item bottom
-            } else {
-                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
-                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
-                if (position >= spanCount) {
-                    outRect.top = spacing; // item top
-                }
-            }
-        }
-    }
-
 }

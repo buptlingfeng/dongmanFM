@@ -3,11 +3,15 @@
     <!--<item name="text_title_bar_size">20sp</item>-->
     <dimen name="image_width">160dp</dimen>
     <dimen name="image_height">213dp</dimen>
+
+    <dimen name="mid_image_width">130dp</dimen>
+    <dimen name="mid_image_height">173dp</dimen>
+
     <dimen name="little_image_width">100dp</dimen>
     <dimen name="little_image_heigth">133dp</dimen>
 
-    <dimen name="anime_average_star_width">20dp</dimen>
-    <dimen name="anime_average_star_heigth">20dp</dimen>
+    <dimen name="anime_average_star_width">15dp</dimen>
+    <dimen name="anime_average_star_heigth">15dp</dimen>
 
     <dimen name="anime_average_star_small_width">10dp</dimen>
     <dimen name="anime_average_star_small_heigth">10dp</dimen>

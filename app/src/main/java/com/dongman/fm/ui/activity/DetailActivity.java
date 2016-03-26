@@ -1,13 +1,9 @@
 package com.dongman.fm.ui.activity;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.dongman.fm.R;
 import com.dongman.fm.ui.fragment.DetailFragment;
@@ -24,7 +20,7 @@ public class DetailActivity extends BaseActivity {
 
 //    private String mURL = "";
     private String mTitle = "";
-    private int mID;
+    private String mID;
 
     private TitleBarView mTitleView;
 
@@ -35,7 +31,7 @@ public class DetailActivity extends BaseActivity {
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
         mTitle = bundle.getString(ANIME_TITLE);
-        mID = bundle.getInt(ANIME_ID);
+        mID = bundle.getString(ANIME_ID);
         initView();
     }
 
@@ -64,7 +60,7 @@ public class DetailActivity extends BaseActivity {
 
         DetailFragment detailFragment = new DetailFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(ANIME_ID, mID);
+        bundle.putString(ANIME_ID, mID);
         detailFragment.setArguments(bundle);
         addFragment(detailFragment,"detailFragment");
     }

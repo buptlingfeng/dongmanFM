@@ -85,8 +85,8 @@ public class RecommendFragment extends BaseFragment {
 
         List<Fragment> data = new ArrayList<>();
         data.add(new RecommendHotFragmet());
-        data.add(new RecommendThemeFragmet());
-        data.add(new ThemeFragment());
+        data.add(new TopicFragment());
+        data.add(new ManPingFragmet());
         data.add(new RecommendNewsFragmet());
         data.add(new RecommendChartletFragmet());
         mViewPager = (ViewPager) root.findViewById(R.id.main_viewPager);

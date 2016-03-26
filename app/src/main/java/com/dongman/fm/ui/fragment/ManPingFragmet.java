@@ -17,9 +17,7 @@ import android.widget.Toast;
 import com.dongman.fm.R;
 import com.dongman.fm.data.APIConfig;
 import com.dongman.fm.network.IRequestCallBack;
-import com.dongman.fm.ui.fragment.adapter.HomePageFragmentAdapter;
-import okhttp3.Request;
-import okhttp3.Response;
+import com.dongman.fm.ui.fragment.adapter.ManpingListAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,22 +26,27 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by liuzhiwei on 15/6/17.
- */
-public class ThemeFragment extends BaseFragment {
+import okhttp3.Request;
+import okhttp3.Response;
 
-    private static final String TAG = ThemeFragment.class.getName();
+/**
+ * Created by liuzhiwei on 15/12/13.
+ * 内容包括：漫评的数据
+ */
+public class ManPingFragmet extends BaseFragment {
+
+    private static final String TAG = ManPingFragmet.class.getSimpleName();
+
     private static final int DATA_READY = 1;
     private static final int DARA_FAILED = 2;
 
     private Context mContext;
     private Handler mHandler;
 
-//    private EditText mInputEdit;
+    //    private EditText mInputEdit;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
-    private HomePageFragmentAdapter mRecommendAdapter;
+    private ManpingListAdapter mRecommendAdapter;
     private SwipeRefreshLayout mRefreshLayout;
 
     private int mPageNumber = 1;
@@ -84,18 +87,6 @@ public class ThemeFragment extends BaseFragment {
     }
 
     private void initView(View root) {
-//        mInputEdit = (EditText) root.findViewById(R.id.search_input);
-//        mInputEdit.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                if(v.getId() == mInputEdit.getId() && event.getAction() == MotionEvent.ACTION_DOWN) {
-//                    Intent intent = new Intent();
-//                    intent.setAction("com.dongman.fm.search");
-//                    mContext.startActivity(intent);
-//                }
-//                return false;
-//            }
-//        });
 
         mRecyclerView = (RecyclerView) root.findViewById(R.id.recycleview);
         mRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.swipe_refresh_widget);
@@ -135,7 +126,7 @@ public class ThemeFragment extends BaseFragment {
 
             }
         });
-        mRecommendAdapter = new HomePageFragmentAdapter(getActivity());
+        mRecommendAdapter = new ManpingListAdapter(getActivity());
         mRecyclerView.setAdapter(mRecommendAdapter);
         getData(mPageNumber, true);
     }
@@ -143,7 +134,7 @@ public class ThemeFragment extends BaseFragment {
     private void getData(int pageNum, final boolean isFrist) {
         Map<String, String> params = new HashMap<>();
         params.put("page", Integer.toString(pageNum));
-        asyncGet(APIConfig.HOME_DATA_API, params, new IRequestCallBack(){
+        asyncGet(APIConfig.TOPIC_LIST, params, new IRequestCallBack(){
 
             @Override
             public void onFailure(Request request, IOException e) {
@@ -173,5 +164,4 @@ public class ThemeFragment extends BaseFragment {
             }
         });
     }
-
 }

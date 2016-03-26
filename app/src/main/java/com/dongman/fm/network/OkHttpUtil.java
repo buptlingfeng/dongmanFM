@@ -3,6 +3,8 @@ package com.dongman.fm.network;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.dongman.fm.BaseApplication;
+
 import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -125,7 +127,12 @@ public class OkHttpUtil {
     }
 
     public static String attachHttpGetParams(String url, Map<String, String> params) {
-
+        params.put("timestamp", System.currentTimeMillis() +"");
+        params.put("appkey", BaseApplication.getInstance().getAppKey());
+        params.put("channelid", BaseApplication.getInstance().getChannelId());
+        params.put("appversion", BaseApplication.getInstance().getAppVerion());
+        params.put("platform", "android");
+        params.put("sign", "");
         return attachHttpGetParams(url, convertMap(params));
     }
 

@@ -22,9 +22,12 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 public class BaseFragment extends Fragment {
+
+	protected static final int REFRESH_UI = 1;
+
 	protected LayoutInflater inflater;
 	private View contentView;
-	private Context context;
+	protected Context mContext;
 	private ViewGroup container;
 	protected boolean isRendered = false;
 
@@ -38,7 +41,7 @@ public class BaseFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		context = getActivity().getApplicationContext();
+		mContext = getActivity().getApplicationContext();
 	}
 
 	@Override
@@ -73,7 +76,7 @@ public class BaseFragment extends Fragment {
 	}
 
 	public Context getApplicationContext() {
-		return context;
+		return mContext;
 	}
 
 	public void setContentView(int layoutResID) {

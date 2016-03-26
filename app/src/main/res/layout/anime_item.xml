@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/anime_image"
+        android:scaleType="fitXY"
+        android:src="@drawable/holder"
+        android:layout_width="@dimen/little_image_width"
+        android:layout_height="@dimen/little_image_heigth" />
+    <TextView
+        android:id="@+id/anime_title"
+        android:textSize="12sp"
+        android:lineSpacingMultiplier="1"
+        android:gravity="center"
+        android:text="海贼王"
+        android:textColor="@color/tab_top_text_1"
+        android:maxLines="2"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_width="@dimen/little_image_width"
+        android:layout_height="wrap_content" />
+</LinearLayout>

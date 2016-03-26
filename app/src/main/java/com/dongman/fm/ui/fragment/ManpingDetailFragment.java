@@ -2,10 +2,14 @@ package com.dongman.fm.ui.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +21,11 @@ import com.dongman.fm.data.APIConfig;
 import com.dongman.fm.image.ImageUtils;
 import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.ui.fragment.adapter.CommentAdapter;
+import com.dongman.fm.ui.fragment.adapter.RelativeAdapter;
 import com.dongman.fm.ui.view.CircleImageView;
 import com.dongman.fm.ui.view.CustomListView;
+import com.dongman.fm.ui.view.SpacesItemDecoration;
+
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -48,6 +55,10 @@ public class ManpingDetailFragment extends BaseFragment {
     private CustomListView mManpingCommentsList;
     private CommentAdapter mCommentAdapter;
 
+    private RecyclerView mRecycleView;
+    private LinearLayoutManager mLinearLayoutManager;
+    private RelativeAdapter mMantieAdapter;
+
     private Handler mHandler;
 
     private String mID;
@@ -74,8 +85,22 @@ public class ManpingDetailFragment extends BaseFragment {
     }
 
     private void init(View root) {
+
         mManpinOwnerName = (TextView) root.findViewById(R.id.manping_detail_user_name);
         mManpingOwnerAvatar = (CircleImageView) root.findViewById(R.id.manping_detail_user_avatar);
+
+        mManpingOwnerAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("com.dongman.fm.detail");
+                intent.putExtra("id", 1);
+                intent.putExtra("name", "海贼王");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            }
+        });
+
         mManpingUpdateTime = (TextView) root.findViewById(R.id.manping_detail_updatetime);
 
         mManpingTitle = (TextView) root.findViewById(R.id.manping_detail_title);
@@ -86,6 +111,15 @@ public class ManpingDetailFragment extends BaseFragment {
         mCommentAdapter = new CommentAdapter(getActivity());
         mManpingCommentsList.setAdapter(mCommentAdapter);
         mManpingCommentsList.setFocusable(false);
+
+        mRecycleView = (RecyclerView) root.findViewById(R.id.recycleview);
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        mLinearLayoutManager.setOrientation(OrientationHelper.HORIZONTAL);
+        mRecycleView.setLayoutManager(mLinearLayoutManager);
+        mMantieAdapter = new RelativeAdapter(mContext,RelativeAdapter.MANTIE);
+        mRecycleView.setAdapter(mMantieAdapter);
+        mRecycleView.addItemDecoration(new SpacesItemDecoration(20, 0, 10, 10));
+
         mHandler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message msg) {
@@ -166,6 +200,5 @@ public class ManpingDetailFragment extends BaseFragment {
             hint.setText("快去抢沙发~");
         }
         mManpingCommentsList.addFooterView(footer);
-
     }
 }

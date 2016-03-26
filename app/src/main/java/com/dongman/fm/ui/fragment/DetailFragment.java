@@ -1,34 +1,32 @@
 package com.dongman.fm.ui.fragment;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.graphics.Typeface;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dongman.fm.R;
 import com.dongman.fm.data.APIConfig;
+import com.dongman.fm.data.AnimeInfo;
+import com.dongman.fm.data.CommentData;
+import com.dongman.fm.data.RelativeRecommend;
+import com.dongman.fm.data.ReviewInfo;
+import com.dongman.fm.image.ImageUtils;
 import com.dongman.fm.network.IRequestCallBack;
-import com.dongman.fm.ui.fragment.adapter.CommentAdapter;
-import com.dongman.fm.ui.fragment.adapter.DetailRecommendAdapter;
-import com.dongman.fm.ui.view.CustomListView;
-import com.dongman.fm.ui.view.ExpandableTextView;
-import com.dongman.fm.ui.view.loading.Titanic;
-import com.dongman.fm.ui.view.loading.TitanicTextView;
-import com.dongman.fm.ui.view.recycleview.widget.TwoWayView;
-import okhttp3.Request;
-import okhttp3.Response;
-
+import com.dongman.fm.ui.activity.BaseActivity;
+import com.dongman.fm.ui.fragment.adapter.RelativeAdapter;
+import com.dongman.fm.ui.view.CircleImageView;
+import com.dongman.fm.ui.view.SpacesItemDecoration;
+import com.dongman.fm.utils.FMLog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,10 +34,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by liuzhiwei on 15/7/11.
@@ -47,282 +45,293 @@ import java.util.Map;
 public class DetailFragment extends BaseFragment {
 
     private static final String TAG = "DetailFragment";
-    private static final int DETAIL_DATA_ARRIVED_FAILED = 0;
-    private static final int DETAIL_DATA_ARRIVED_SUCCEED = 1;
-    private static final int RECOMMEND_DATA_ARRIVED_FAILED = 2;
-    private static final int RECOMMEND_DATA_ARRIVED_SUCCEED = 3;
+    private static final int ANIME_BASE     = 1;
+    private static final int ANIME_RELS     = 2;
+    private static final int MANTIE_RELS    = 3;
+    private static final int MANPING_RELS   = 4;
+    private static final int ANIME_COMMENTS = 5;
 
-//    private String          mURL;
-    private int             mID;
+    private static final int MORE_COMMENTS  = 6;
 
-    private RelativeLayout  mRootView;
-    private TwoWayView      mRecommendView;
-    private DetailRecommendAdapter mRecommendAdapter;
-    private CustomListView  mCommentList;
-    private CommentAdapter  mCommentAdapter;
+    private String          mID;
+    private RecyclerView    mRecyclerView;
+    private LinearLayoutManager mLinearLayoutManager;
+    private ModuleAdapter mModuleAdapter;
+    private BaseActivity mActivity;
 
-    private Dialog          mLoaddingDialog;
-    private Titanic         mTitanic;
 
-    private Handler         mHandler;
-    private JSONObject      mData;
+    private AnimeInfo mAnimeInfo;
+    private List<RelativeRecommend> mAnimesRecommends = new ArrayList<>();
+    private List<RelativeRecommend> mMantieRecommends = new ArrayList<>();
+    private List<ReviewInfo> mReviewsRecommends = new ArrayList<>();
+    private List<CommentData> mComments = new ArrayList<>();
 
-    public DetailFragment() {
-    }
+
+    private Handler mHandler;
+
+    private boolean isDataReady = false;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        mActivity = (BaseActivity) activity;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
-        mID = bundle.getInt("id");
-    }
+        mID = bundle.getString("id");
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.detail_page_fragment, container, false);
-        initLoadingView();
-        init(view);
-
-        return view;
-    }
-
-    private void init(final View root) {
-
-        mHandler = new Handler(Looper.getMainLooper()) {
+        mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
-                    case DETAIL_DATA_ARRIVED_SUCCEED:
-                        if(mData == null) {
-                            Log.e(TAG, "The json data is null !");
-                        }
-//                        mProgressView.setVisibility(View.GONE);
-                        mRootView.setVisibility(View.VISIBLE);
-                        initView(root, mData);
-                        mTitanic.cancel();
-                        mLoaddingDialog.cancel();
-                        break;
-                    case DETAIL_DATA_ARRIVED_FAILED:
-                        break;
-                    case RECOMMEND_DATA_ARRIVED_FAILED:
-                        break;
-                    case RECOMMEND_DATA_ARRIVED_SUCCEED:
-                        mRecommendAdapter.notifyDataSetChanged();
+                    case REFRESH_UI:
+                        isDataReady = true;
+                        mModuleAdapter.notifyDataSetChanged();
                         break;
                     default:
                         break;
                 }
             }
         };
+    }
 
-        mRootView = (RelativeLayout)root.findViewById(R.id.detail_root_content);
-        mRootView.setVisibility(View.GONE);
-//        mProgressView = root.findViewById(R.id.detail_progress_view);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.detail_page_fragment, container, false);
+        initView(view);
+
+        return view;
+    }
+
+    private void initView(View root) {
+        mRecyclerView = (RecyclerView)root.findViewById(R.id.recycleview);
+
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        mLinearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        mModuleAdapter = new ModuleAdapter(mContext);
+        mRecyclerView.setAdapter(mModuleAdapter);
         getData(mID);
-    }
-
-
-    private void initView(View root, final JSONObject data) {
-
-        mRecommendView = (TwoWayView) root.findViewById(R.id.recommend_list);
-        mRecommendView.setHasFixedSize(true);
-        mRecommendView.setLongClickable(true);
-        mRecommendAdapter = new DetailRecommendAdapter(getActivity());
-        mRecommendView.setAdapter(mRecommendAdapter);
-
-        mCommentList = (CustomListView) root.findViewById(R.id.comment_list);
-        mCommentAdapter = new CommentAdapter(getActivity());
-        mCommentList.setAdapter(mCommentAdapter);
-        mCommentList.addFooterView(LayoutInflater.from(getActivity()).inflate(R.layout.more_footer, null));
-
-        AnimeDescription anime = AnimeDescription.make(data);
-        if(anime != null) {
-            //获取推荐信息
-            getRecommendAnimes(new IRequestCallBack() {
-                @Override
-                public void onFailure(Request request, IOException e) {
-
-                }
-
-                @Override
-                public void onResponse(Response response) throws IOException {
-                    String result = new String(response.body().bytes());
-                    try {
-                        JSONObject object = new JSONObject(result);
-                        if (object == null)
-                            return;
-                        JSONArray array = object.getJSONArray("data");
-                        if (array == null || array.length() == 0)
-                            return;
-                        List<DetailRecommendAdapter.RecommendData> recommendList = new ArrayList<>();
-                        for (int i = 0; i < array.length(); i++) {
-                            JSONObject obj = array.getJSONObject(i);
-                            DetailRecommendAdapter.RecommendData recommendData = DetailRecommendAdapter.RecommendData.make(obj);
-                            if (recommendData != null) {
-                                recommendList.add(recommendData);
-                            }
-                            mRecommendAdapter.setData(recommendList);
-                        }
-                        mHandler.sendEmptyMessage(RECOMMEND_DATA_ARRIVED_SUCCEED);
-                        Log.i(TAG, "已经更新页面");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, anime);
-
-            ImageView imageView = (ImageView) root.findViewById(R.id.detail_anime_image);
-            getImage(anime.imageUrl, imageView);
-            TextView animeSubtype = (TextView) root.findViewById(R.id.anime_subtype);
-            animeSubtype.setText("篇幅：" + anime.subType);
-            TextView animeCountries = (TextView) root.findViewById(R.id.anime_countries);
-            animeCountries.setText("国家地区：" + anime.country);
-            TextView animeGenres = (TextView) root.findViewById(R.id.anime_genres);
-            animeGenres.setText("类型：" + anime.casts);
-            TextView animeCasts = (TextView) root.findViewById(R.id.anime_casts);
-            animeCasts.setText("声优：" + anime.genres);
-            ExpandableTextView animeSummary = (ExpandableTextView) root.findViewById(R.id.anime_summary);
-            animeSummary.setText(anime.summary);
-
-            LinearLayout rateContainer = (LinearLayout) root.findViewById(R.id.anime_average_star_container);
-            int childCount = rateContainer.getChildCount();
-            int starNum = (int) Math.ceil(anime.rateAverage / 2);
-            for(int i = 0; i < childCount - 2 && i < starNum; i++) {
-                ImageView childView = (ImageView)rateContainer.getChildAt(i);
-                childView.setImageResource(R.drawable.icon_star_yellow);
-            }
-
-            TextView animeAverage = (TextView) root.findViewById(R.id.anime_average);
-            animeAverage.setText(anime.rateAverage + "分");
-
-        } else {
-            //获取数据失败的情况
-        }
 
     }
 
-    private void initLoadingView() {
-        mLoaddingDialog = new Dialog(getActivity(), R.style.Dialog_Fullscreen);
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.loading_dialog, null, false);
-        mLoaddingDialog.setContentView(view);
-        mLoaddingDialog.show();
-        TitanicTextView tv = (TitanicTextView) view.findViewById(R.id.my_text_view);
-        tv.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Satisfy-Regular.ttf"));
-        mTitanic = new Titanic();
-        mTitanic.start(tv);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
-    public void getRecommendAnimes(IRequestCallBack callBack, AnimeDescription animeDes) {
-
-        if(animeDes == null)
-            return;
-
-        Map<String, String> params = new HashMap<>();
-        params.put("subject_id",animeDes.animeID);
-        params.put("page", "1");
-        params.put("size", "9");
-
-        asyncGet(APIConfig.RECOMMEND_API, params, callBack);
-
-    }
-
-    private void getData(int id) {
-        Map<String,String> parms = new HashMap<>();
-        parms.put("id", id + "");
-        asyncGet(APIConfig.SUBJECT_DETAIL, parms, new IRequestCallBack() {
+    public void getData(String id) {
+        asyncGet(APIConfig.SUBJECT_DETAIL, "id", id, new IRequestCallBack() {
             @Override
             public void onFailure(Request request, IOException e) {
-                Log.e(TAG, "数据请求失败");
-                e.printStackTrace();
+
             }
 
             @Override
             public void onResponse(Response response) throws IOException {
-                String result = new String(response.body().bytes());
-                try {
-                    mData = new JSONObject(result);
-                    mHandler.sendEmptyMessage(DETAIL_DATA_ARRIVED_SUCCEED);
+                try {//TODO 数据结构改变，增加扩展字段来表示是否已经加载完毕
+                    JSONObject data = new JSONObject(response.body().string());
+                    data = data.getJSONObject("data");
+                    JSONObject subject = data.getJSONObject("subject");
+                    mAnimeInfo = AnimeInfo.create(subject);
+                    //处理推荐动漫逻辑
+                    if (!data.isNull("relative_subjects")) {
+                        JSONArray relativeSubjects = data.getJSONArray("relative_subjects");
+                        if (relativeSubjects != null && relativeSubjects.length() > 0) {
+                            mAnimesRecommends = new ArrayList<>(relativeSubjects.length());
+                            for (int i = 0; i < relativeSubjects.length(); i++) {
+                                JSONObject object = relativeSubjects.getJSONObject(i);
+                                RelativeRecommend animeInfo = RelativeRecommend.create(object);
+                                mAnimesRecommends.add(animeInfo);
+                            }
+                        }
+                    }
+                    //处理推荐漫贴的逻辑
+                    if (!data.isNull("relative_articles")) {
+                        JSONArray relativeArticles = data.getJSONArray("relative_articles");
+                        if (relativeArticles != null && relativeArticles.length() > 0) {
+                            mMantieRecommends = new ArrayList<>();
+                            for (int i = 0; i < relativeArticles.length(); i++) {
+                                JSONObject object = relativeArticles.getJSONObject(i);
+                                RelativeRecommend mantie = RelativeRecommend.create(object);
+                                mMantieRecommends.add(mantie);
+                            }
+                        }
+                    }
+
+                    //处理推荐漫评的逻辑
+                    JSONArray reviews = data.getJSONArray("reviews");
+                    if (reviews != null && reviews.length() > 0) {
+                        mReviewsRecommends = new ArrayList<>();
+                        for (int i = 0; i < reviews.length(); i++) {
+                            JSONObject object = reviews.getJSONObject(i);
+                            ReviewInfo reviewInfo = ReviewInfo.create(object);
+                            mReviewsRecommends.add(reviewInfo);
+                        }
+                    }
+                    //处理评论逻辑
+                    JSONArray comments = data.getJSONArray("comments");
+                    if (comments != null && comments.length() > 0) {
+                        mComments = new ArrayList<>();
+                        for (int i = 0; i < comments.length(); i++) {
+                            JSONObject object = comments.getJSONObject(i);
+                            CommentData comment = CommentData.create(object);
+                            mComments.add(comment);
+                        }
+                    }
+                    mHandler.sendEmptyMessage(REFRESH_UI);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Log.d(TAG, "数据请求成功");
             }
         });
     }
 
-    public static class AnimeDescription {
+    class ModuleAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
+        private LayoutInflater mInflater;
+        ModuleAdapter(Context context) {
+            mInflater = LayoutInflater.from(context);
+        }
 
-        private String animeID;//ID字段
+        @Override
+        public ModuleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        public String subType;//是否是电影或者TV
-        public String summary;//简介
-        public String genres;//类型、分类
-        public String casts;//声优
-        public String imageUrl;//图片链接
-        public double rateAverage;//评分
-        public int browseCount;//浏览次数
-        public int rateCount;//评分人数
-        public int    playCount;//播放次数
-        public String country;//动漫产地
-        public int explodeCount;//当前集数
+            int id = 0;
+            switch (viewType) {
+                case ANIME_BASE:
+                    id = R.layout.anime_base;
+                    break;
+                case ANIME_RELS:
+                    id = R.layout.relative_anims_recommend;
+                    break;
+                case MANTIE_RELS:
+                    id = R.layout.relative_recommend;
+                    break;
+                case MANPING_RELS:
+                    id = R.layout.manping_item;
+                    break;
+                case ANIME_COMMENTS:
+                    id = R.layout.review_item;
+                    break;
+                case MORE_COMMENTS:
+                    id = R.layout.more_footer;
+                    break;
+            }
 
-        public JSONArray reviews;
+            View view = mInflater.inflate(id, null, false);
+            return new ModuleViewHolder(view, viewType);
+        }
 
-        public static AnimeDescription make(JSONObject json) {
-            try{
-                if(json == null) {
-                    return null;
-                }
-                AnimeDescription anime = new AnimeDescription();
-                anime.animeID   = json.getString("subject_id");
-                anime.subType   = json.getString("subtype");//是否是电影或者TV
-                anime.summary   = json.getString("summary");//简介
-                anime.genres    = json.getString("genres");//类型、分类
-                anime.casts     = json.getString("casts");//声优
-                anime.imageUrl  = json.getString("img_large");//
-                anime.rateAverage   = json.getDouble("score_all_avg");
-                anime.browseCount   = Integer.parseInt(json.getString("browse_count"));
-                anime.rateCount = Integer.parseInt(json.getString("rate_count"));
-                anime.playCount = Integer.parseInt(json.getString("play_count"));
-                anime.country   = json.getString("countries");
-                anime.explodeCount  = Integer.parseInt(json.getString("all_explode"));
-                anime.reviews   = json.getJSONArray("Reviews");
-                return anime;
-            } catch (JSONException e) {
-                Log.e(TAG, "the AnimeDescription make failed");
-                e.printStackTrace();
-                return null;
+        @Override
+        public void onBindViewHolder(ModuleViewHolder holder, int position) {
+            holder.bindView(position);
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+
+            switch (position) {
+                case 0 :
+                    return ANIME_BASE;
+                case 1 :
+                    return ANIME_RELS;
+                case 2 :
+                    return MANTIE_RELS;
+                default:
+                    if (mReviewsRecommends.size() + 3 > position) {
+                        return MANPING_RELS;
+                    } else if (mComments.size() + mReviewsRecommends.size() + 3 > position){
+                        return ANIME_COMMENTS;
+                    } else {
+                        FMLog.d(TAG, "More : " + position);
+                        return MORE_COMMENTS;
+                    }
             }
         }
 
-        public String getAnimeID() {
-            return animeID;
+        @Override
+        public long getItemId(int position) {
+            return super.getItemId(position);
+        }
+
+        @Override
+        public int getItemCount() {
+            int count = 0;
+            if (isDataReady) {
+                 count = 1 + (mAnimesRecommends.size() > 0 ? 1:0) + (mMantieRecommends.size()>0 ? 1:0) + mReviewsRecommends.size() + mComments.size() + 1;
+            }
+
+            return count;
         }
     }
+
+    class ModuleViewHolder extends RecyclerView.ViewHolder {
+
+        View viewHolder;
+        int viewType;
+        public ModuleViewHolder(View itemView, int type) {
+            super(itemView);
+            viewHolder = itemView;
+            viewType = type;
+        }
+
+
+        public void bindView(int position) {
+
+            switch (viewType) {
+                case ANIME_BASE:
+                    ImageView animeImage = (ImageView) itemView.findViewById(R.id.detail_anime_image);
+                    TextView average = (TextView) itemView.findViewById(R.id.anime_average);
+                    TextView averageCount = (TextView) itemView.findViewById(R.id.average_count);
+                    ImageUtils.getImage(mContext, mAnimeInfo.imageLarge, animeImage);
+                    average.setText(mAnimeInfo.scoreAllAvg + "分");
+                    averageCount.setText(mAnimeInfo.rateCount);
+                    break;
+                case ANIME_RELS:
+                    RecyclerView recyclerView1 = (RecyclerView) viewHolder.findViewById(R.id.recycleview);
+                    LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity());
+                    linearLayoutManager1.setOrientation(OrientationHelper.HORIZONTAL);
+                    recyclerView1.setLayoutManager(linearLayoutManager1);
+                    RelativeAdapter animesAdapter = new RelativeAdapter(mActivity, RelativeAdapter.ANIMES);
+                    recyclerView1.setAdapter(animesAdapter);
+                    recyclerView1.addItemDecoration(new SpacesItemDecoration(20, 0, 10, 10));
+                    animesAdapter.setData(mAnimesRecommends);
+                    break;
+                case MANTIE_RELS:
+                    RecyclerView recyclerView = (RecyclerView) viewHolder.findViewById(R.id.recycleview);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                    linearLayoutManager.setOrientation(OrientationHelper.HORIZONTAL);
+                    recyclerView.setLayoutManager(linearLayoutManager);
+                    RelativeAdapter mantieAdapter = new RelativeAdapter(mActivity, RelativeAdapter.MANTIE);
+                    recyclerView.setAdapter(mantieAdapter);
+                    recyclerView.addItemDecoration(new SpacesItemDecoration(20, 0, 10, 10));
+                    mantieAdapter.setData(mMantieRecommends);
+                    break;
+                case MANPING_RELS:
+                    TextView manpingTitle = (TextView) viewHolder.findViewById(R.id.manping_title);
+                    TextView manpingContent = (TextView) viewHolder.findViewById(R.id.manping_content);
+                    ReviewInfo reviewInfo = mReviewsRecommends.get(position - 3);
+                    manpingTitle.setText(reviewInfo.title);
+                    manpingContent.setText(reviewInfo.summary);
+                    break;
+                case ANIME_COMMENTS:
+                    CircleImageView commentAvatar = (CircleImageView) itemView.findViewById(R.id.comment_avatar);
+                    TextView commentDate   = (TextView) itemView.findViewById(R.id.comment_date);
+                    TextView commentContent = (TextView) itemView.findViewById(R.id.comment_content);
+                    TextView commentNick   = (TextView) itemView.findViewById(R.id.comment_nick);
+
+                    CommentData data = mComments.get(position - (3 + mReviewsRecommends.size()));
+
+                    commentNick.setText(data.userName);
+                    commentDate.setText(data.createTime);
+                    commentContent.setText(data.content);
+                    ImageUtils.getImage(mContext, data.avatarUrl, commentAvatar);
+                    break;
+                case MORE_COMMENTS:
+                    TextView hint = (TextView) viewHolder.findViewById(R.id.footer_hint_words);
+                    hint.setText("点击查看更多");
+                    break;
+            }
+        }
+    }
+
 
 }
