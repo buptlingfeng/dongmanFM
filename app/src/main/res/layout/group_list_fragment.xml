@@ -6,30 +6,94 @@
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:background="@color/default_bg_color"
-        android:gravity="center"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <Button
-            android:id="@id/back"
-            android:background="@drawable/iconfont_back"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
-        <TextView
-            android:id="@id/title"
-            android:text="TMA 弱爆了"
-            style="@style/ActionBarTitle"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/test7"
+            android:scaleType="fitCenter"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="200dp" />
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/group_title"
+                android:text="火影忍者"
+                style="@style/ActionBarTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_below="@id/group_title"
+                android:layout_marginTop="10dp"
+                android:weightSum="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/group_watch"
+                    android:layout_gravity="center_horizontal"
+                    android:text="关注：298120"
+                    android:paddingRight="10dp"
+                    android:gravity="right"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:text="成员：2113"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
     </FrameLayout>
 
-    <include layout="@layout/recycleview_layout"
+    <LinearLayout
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </include>
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:weightSum="8"
+        android:orientation="horizontal">
+        <TextView
+            android:gravity="center"
+            android:text="脑洞"
+            style="@style/sub_title"
+            android:textColor="#607D8B"
+            android:layout_weight="2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:gravity="center"
+            android:text="经典"
+            style="@style/sub_title"
+            android:textColor="#607D8B"
+            android:layout_weight="2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:gravity="center"
+            android:text="槽点"
+            style="@style/sub_title"
+            android:textColor="#607D8B"
+            android:layout_weight="2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:gravity="center"
+            android:text="秀我"
+            style="@style/sub_title"
+            android:textColor="#607D8B"
+            android:layout_weight="2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@id/main_viewPager"
+        android:layout_below="@id/title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

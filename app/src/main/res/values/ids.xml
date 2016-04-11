@@ -23,4 +23,8 @@
     <item type="id" name="back"/>
 
     <item type="id" name="search_input"/>
+
+    <!-- Collapsing Avatar Toolbar -->
+    <item name="cat_avatar" type="id"></item>
+    <item name="cat_title" type="id"></item>
 </resources>

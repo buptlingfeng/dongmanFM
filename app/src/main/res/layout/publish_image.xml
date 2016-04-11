@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:hint="这一刻你想说什么..."
+        android:layout_gravity="left|top"
+        android:padding="5dp"
+        android:gravity="top"
+        android:textSize="14sp"
+        android:layout_margin="5dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@id/recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none" />
+    <ImageView
+        android:id="@+id/add_more"
+        android:layout_margin="10dp"
+        android:background="@color/lightgrey"
+        android:src="@drawable/icon_add"
+        android:layout_width="@dimen/homepage_title_height"
+        android:layout_height="@dimen/homepage_title_height" />
+</LinearLayout>

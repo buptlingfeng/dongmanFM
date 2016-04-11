@@ -56,7 +56,7 @@ public class ManPingFragmet extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.homepage_fragment_focus, container, false);
+        View root = inflater.inflate(R.layout.base_fragment, container, false);
         initView(root);
         mContext = this.getActivity();
         return root;

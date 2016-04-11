@@ -24,66 +24,34 @@ public class GroupListFragment extends BaseFragment {
     private static final String TAG = GroupListFragment.class.getSimpleName();
 
     private BaseActivity mActivity;
-    private ActionBar mActionBar;
-    private RecyclerView mRecycleView;
-    private LinearLayoutManager mLinearLayoutManager;
-    private SwipeRefreshLayout mRefreshLayout;
-    private GroupListAdapter mAdapter;
+    private Bundle mArguments;
 
-    private View mBack;
+    private RecyclerView mRecycleView;
+    private SwipeRefreshLayout mRefreshLayout;
+    private LinearLayoutManager mLinearLayoutManager;
+    private PostsListAdapter mAdapter;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = (BaseActivity) activity;
-        mActionBar = mActivity.getSupportActionBar();
-        mActionBar.setTitle("新番讨论区");
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onPause() {
-        FMLog.d(TAG, "onPause");
-        super.onPause();
+        ActionBar actionBar = mActivity.getSupportActionBar();
+        actionBar.setTitle("一拳超人（小组）");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.group_list_fragment, container, false);
-        initView(root);
-        return root;
-    }
-
-    @Override
-    public void onResume() {
-        mActionBar.setTitle("新番讨论区");
-        super.onResume();
+        View view = inflater.inflate(R.layout.group_list_fragment, container, false);
+        initView(view);
+        return view;
     }
 
     private void initView(View root) {
-
-        mBack = root.findViewById(R.id.back);
-        mBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mActivity.onBackPressed();
-            }
-        });
-
         mRecycleView = (RecyclerView) root.findViewById(R.id.recycleview);
         mRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.swipe_refresh_widget);
         mRecycleView.setHasFixedSize(true);
         mRecycleView.setLongClickable(true);
-        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        mLinearLayoutManager = new LinearLayoutManager(mActivity);
         mRecycleView.setLayoutManager(mLinearLayoutManager);
 
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -93,63 +61,85 @@ public class GroupListFragment extends BaseFragment {
             }
         });
 
-        mAdapter = new GroupListAdapter();
+        mAdapter = new PostsListAdapter();
         mRecycleView.setAdapter(mAdapter);
     }
 
-    class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.GroupListItemViewHolder> {
+    class PostsListAdapter extends RecyclerView.Adapter<PostItemViewHolder> {
 
         LayoutInflater mInflater;
 
-        public GroupListAdapter() {
+        public PostsListAdapter () {
             mInflater = LayoutInflater.from(mActivity);
         }
 
         @Override
-        public GroupListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = mInflater.inflate(R.layout.group_item, null, false);
-            return new GroupListItemViewHolder(view);
+        public int getItemViewType(int position) {
+            return position % 4;
+//            return super.getItemViewType(position);
         }
 
         @Override
-        public void onBindViewHolder(GroupListItemViewHolder holder, int position) {
+        public PostItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            int id = 0;
+            switch (viewType) {
+                case 0:
+                    id = R.layout.state_recommend_item;
+                    break;
+                case 1:
+                    id = R.layout.state_image_item;
+                    break;
+                case 2:
+                    id = R.layout.post_item_layout;
+                    break;
+                case 3:
+                    id = R.layout.state_text_item;
+                    break;
+                default:
+                    break;
+            }
+            View view = mInflater.inflate(id, null, false);
+            return new PostItemViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(PostItemViewHolder holder, int position) {
             holder.bindView(position);
         }
 
         @Override
-        public int getItemViewType(int position) {
-            return super.getItemViewType(position);
+        public int getItemCount() {
+            return 10;
         }
 
         @Override
         public long getItemId(int position) {
             return super.getItemId(position);
         }
+    }
 
-        @Override
-        public int getItemCount() {
-            return 7;
+    class PostItemViewHolder extends RecyclerView.ViewHolder {
+
+        private View view;
+
+        public PostItemViewHolder(View itemView) {
+            super(itemView);
+            view = itemView;
         }
 
-
-
-        class GroupListItemViewHolder extends RecyclerView.ViewHolder {
-            View item;
-
-            public GroupListItemViewHolder(View itemView) {
-                super(itemView);
-                item = itemView;
-            }
-
-            public void bindView(int position) {
-                item.setOnClickListener(new View.OnClickListener(){
-
-                    @Override
-                    public void onClick(View v) {
-                        mActivity.addFragment(new GroupDetailFragment(), "groupDetail");
-                    }
-                });
-            }
+        public void bindView(int position) {
+            view.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    TopicDetailFragment fragment = new TopicDetailFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url", "http://192.168.11.100/files/index.html");
+                    bundle.putString("title","一拳超人为什么这么牛逼");
+                    fragment.setArguments(bundle);
+                    mActivity.addFragment(fragment, "postContent");
+                }
+            });
         }
+
     }
 }

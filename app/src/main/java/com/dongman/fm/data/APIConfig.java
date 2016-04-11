@@ -19,7 +19,7 @@ public class APIConfig {
 
     public static final String ARTICAL_DETAIL = HOST + "/article/detail";
 
-    public static final String SEARCH_API = "http://www.dongman.fm" + "/api/search/q";
+    public static final String SEARCH_API = HOST + "/search/q";
 
     public static final String DETAIL_API = HOST + "/api/detail";
 }

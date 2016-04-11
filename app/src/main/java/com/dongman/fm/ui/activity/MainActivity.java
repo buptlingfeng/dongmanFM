@@ -11,6 +11,8 @@ import com.dongman.fm.R;
 import com.dongman.fm.ui.fragment.BackHandledInterface;
 import com.dongman.fm.ui.fragment.BaseFragment;
 import com.dongman.fm.ui.fragment.CommunityFragment;
+import com.dongman.fm.ui.fragment.CommunityHotSpotFragment;
+import com.dongman.fm.ui.fragment.HomePageFocusFragment;
 import com.dongman.fm.ui.fragment.HomePageFragment;
 import com.dongman.fm.ui.fragment.MessageFragment;
 import com.dongman.fm.ui.fragment.RecommendDetailFragment;
@@ -44,7 +46,7 @@ public class MainActivity extends BaseActivity implements BackHandledInterface{
         mHome = getIndicatorView("首页", R.layout.main_navigation_item);
         ImageView icon = (ImageView) mHome.findViewById(R.id.navigation_icon);
         icon.setImageResource(R.drawable.icon_home);
-        mMainNavigation.addTab(mMainNavigation.newTabSpec("首页").setIndicator(mHome), HomePageFragment.class, null);
+        mMainNavigation.addTab(mMainNavigation.newTabSpec("首页").setIndicator(mHome), HomePageFocusFragment.class, null);
 
         mRecommend = getIndicatorView("推荐", R.layout.main_navigation_item);
         icon = (ImageView) mRecommend.findViewById(R.id.navigation_icon);
@@ -54,7 +56,7 @@ public class MainActivity extends BaseActivity implements BackHandledInterface{
         mCommmunity = getIndicatorView("小组", R.layout.main_navigation_item);
         icon = (ImageView) mCommmunity.findViewById(R.id.navigation_icon);
         icon.setImageResource(R.drawable.icon_shequ);
-        mMainNavigation.addTab(mMainNavigation.newTabSpec("小组").setIndicator(mCommmunity), CommunityFragment.class, null);
+        mMainNavigation.addTab(mMainNavigation.newTabSpec("小组").setIndicator(mCommmunity), CommunityHotSpotFragment.class, null);
 
         mMessage = getIndicatorView("消息", R.layout.main_navigation_item);
         icon = (ImageView) mMessage.findViewById(R.id.navigation_icon);

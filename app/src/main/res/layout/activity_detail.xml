@@ -5,13 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.dongman.fm.ui.view.TitleBarView
-        android:id="@id/title_bar_view"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:left_title_background="@drawable/icon_back"
-        app:right_title_background="@drawable/icon_share"
-        />
+    <!--<com.dongman.fm.ui.view.TitleBarView-->
+        <!--android:id="@id/title_bar_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--app:left_title_background="@drawable/icon_back"-->
+        <!--/>-->
 
     <FrameLayout
         android:id="@id/fragment_container"
@@ -19,12 +18,4 @@
         android:layout_height="match_parent">
 
     </FrameLayout>
-
-    <!--<fragment-->
-        <!--android:id="@+id/detail_page_fragment"-->
-        <!--android:name="com.dongman.fm.ui.fragment.DetailFragment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:layout="@layout/detail_page_fragment"-->
-        <!--/>-->
 </LinearLayout>

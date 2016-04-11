@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/title"
+        android:hint="标题（可选）"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:background="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/homepage_title_height" />
+    <View
+        android:background="@color/lightgrey"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <EditText
+        android:id="@+id/content"
+        android:textSize="14sp"
+        android:hint="说出此刻的心声吧..."
+        android:lineSpacingExtra="2dp"
+        android:layout_margin="10dp"
+        android:gravity="left|top"
+        android:background="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

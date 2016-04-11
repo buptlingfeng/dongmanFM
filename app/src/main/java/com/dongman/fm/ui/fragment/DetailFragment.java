@@ -2,6 +2,7 @@ package com.dongman.fm.ui.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -308,9 +309,20 @@ public class DetailFragment extends BaseFragment {
                 case MANPING_RELS:
                     TextView manpingTitle = (TextView) viewHolder.findViewById(R.id.manping_title);
                     TextView manpingContent = (TextView) viewHolder.findViewById(R.id.manping_content);
-                    ReviewInfo reviewInfo = mReviewsRecommends.get(position - 3);
+                    final ReviewInfo reviewInfo = mReviewsRecommends.get(position - 3);
                     manpingTitle.setText(reviewInfo.title);
                     manpingContent.setText(reviewInfo.summary);
+
+                    itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent();
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//TODO 为什么一定要加这个标志
+                            intent.setAction("com.dongman.fm.manping");
+                            intent.putExtra("id", reviewInfo.id);
+                            mContext.startActivity(intent);
+                        }
+                    });
                     break;
                 case ANIME_COMMENTS:
                     CircleImageView commentAvatar = (CircleImageView) itemView.findViewById(R.id.comment_avatar);

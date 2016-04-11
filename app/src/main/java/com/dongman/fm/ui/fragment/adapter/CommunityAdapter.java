@@ -62,11 +62,12 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.Comm
         }
 
         public void bindView(int position) {
+
             root.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    intent.setAction("com.dongman.fm.group");
+                    intent.setAction("com.dongman.fm.group.detail");
                     Bundle data = new Bundle();
                     data.putInt("type", 2);
                     intent.putExtra("data", data);

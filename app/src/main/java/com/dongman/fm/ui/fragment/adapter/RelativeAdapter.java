@@ -25,6 +25,7 @@ public class RelativeAdapter extends RecyclerView.Adapter<RelativeAdapter.Relati
 
     public static final int MANTIE      = 1;
     public static final int ANIMES      = 2;
+    public static final int TOPIC       = 3;
 
     private LayoutInflater mInflater;
     private List<RelativeRecommend> mData;
@@ -116,19 +117,37 @@ public class RelativeAdapter extends RecyclerView.Adapter<RelativeAdapter.Relati
                             }
                         });
                         break;
-                    case MANTIE:
+                    default:
                         TextView mantieTitle = (TextView) itemView.findViewById(R.id.mantie_title);
                         ImageView mantieImageView = (ImageView) itemView.findViewById(R.id.mantie_image);
 
                         mantieTitle.setText(data.title);
                         ImageUtils.getImage(mActivity, data.imageUrl, mantieImageView);
 
-                        itemView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                            }
-                        });
+                        if (mType == MANTIE) {
+                            itemView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent();
+                                    intent.setAction("com.dongman.fm.recommend_detail");
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("title", data.title);
+                                    bundle.putString("id", data.id);
+                                    intent.putExtra("info", bundle);
+                                    mActivity.startActivity(intent);
+                                }
+                            });
+                        } else if (mType == TOPIC) {
+                            itemView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent();
+                                    intent.setAction("com.dongman.fm.subject");
+                                    intent.putExtra("id", data.id);
+                                    mActivity.startActivity(intent);
+                                }
+                            });
+                        }
                         break;
                 }
             }

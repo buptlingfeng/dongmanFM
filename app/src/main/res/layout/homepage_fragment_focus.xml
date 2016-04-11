@@ -4,7 +4,22 @@
     android:layout_height="match_parent"
     android:background="#F2F1EE"
     android:orientation="vertical">
-
+    <LinearLayout
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:gravity="center_vertical"
+            android:text="首页"
+            style="@style/translation_title"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:textColor="#607D8B"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
     <!--<RelativeLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="@dimen/homepage_title_height"-->

@@ -99,7 +99,7 @@ public class RecommendNewsFragmet extends BaseFragment {
         mAdapter = new RecommendAdapter(getActivity());
         mRecycleView.setAdapter(mAdapter);
 
-        getData("zixun");
+        getData("zixun,topic");
     }
 
     private void getData(String type) {

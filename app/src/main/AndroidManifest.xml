@@ -5,6 +5,9 @@
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="15"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:label="@string/app_name"
@@ -43,8 +46,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.GroupDetailActivity"
+            android:theme="@style/test1">
+            <intent-filter>
+                <action android:name="com.dongman.fm.group.detail"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.activity.DetailActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/test1">
             <intent-filter>
                 <action android:name="com.dongman.fm.detail"/>
                 <category android:name="android.intent.category.DEFAULT" />
@@ -66,10 +76,33 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.ImageShowActivity"
+            android:theme="@style/publish_bar_style">
+            <intent-filter>
+                <action android:name="com.dongman.fm.image"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.activity.SubjectActivity"
             android:theme="@style/test1">
             <intent-filter>
                 <action android:name="com.dongman.fm.subject"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.activity.ArticalEditActivity"
+            android:theme="@style/publish_bar_style">
+            <intent-filter>
+                <action android:name="com.dongman.fm.artical.edit"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.activity.GroupListActivity"
+            android:theme="@style/test1">
+            <intent-filter>
+                <action android:name="com.dongman.fm.group.list"/>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

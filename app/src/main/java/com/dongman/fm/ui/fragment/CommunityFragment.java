@@ -63,14 +63,6 @@ public class CommunityFragment extends BaseFragment {
         mViewPager.setOffscreenPageLimit(1);
     }
 
-//    private void changeStatus(TextView nav, int position) {
-//        if(mCurrentTab != nav) {
-//            mCurrentTab.setTextColor(mActivity.getResources().getColor(R.color.nav_default_color));
-//            nav.setTextColor(mActivity.getResources().getColor(R.color.red));
-//            mViewPager.setCurrentItem(position);
-//            mCurrentTab = nav;
-//        }
-//    }
 
     class CommunityPagerAdapter extends FragmentPagerAdapter {
 
@@ -104,7 +96,6 @@ public class CommunityFragment extends BaseFragment {
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
         }
 
         @Override

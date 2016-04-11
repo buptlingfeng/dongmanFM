@@ -97,8 +97,7 @@ public class RecommendChartletFragmet extends BaseFragment {
 
         mAdapter = new RecommendAdapter(getActivity());
         mRecycleView.setAdapter(mAdapter);
-        getData("cosplay");
-        getData("shouhui");
+        getData("cosplay,shouhui");
     }
 
     private void getData(String type) {

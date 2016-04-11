@@ -29,4 +29,9 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp3:okhttp:3.0.0-RC1'
     compile 'com.github.manuelpeinado.fadingactionbar:fadingactionbar-abc:3.1.2'
+    compile 'jp.wasabeef:recyclerview-animators:1.2.0@aar'
+    compile 'com.android.support:design:23.0.0'
+    compile 'com.timehop.stickyheadersrecyclerview:library:0.4.3@aar'
+    compile 'cn.finalteam:galleryfinal:1.4.6'
+    compile 'com.android.support:support-v4:23.1.1'
 }

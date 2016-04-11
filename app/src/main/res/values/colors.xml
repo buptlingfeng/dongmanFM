@@ -151,14 +151,21 @@
     <color name="text_grey">#D0D0D0</color>
     <!---->
     <color name="text_normal">#2A2A2A</color>
-
     <color name="tab_top_text_1">#aaa</color>
     <color name="tab_top_text_2">#000</color>
     <color name="navegation_bg">#FBFFFD</color>
-
     <color name="default_bg_color">#1BB48B</color>
-
     <color name="nav_default_color">#607D8B</color>
-
     <color name="theme_color">#009688</color>
+
+    <!-- 半透明 -->
+    <color name="half_transparent">#201a181a</color>
+
+
+    <!-- Collapsing Avatar Toolbar -->
+    <color name="primary">#3F51B5</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="accent">#FF4081</color>
+    <color name="window_background">#FFF5F5F5</color>
+    <color name="background_dark">#ECECEC</color>
 </resources>

@@ -3,6 +3,7 @@ package com.dongman.fm.ui.view;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -31,12 +32,6 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
         final int heightMode = View.MeasureSpec.getMode(heightSpec);
         final int widthSize = View.MeasureSpec.getSize(widthSpec);
         final int heightSize = View.MeasureSpec.getSize(heightSpec);
-
-//        FMLog.i(TAG, "onMeasure called. \nwidthMode " + widthMode
-//                + " \nheightMode " + heightSpec
-//                + " \nwidthSize " + widthSize
-//                + " \nheightSize " + heightSize
-//                + " \ngetItemCount() " + getItemCount());
 
         int width = 0;
         int height = 0;
@@ -78,7 +73,13 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
     private void measureScrapChild(RecyclerView.Recycler recycler, int position, int widthSpec,
                                    int heightSpec, int[] measuredDimension) {
         try {
-            View view = recycler.getViewForPosition(0);//fix 动态添加时报IndexOutOfBoundsException
+            View view = null;
+
+            try {
+                view = recycler.getViewForPosition(position);//fix 动态添加时报IndexOutOfBoundsException
+            } catch (IndexOutOfBoundsException e) {
+                view = recycler.getViewForPosition(0);
+            }
 
             if (view != null) {
                 RecyclerView.LayoutParams p = (RecyclerView.LayoutParams) view.getLayoutParams();
@@ -86,12 +87,18 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
                 int childWidthSpec = ViewGroup.getChildMeasureSpec(widthSpec,
                         getPaddingLeft() + getPaddingRight(), p.width);
 
-                int childHeightSpec = ViewGroup.getChildMeasureSpec(heightSpec,
-                        getPaddingTop() + getPaddingBottom(), p.height);
+                int childHeightSpec = ViewGroup.getChildMeasureSpec(heightSpec, getPaddingTop() + getPaddingBottom() + p.bottomMargin + p.topMargin, p.height);
 
                 view.measure(childWidthSpec, childHeightSpec);
+
+                int j = view.getPaddingTop() + view.getPaddingBottom() + 46;
+
                 measuredDimension[0] = view.getMeasuredWidth() + p.leftMargin + p.rightMargin;
-                measuredDimension[1] = view.getMeasuredHeight() + p.bottomMargin + p.topMargin;
+                measuredDimension[1] = view.getMeasuredHeight() + p.bottomMargin + p.topMargin + j;
+
+
+                Log.d("FullyLinearLayoutManager", "j = " + j);
+                Log.d("FullyLinearLayoutManager", "measureDimension[1]" + measuredDimension[1]);
                 recycler.recycleView(view);
             }
         } catch (Exception e) {

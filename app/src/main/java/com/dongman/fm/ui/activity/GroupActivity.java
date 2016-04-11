@@ -32,21 +32,23 @@ public class GroupActivity extends BaseActivity {
             Bundle bundle = intent.getBundleExtra("data");
             int type;
             Fragment fragment;
-            if(bundle != null) {
-                type = bundle.getInt("type", GROUP_LIST);
-                switch (type) {
-                    case GROUP_LIST:
-                        fragment = new GroupListFragment();
-                        addFragment(fragment, "group_list");
-                        break;
-                    case GROUP_DETAIL:
-                        fragment = new GroupDetailFragment();
-                        addFragment(fragment, "groupDetail");
-                        break;
-                    default:
-                        break;
-                }
-            }
+//            if(bundle != null) {
+//                type = bundle.getInt("type", GROUP_LIST);
+//                switch (type) {
+//                    case GROUP_LIST:
+//                        fragment = new GroupListFragment();
+//                        addFragment(fragment, "group_list");
+//                        break;
+//                    case GROUP_DETAIL:
+//                        fragment = new GroupDetailFragment();
+//                        addFragment(fragment, "groupDetail");
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            }
+            fragment = new GroupDetailFragment();
+            addFragment(fragment, "groupDetail");
         }
 
     }

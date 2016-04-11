@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@android:color/transparent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/action1"
+            android:orientation="vertical"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.dongman.fm.ui.view.CircleImageView
+                android:id="@+id/Shanzhai"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="5dp"
+                android:layout_width="@dimen/homepage_recommend_image_width"
+                android:layout_height="@dimen/homepage_recommend_image_width"
+                android:src="@color/red" />
+            <TextView
+                android:text="脑洞"
+                android:gravity="center"
+                android:textColor="@color/white"
+                style="@style/third_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/action2"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.dongman.fm.ui.view.CircleImageView
+                android:id="@+id/classes"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="5dp"
+                android:layout_width="@dimen/homepage_recommend_image_width"
+                android:layout_height="@dimen/homepage_recommend_image_width"
+                android:src="@color/blue" />
+            <TextView
+                android:text="经典"
+                android:gravity="center"
+                android:textColor="@color/white"
+                style="@style/third_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/action3"
+            android:orientation="vertical"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.dongman.fm.ui.view.CircleImageView
+                android:id="@+id/tucao"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="5dp"
+                android:layout_width="@dimen/homepage_recommend_image_width"
+                android:layout_height="@dimen/homepage_recommend_image_width"
+                android:src="@color/yellow" />
+            <TextView
+                android:text="脑洞"
+                android:gravity="center"
+                android:textColor="@color/white"
+                style="@style/third_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/action4"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.dongman.fm.ui.view.CircleImageView
+                android:id="@+id/showtime"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="5dp"
+                android:layout_width="@dimen/homepage_recommend_image_width"
+                android:layout_height="@dimen/homepage_recommend_image_width"
+                android:src="@color/green" />
+            <TextView
+                android:text="经典"
+                android:gravity="center"
+                android:textColor="@color/white"
+                style="@style/third_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

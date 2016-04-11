@@ -2,6 +2,10 @@ package com.dongman.fm.ui.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,10 +13,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.dongman.fm.R;
 import com.dongman.fm.ui.activity.BaseActivity;
 import com.dongman.fm.utils.FMLog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by liuzhiwei on 16/1/12.
@@ -21,124 +29,91 @@ public class GroupDetailFragment extends BaseFragment {
 
     private static String TAG = GroupDetailFragment.class.getSimpleName();
 
-    private BaseActivity mActivity;
-    private Bundle mArguments;
+    private Activity mActivity;
+    private ViewPager mViewPager;
 
-    private RecyclerView mRecycleView;
-    private SwipeRefreshLayout mRefreshLayout;
-    private LinearLayoutManager mLinearLayoutManager;
-    private PostsListAdapter mAdapter;
+    private TextView mNav1, mNav2, mNav3, mNav4;
+
+    public GroupDetailFragment() {
+    }
 
     @Override
     public void onAttach(Activity activity) {
+        mActivity = activity;
         super.onAttach(activity);
-        mActivity = (BaseActivity) activity;
-        ActionBar actionBar = mActivity.getSupportActionBar();
-        actionBar.setTitle("一拳超人（小组）");
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.group_list_fragment, container, false);
-        initView(view);
-        return view;
+        View root = inflater.inflate(R.layout.group_detail_fragment, container, false);
+        initView(root);
+        return root;
     }
 
-    private void initView(View root) {
-        mRecycleView = (RecyclerView) root.findViewById(R.id.recycleview);
-        mRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.swipe_refresh_widget);
-        mRecycleView.setHasFixedSize(true);
-        mRecycleView.setLongClickable(true);
-        mLinearLayoutManager = new LinearLayoutManager(mActivity);
-        mRecycleView.setLayoutManager(mLinearLayoutManager);
+    private void initView(View root){
 
-        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                FMLog.d(TAG, "onRefresh");
-            }
-        });
+        List<Fragment> data = new ArrayList<>();
+        data.add(new GroupCreationFragment());
+        data.add(new GroupClassicFragment());
+        data.add(new GroupTalkFragment());
+        data.add(new GroupShowFragment());
 
-        mAdapter = new PostsListAdapter();
-        mRecycleView.setAdapter(mAdapter);
+        mViewPager = (ViewPager) root.findViewById(R.id.main_viewPager);
+        CommunityPagerAdapter adapter = new CommunityPagerAdapter(getChildFragmentManager());
+        adapter.setData(data);
+        mViewPager.setAdapter(adapter);
+        mViewPager.addOnPageChangeListener(new PageChangeListener());
+        mViewPager.setOffscreenPageLimit(1);
     }
 
-    class PostsListAdapter extends RecyclerView.Adapter<PostItemViewHolder> {
 
-        LayoutInflater mInflater;
+    public static class CommunityPagerAdapter extends FragmentPagerAdapter {
 
-        public PostsListAdapter () {
-            mInflater = LayoutInflater.from(mActivity);
+        private List<Fragment> mData;
+
+        public CommunityPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        public void setData(List<Fragment> data) {
+            mData = data;
         }
 
         @Override
-        public int getItemViewType(int position) {
-            return position % 4;
-//            return super.getItemViewType(position);
+        public int getCount() {
+            return mData.size();
         }
 
         @Override
-        public PostItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            int id = 0;
-            switch (viewType) {
-                case 0:
-                    id = R.layout.state_recommend_item;
-                    break;
-                case 1:
-                    id = R.layout.state_image_item;
-                    break;
-                case 2:
-                    id = R.layout.post_item_layout;
-                    break;
-                case 3:
-                    id = R.layout.state_text_item;
-                    break;
-                default:
-                    break;
-            }
-            View view = mInflater.inflate(id, null, false);
-            return new PostItemViewHolder(view);
+        public Fragment getItem(int position) {
+            return mData.get(position);
         }
 
         @Override
-        public void onBindViewHolder(PostItemViewHolder holder, int position) {
-            holder.bindView(position);
-        }
-
-        @Override
-        public int getItemCount() {
-            return 10;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return super.getItemId(position);
+        public Object instantiateItem(ViewGroup container, int position) {
+            return super.instantiateItem(container, position);
         }
     }
 
-    class PostItemViewHolder extends RecyclerView.ViewHolder {
+    public static class PageChangeListener implements ViewPager.OnPageChangeListener {
 
-        private View view;
-
-        public PostItemViewHolder(View itemView) {
-            super(itemView);
-            view = itemView;
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         }
 
-        public void bindView(int position) {
-            view.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    TopicDetailFragment fragment = new TopicDetailFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("url", "http://192.168.11.100/files/index.html");
-                    bundle.putString("title","一拳超人为什么这么牛逼");
-                    fragment.setArguments(bundle);
-                    mActivity.addFragment(fragment, "postContent");
-                }
-            });
+        @Override
+        public void onPageSelected(int position) {
         }
 
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
     }
 
 }

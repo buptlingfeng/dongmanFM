@@ -76,13 +76,13 @@ public class TopicDetailFragment extends BaseFragment implements IRequestCallBac
                 mActivity.addFragment(new ReviewsListFragment(), "ReviewList");
             }
         });
-        mBack = root.findViewById(R.id.back);
-        mBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mActivity.onBackPressed();
-            }
-        });
+//        mBack = root.findViewById(R.id.back);
+//        mBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mActivity.onBackPressed();
+//            }
+//        });
         WebView mWebView = (WebView) root.findViewById(R.id.webView1);
         mWebView.setWebViewClient(new CustomWebViewClient());
         mWebView.loadUrl(mUrl);

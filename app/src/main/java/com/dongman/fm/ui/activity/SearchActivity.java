@@ -205,14 +205,10 @@ public class SearchActivity extends BaseActivity {
                 Message message = mHandler.obtainMessage();
                 try {//TODO 数据结构改变，增加扩展字段来表示是否已经加载完毕
                     JSONObject object = new JSONObject(response.body().string());
-                    String msg = object.getString("msg");
+                    JSONObject data = object.getJSONObject("data");
 
-                    if(!"success".equals(msg)) {
-                        message.what = DATA_FAILED;
-                        return;
-                    }
-                    if(!object.isNull("list") ) {
-                        mSearchListData = object.getJSONArray("list");
+                    if(!data.isNull("list") ) {
+                        mSearchListData = data.getJSONArray("list");
                         if(isFrist) {
                             mAdapter.setData(mSearchListData);
                             mPageCount = 2;

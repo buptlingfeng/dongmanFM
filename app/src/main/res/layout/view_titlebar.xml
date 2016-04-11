@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:background="@color/lightgrey"
+              android:background="@color/theme_color"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="@dimen/homepage_title_height">
     <TextView
             android:id="@+id/left_title_bar"
             android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/homepage_title_height"
+            android:layout_height="@dimen/homepage_title_height"
             android:layout_centerVertical="true"/>
     <TextView
             android:id="@+id/content_title_bar"
             android:text="动漫FM"
-            style="@style/text_title_bar_style"
+            android:layout_toRightOf="@id/left_title_bar"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"/>
     <TextView

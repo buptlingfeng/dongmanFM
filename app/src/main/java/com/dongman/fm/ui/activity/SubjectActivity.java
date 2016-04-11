@@ -102,7 +102,7 @@ public class SubjectActivity extends BaseActivity {
         mAnimesRecycleView.addItemDecoration(new SpacesItemDecoration(20, 0, 10, 10));
 
         mTopicRecycleView = (RecyclerView) findViewById(R.id.topic_recycleview);
-        mTopicAdapter = new RelativeAdapter(this, RelativeAdapter.MANTIE);
+        mTopicAdapter = new RelativeAdapter(this, RelativeAdapter.TOPIC);
         mTopicsLinearLayoutManager = new LinearLayoutManager(this);
         mTopicsLinearLayoutManager.setOrientation(OrientationHelper.HORIZONTAL);
         mTopicRecycleView.setLayoutManager(mTopicsLinearLayoutManager);

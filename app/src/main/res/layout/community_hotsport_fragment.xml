@@ -1,12 +1,691 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/recycleview_layout"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_heigth">
+        <TextView
+            android:gravity="center"
+            android:text="小组"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <ScrollView
+        android:background="@color/lightgrey"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </include>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <LinearLayout
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.dongman.fm.ui.view.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:uik_autoScroll="true"
+                    app:uik_autoScrollInterval="2000"
+                    app:uik_ratio="0.5">
+                </com.dongman.fm.ui.view.Banner>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:weightSum="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+                        <TextView
+                            android:gravity="left|center_vertical"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:singleLine="true"
+                            android:textSize="14sp"
+                            android:text="【Cosplay】怀旧的cosplay"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                        <View
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="15dp"
+                            android:background="@color/lightgrey"
+                            android:layout_width="0.5dp"
+                            android:layout_height="match_parent"/>
+                        <TextView
+                            android:gravity="left|center_vertical"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:singleLine="true"
+                            android:textSize="14sp"
+                            android:text="【一拳超人】纯粹的个人英雄"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <View
+                        android:background="@color/lightgrey"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"/>
+                    <LinearLayout
+                        android:weightSum="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+                        <TextView
+                            android:gravity="left|center_vertical"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:singleLine="true"
+                            android:textSize="14sp"
+                            android:text="【圣斗士】打不死的五小强"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                        <View
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="15dp"
+                            android:background="@color/lightgrey"
+                            android:layout_width="0.5dp"
+                            android:layout_height="match_parent"/>
+                        <TextView
+                            android:gravity="left|center_vertical"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:singleLine="true"
+                            android:textSize="14sp"
+                            android:text="【进击的巨人】大爱三爷"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="番米酱推荐"
+                    android:gravity="left"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="5dp"
+                    style="@style/sub_title"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/recommend_group_1"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_width="@dimen/little_image_width"
+                            android:layout_height="wrap_content">
+                            <com.dongman.fm.ui.view.CircleImageView
+                                android:src="@color/green"
+                                app:border_color="@color/white"
+                                app:border_width="1dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/little_image_width" />
+                            <TextView
+                                android:text="魔道祖师"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:textSize="12sp"
+                                android:text="21345参与"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/recommend_group_2"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_width="@dimen/little_image_width"
+                            android:layout_height="wrap_content">
+                            <com.dongman.fm.ui.view.CircleImageView
+                                android:src="@color/orange"
+                                app:border_color="@color/white"
+                                app:border_width="1dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/little_image_width" />
+                            <TextView
+                                android:text="魔道祖师"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:textSize="12sp"
+                                android:text="21345参与"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/recommend_group_3"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_width="@dimen/little_image_width"
+                            android:layout_height="wrap_content">
+                            <com.dongman.fm.ui.view.CircleImageView
+                                android:src="@color/salmon"
+                                app:border_color="@color/white"
+                                app:border_width="1dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/little_image_width" />
+                            <TextView
+                                android:text="魔道祖师"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:textSize="12sp"
+                                android:text="21345参与"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/recommend_group_4"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="@dimen/little_image_width"
+                        android:layout_height="wrap_content">
+                        <com.dongman.fm.ui.view.CircleImageView
+                            android:src="@color/blue"
+                            app:border_color="@color/white"
+                            app:border_width="1dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/little_image_width" />
+                        <TextView
+                            android:text="魔道祖师"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textSize="12sp"
+                            android:text="21345参与"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/recommend_group_5"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="@dimen/little_image_width"
+                        android:layout_height="wrap_content">
+                        <com.dongman.fm.ui.view.CircleImageView
+                            android:src="@color/yellow"
+                            app:border_color="@color/white"
+                            app:border_width="1dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/little_image_width" />
+                        <TextView
+                            android:text="魔道祖师"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textSize="12sp"
+                            android:text="21345参与"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/recommend_group_6"
+                        android:orientation="vertical"
+                        android:weightSum="1"
+                        android:layout_width="@dimen/little_image_width"
+                        android:layout_height="wrap_content">
+                        <com.dongman.fm.ui.view.CircleImageView
+                            android:src="@color/cadetblue"
+                            app:border_color="@color/white"
+                            app:border_width="1dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/little_image_width" />
+                        <TextView
+                            android:text="魔道祖师"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textSize="12sp"
+                            android:text="21345参与"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/all_group_indicator"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/lightgreen"
+                        android:text="全部番团 @ "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/lightgreen"
+                        android:text="换一换 {} "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="人气榜"
+                    android:gravity="left"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="5dp"
+                    style="@style/sub_title"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.dongman.fm.ui.view.CircleImageView
+                        android:src="@color/green"
+                        app:border_color="@color/white"
+                        app:border_width="1dp"
+                        android:layout_width="@dimen/actionbar_heigth"
+                        android:layout_height="@dimen/actionbar_heigth" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:text="库日天不要不要的"
+                            android:textSize="16sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:text="190人关注"
+                            android:textSize="12sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <TextView
+                        android:text="+ 关注"
+                        android:textSize="20sp"
+                        android:textColor="@color/lightgreen"
+                        android:gravity="right|center"
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="center|right"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:weightSum="3"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_weight="1"
+                        android:src="@drawable/test6"
+                        android:layout_width="@dimen/little_image_width"
+                        android:layout_height="@dimen/little_image_width" />
+                    <ImageView
+                        android:layout_weight="1"
+                        android:src="@drawable/test5"
+                        android:layout_width="@dimen/little_image_width"
+                        android:layout_height="@dimen/little_image_width" />
+                    <ImageView
+                        android:layout_weight="1"
+                        android:src="@drawable/test6"
+                        android:layout_width="@dimen/little_image_width"
+                        android:layout_height="@dimen/little_image_width" />
+                </LinearLayout>
+
+                <TextView
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    style="@style/third_title"
+                    android:gravity="left|center_vertical"
+                    android:drawableLeft="@drawable/yinhao"
+                    android:text="虐 虐 虐 太虐人了 尼玛 能不这样吗？"
+                    android:singleLine="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/lightgrey"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.dongman.fm.ui.view.CircleImageView
+                            android:src="@color/pink"
+                            app:border_color="@color/white"
+                            app:border_width="1dp"
+                            android:layout_width="@dimen/actionbar_heigth"
+                            android:layout_height="@dimen/actionbar_heigth" />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:text="夏夏夏家的默千千"
+                                android:textSize="16sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:text="190人关注"
+                                android:textSize="12sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                        <TextView
+                            android:text="+ 关注"
+                            android:textSize="20sp"
+                            android:textColor="@color/lightgreen"
+                            android:gravity="right|center"
+                            android:layout_marginRight="10dp"
+                            android:layout_gravity="center|right"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:weightSum="3"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_weight="1"
+                            android:src="@drawable/test1"
+                            android:layout_width="@dimen/little_image_width"
+                            android:layout_height="@dimen/little_image_width" />
+                        <ImageView
+                            android:layout_weight="1"
+                            android:src="@drawable/test3"
+                            android:layout_width="@dimen/little_image_width"
+                            android:layout_height="@dimen/little_image_width" />
+                        <ImageView
+                            android:layout_weight="1"
+                            android:src="@drawable/test7"
+                            android:layout_width="@dimen/little_image_width"
+                            android:layout_height="@dimen/little_image_width" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        style="@style/third_title"
+                        android:gravity="left|center_vertical"
+                        android:drawableLeft="@drawable/yinhao"
+                        android:text="虐 虐 虐 太虐人了 尼玛 能不这样吗？"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/index_title"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="45dp">
+                    <View
+                        android:background="@color/lightgrey"
+                        android:layout_width="match_parent"
+                        android:layout_height="4.5dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="39dp">
+                        <View
+                            android:background="#F4538D"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_width="2dp"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:text="今日热点"
+                            android:textSize="18sp"
+                            android:layout_marginLeft="20dp"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <View
+                        android:background="@color/lightgrey"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_below="@id/index_title"
+                    android:id="@+id/biaoqian_container"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="89"
+                        android:gravity="center"
+                        android:textColor="#A8D3E6"
+                        android:background="@drawable/biaoqian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_below="@id/index_title"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_toRightOf="@id/biaoqian_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/anime_hot_spot_image"
+                        android:src="@drawable/test8"
+                        android:layout_width="@dimen/item_image_size"
+                        android:layout_height="@dimen/item_image_size"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+
+                    <LinearLayout
+                        android:layout_toLeftOf="@id/anime_hot_spot_image"
+                        android:id="@+id/content_container"
+                        android:orientation="vertical"
+                        android:layout_marginRight="10dp"
+                        android:layout_alignBaseline="@id/anime_hot_spot_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            style="@style/sub_title"
+                            android:gravity="left|center_vertical"
+                            android:text="有觉得混沌帅气的同伴么？"
+                            android:singleLine="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/third_title"
+                            android:gravity="left|center_vertical"
+                            android:drawableLeft="@drawable/yinhao"
+                            android:text="虐 虐 虐 太虐人了 尼玛 能不这样吗？"
+                            android:singleLine="true"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/third_title"
+                            android:gravity="left|center_vertical"
+                            android:drawableLeft="@drawable/yinhao"
+                            android:text="大圣，你一定会很多法术吧？我知道，齐天大圣孙悟空，身如玄铁，火眼金睛，长生不老还有七十二变，一个筋斗云就是十万八千里。"
+                            android:singleLine="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/topic_tag"
+                        android:layout_marginTop="15dp"
+                        android:layout_below="@id/anime_hot_spot_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textColor="#A8D3E6"
+                            android:text="大圣归来"
+                            android:gravity="center"
+                            style="@style/third_title"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:background="@drawable/kuang"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:textColor="#A8D3E6"
+                            android:text="电影"
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
+                            style="@style/third_title"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:background="@drawable/kuang"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <View
+                        android:layout_below="@id/topic_tag"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/lightgrey"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"/>
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="番米酱推荐"
+        android:gravity="left"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        style="@style/sub_title"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="@dimen/little_image_width"
+                android:layout_height="wrap_content">
+                <com.dongman.fm.ui.view.CircleImageView
+                    android:src="@color/green"
+                    app:border_color="@color/white"
+                    app:border_width="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/little_image_width" />
+                <TextView
+                    android:text="魔道祖师"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textSize="12sp"
+                    android:text="21345参与"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="@dimen/little_image_width"
+                android:layout_height="wrap_content">
+                <com.dongman.fm.ui.view.CircleImageView
+                    android:src="@color/orange"
+                    app:border_color="@color/white"
+                    app:border_width="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/little_image_width" />
+                <TextView
+                    android:text="魔道祖师"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textSize="12sp"
+                    android:text="21345参与"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="@dimen/little_image_width"
+                android:layout_height="wrap_content">
+                <com.dongman.fm.ui.view.CircleImageView
+                    android:src="@color/salmon"
+                    app:border_color="@color/white"
+                    app:border_width="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/little_image_width" />
+                <TextView
+                    android:text="魔道祖师"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textSize="12sp"
+                    android:text="21345参与"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="@dimen/little_image_width"
+            android:layout_height="wrap_content">
+            <com.dongman.fm.ui.view.CircleImageView
+                android:src="@color/blue"
+                app:border_color="@color/white"
+                app:border_width="1dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/little_image_width" />
+            <TextView
+                android:text="魔道祖师"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="12sp"
+                android:text="21345参与"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="@dimen/little_image_width"
+            android:layout_height="wrap_content">
+            <com.dongman.fm.ui.view.CircleImageView
+                android:src="@color/yellow"
+                app:border_color="@color/white"
+                app:border_width="1dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/little_image_width" />
+            <TextView
+                android:text="魔道祖师"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="12sp"
+                android:text="21345参与"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:weightSum="1"
+            android:layout_width="@dimen/little_image_width"
+            android:layout_height="wrap_content">
+            <com.dongman.fm.ui.view.CircleImageView
+                android:src="@color/cadetblue"
+                app:border_color="@color/white"
+                app:border_width="1dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/little_image_width" />
+            <TextView
+                android:text="魔道祖师"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="12sp"
+                android:text="21345参与"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/lightgreen"
+            android:text="全部番团 @ "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/lightgreen"
+            android:text="换一换 {} "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

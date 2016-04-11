@@ -25,9 +25,9 @@
             <ImageView
                 android:id="@+id/article_image"
                 android:padding="1dp"
-                android:scaleType="fitCenter"
+                android:scaleType="fitXY"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="240dp" />
             <TextView
                 android:id="@+id/article_create_time"
                 android:layout_width="wrap_content"
