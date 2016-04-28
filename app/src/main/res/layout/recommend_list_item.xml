@@ -11,11 +11,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
             <!--<LinearLayout-->
                 <!--android:id="@+id/article_image_container"-->
                 <!--android:orientation="horizontal"-->
@@ -25,9 +25,9 @@
             <ImageView
                 android:id="@+id/article_image"
                 android:padding="1dp"
-                android:scaleType="fitXY"
                 android:layout_width="match_parent"
-                android:layout_height="240dp" />
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
             <TextView
                 android:id="@+id/article_create_time"
                 android:layout_width="wrap_content"

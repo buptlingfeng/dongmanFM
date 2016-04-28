@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.dongman.fm.R;
 import com.dongman.fm.image.ImageUtils;
+import com.dongman.fm.ui.utils.ToolsUtils;
+import com.dongman.fm.utils.FMLog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,7 +24,7 @@ import org.json.JSONObject;
  */
 public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.TopicViewHolder> {
 
-    private static final String TAG = ManpingListAdapter.class.getName();
+    private static final String TAG = TopicListAdapter.class.getName();
 
     private static final int BANNER  = 1;//标示Banner样式
     private static final int REVIEW = 2;//标示漫评的样式
@@ -107,7 +109,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
 
                 data = obj;
                 title.setText(obj.getString("title"));
-                ImageUtils.getImage(mContext, obj.getString("img_url"), imageView);
+                ImageUtils.getImage(mContext, obj.getString("img_url"), imageView, 1080, 615);
                 final String id = obj.getString("target_id");
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

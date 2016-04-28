@@ -30,6 +30,13 @@ public class ImageUtils {
         Picasso.with(context).load(url).into(imageView);
     }
 
+    public static void getImage(Context context, String url, ImageView imageView, int width, int heigth) {
+        Picasso.with(context)
+                .load(url)
+                .resize(width, heigth)
+                .into(imageView);
+    }
+
     /**
      * 同步方法，不要在主线程中调用
      * @param context

@@ -19,3 +19,6 @@
 -keep class cn.finalteam.galleryfinal.widget.*{*;}
 -keep class cn.finalteam.galleryfinal.widget.crop.*{*;}
 -keep class cn.finalteam.galleryfinal.widget.zoonview.*{*;}
+-keep class com.tencent.mm.sdk.** {
+   *;
+}

@@ -5,8 +5,6 @@ import android.graphics.Color;
 
 import com.dongman.fm.utils.UILImageLoader;
 
-import java.lang.reflect.Field;
-
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
@@ -72,5 +70,8 @@ public class BaseApplication extends Application {
 
     public String getAppVerion() {
         return appVerion;
+    }
+
+    private void initSharePlatform() {
     }
 }

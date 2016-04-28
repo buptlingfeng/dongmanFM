@@ -11,7 +11,7 @@ public class APIConfig {
 
     public static final String TOPIC_DETAIL   = HOST + "/topic/detail";
 
-    public static final String MANPING_DETAIL = "http://www.dongman.fm" + "/api/review/detail";
+    public static final String MANPING_DETAIL = HOST + "/review/detail";
 
     public static final String SUBJECT_DETAIL = HOST + "/subject/detail";
 

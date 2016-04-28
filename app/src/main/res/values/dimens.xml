@@ -57,6 +57,6 @@
     <dimen name="default_collapsed_text_size">18sp</dimen>
     <dimen name="default_expanded_text_size">19sp</dimen>
 
-    <dimen name="actionbar_heigth">56dp</dimen>
+    <dimen name="actionbar_heigth">50dp</dimen>
 
 </resources>

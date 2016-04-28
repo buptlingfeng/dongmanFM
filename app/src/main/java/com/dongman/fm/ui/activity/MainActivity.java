@@ -10,14 +10,11 @@ import android.widget.TextView;
 import com.dongman.fm.R;
 import com.dongman.fm.ui.fragment.BackHandledInterface;
 import com.dongman.fm.ui.fragment.BaseFragment;
-import com.dongman.fm.ui.fragment.CommunityFragment;
 import com.dongman.fm.ui.fragment.CommunityHotSpotFragment;
 import com.dongman.fm.ui.fragment.HomePageFocusFragment;
-import com.dongman.fm.ui.fragment.HomePageFragment;
 import com.dongman.fm.ui.fragment.MessageFragment;
-import com.dongman.fm.ui.fragment.RecommendDetailFragment;
 import com.dongman.fm.ui.fragment.RecommendFragment;
-import com.dongman.fm.utils.FMLog;
+import com.dongman.fm.ui.fragment.UserCenterFragment;
 
 
 public class MainActivity extends BaseActivity implements BackHandledInterface{
@@ -66,7 +63,7 @@ public class MainActivity extends BaseActivity implements BackHandledInterface{
         mPersonal = getIndicatorView("个人", R.layout.main_navigation_item);
         icon = (ImageView) mPersonal.findViewById(R.id.navigation_icon);
         icon.setImageResource(R.drawable.icon_people);
-        mMainNavigation.addTab(mMainNavigation.newTabSpec("个人").setIndicator(mPersonal), HomePageFragment.class, null);
+        mMainNavigation.addTab(mMainNavigation.newTabSpec("个人").setIndicator(mPersonal), UserCenterFragment.class, null);
 
         mMainNavigation.getTabWidget().setDividerDrawable(android.R.color.transparent);
 

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="人气榜"
+            android:gravity="left"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            style="@style/sub_title"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.dongman.fm.ui.view.CircleImageView
+                android:src="@color/green"
+                app:border_color="@color/white"
+                app:border_width="1dp"
+                android:layout_width="@dimen/actionbar_heigth"
+                android:layout_height="@dimen/actionbar_heigth" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="库日天不要不要的"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="190人关注"
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:text="+ 关注"
+                android:textSize="20sp"
+                android:textColor="@color/lightgreen"
+                android:gravity="right|center"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center|right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:weightSum="3"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_weight="1"
+                android:src="@drawable/test6"
+                android:layout_width="@dimen/little_image_width"
+                android:layout_height="@dimen/little_image_width" />
+            <ImageView
+                android:layout_weight="1"
+                android:src="@drawable/test5"
+                android:layout_width="@dimen/little_image_width"
+                android:layout_height="@dimen/little_image_width" />
+            <ImageView
+                android:layout_weight="1"
+                android:src="@drawable/test6"
+                android:layout_width="@dimen/little_image_width"
+                android:layout_height="@dimen/little_image_width" />
+        </LinearLayout>
+
+        <TextView
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            style="@style/third_title"
+            android:gravity="left|center_vertical"
+            android:drawableLeft="@drawable/yinhao"
+            android:text="虐 虐 虐 太虐人了 尼玛 能不这样吗？"
+            android:singleLine="true"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

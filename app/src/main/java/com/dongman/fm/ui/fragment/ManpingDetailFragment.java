@@ -14,16 +14,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.dongman.fm.R;
 import com.dongman.fm.data.APIConfig;
+import com.dongman.fm.data.CommentData;
 import com.dongman.fm.image.ImageUtils;
 import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.ui.fragment.adapter.CommentAdapter;
+import com.dongman.fm.ui.fragment.adapter.CommentsAdapter;
 import com.dongman.fm.ui.fragment.adapter.RelativeAdapter;
 import com.dongman.fm.ui.view.CircleImageView;
 import com.dongman.fm.ui.view.CustomListView;
+import com.dongman.fm.ui.view.FullyLinearLayoutManager;
 import com.dongman.fm.ui.view.SpacesItemDecoration;
 
 import okhttp3.Request;
@@ -34,6 +40,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by liuzhiwei on 15/8/13.
@@ -49,11 +57,16 @@ public class ManpingDetailFragment extends BaseFragment {
     private TextView mManpingUpdateTime;
 
     private TextView mManpingTitle;
-    private TextView mManpingContent;
     private TextView mManpingVote;
+    private WebView mWebView;
 
-    private CustomListView mManpingCommentsList;
-    private CommentAdapter mCommentAdapter;
+//    private CustomListView mManpingCommentsList;
+//    private CommentAdapter mCommentAdapter;
+
+    private View mCommentsContainer;
+    private RecyclerView mCommentsRecycleView;
+    private FullyLinearLayoutManager mCommentLayoutManager;
+    private CommentsAdapter mCommentAdapter;
 
     private RecyclerView mRecycleView;
     private LinearLayoutManager mLinearLayoutManager;
@@ -64,7 +77,7 @@ public class ManpingDetailFragment extends BaseFragment {
     private String mID;
 
     private JSONObject mBasicData;
-    private JSONArray  mComments;
+    private List<CommentData> mComments;
 
     @Override
     public void onAttach(Activity activity) {
@@ -104,13 +117,22 @@ public class ManpingDetailFragment extends BaseFragment {
         mManpingUpdateTime = (TextView) root.findViewById(R.id.manping_detail_updatetime);
 
         mManpingTitle = (TextView) root.findViewById(R.id.manping_detail_title);
-        mManpingContent = (TextView) root.findViewById(R.id.manping_detail_content);
+//        mManpingContent = (TextView) root.findViewById(R.id.manping_detail_content);
+        mWebView = (WebView) root.findViewById(R.id.webView1);
+        mWebView.setWebViewClient(new CustomWebViewClient());
+
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.setWebChromeClient(new CustomChromClient());
+
+
         mManpingVote = (TextView) root.findViewById(R.id.manping_detail_vote);
 
-        mManpingCommentsList = (CustomListView) root.findViewById(R.id.manping_detail_comments_list);
-        mCommentAdapter = new CommentAdapter(getActivity());
-        mManpingCommentsList.setAdapter(mCommentAdapter);
-        mManpingCommentsList.setFocusable(false);
+        mCommentsContainer = findViewById(R.id.comments_container);
+        mCommentsRecycleView = (RecyclerView) findViewById(R.id.comments_recycleview);
+        mCommentLayoutManager = new FullyLinearLayoutManager(getActivity());
+        mCommentLayoutManager.setOrientation(OrientationHelper.VERTICAL);
+        mCommentAdapter = new CommentsAdapter(getActivity());
+        mCommentsRecycleView.setAdapter(mCommentAdapter);
 
         mRecycleView = (RecyclerView) root.findViewById(R.id.recycleview);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
@@ -135,19 +157,19 @@ public class ManpingDetailFragment extends BaseFragment {
 
                             String manpingTitle = mBasicData.getString("title");
                             mManpingTitle.setText(manpingTitle);
-                            String manpingContent = mBasicData.getString("content");
-                            String resultContent = manpingContent.replaceAll("<p>","\r\n     ");
-                            mManpingContent.setText(resultContent);
+
+                            String reviewUrl = mBasicData.getString("review_url");
+                            mWebView.loadUrl(reviewUrl);
                             String votes = mBasicData.getString("vote_count");
                             mManpingVote.setText("(" + votes + ")");
 
                             mCommentAdapter.setData(mComments);
                             mCommentAdapter.notifyDataSetChanged();
-                            if(mComments != null && mComments.length() > 0) {
-                                addCommentFooter(true);
-                            } else {
-                                addCommentFooter(false);
-                            }
+//                            if(mComments != null && mComments.length() > 0) {
+//                                addCommentFooter(true);
+//                            } else {
+//                                addCommentFooter(false);
+//                            }
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -171,11 +193,19 @@ public class ManpingDetailFragment extends BaseFragment {
             public void onResponse(Response response) throws IOException {
                 try {//TODO 数据结构改变，增加扩展字段来表示是否已经加载完毕
                     JSONObject object = new JSONObject(response.body().string());
-                    JSONObject data = object.getJSONObject("basic");
-                    mBasicData = data;
-                    if(!object.isNull("comments")) {
-                        mComments = object.getJSONArray("comments");
+                    JSONObject data = object.getJSONObject("data");
+                    mBasicData = data.getJSONObject("review");
+
+                    JSONArray comments = data.getJSONArray("comments");
+                    if (comments != null && comments.length() > 0) {
+                        mComments = new ArrayList<>();
+                        for (int i = 0; i < comments.length(); i++) {
+                            JSONObject commentsJSONObject = comments.getJSONObject(i);
+                            CommentData comment = CommentData.create(commentsJSONObject);
+                            mComments.add(comment);
+                        }
                     }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -199,6 +229,34 @@ public class ManpingDetailFragment extends BaseFragment {
         } else {
             hint.setText("快去抢沙发~");
         }
-        mManpingCommentsList.addFooterView(footer);
     }
+
+    class CustomWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+
+        @Override
+        public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+            super.onReceivedError(view, errorCode, description, failingUrl);
+        }
+
+        @Override
+        public void onLoadResource(WebView view, String url) {
+            super.onLoadResource(view, url);
+        }
+    }
+
+    class CustomChromClient extends WebChromeClient {
+
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+//            FMLog.d(TAG, "newProgress " + newProgress);
+            super.onProgressChanged(view, newProgress);
+        }
+
+    }
+
 }
