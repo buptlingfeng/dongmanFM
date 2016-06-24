@@ -20,7 +20,7 @@ public class HomePageSquareFragment extends BaseFragment {
 
     private static final String TAG = HomePageSquareFragment.class.getName();
 
-    private RecyclerView mRecycleView;
+    private RecyclerView mRecyclerView;
     private HomePageSquareFragmentAdapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
     private SwipeRefreshLayout mRefreshLayout;
@@ -42,13 +42,13 @@ public class HomePageSquareFragment extends BaseFragment {
     }
 
     private void initView(View root) {
-        mRecycleView = (RecyclerView) root.findViewById(R.id.recycleview);
+        mRecyclerView = (RecyclerView) root.findViewById(R.id.recycleview);
         mRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.swipe_refresh_widget);
-        mRecycleView.setHasFixedSize(true);
-        mRecycleView.setLongClickable(true);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLongClickable(true);
         mLinearLayoutManager = new LinearLayoutManager(mContext);
 //        mLinearLayoutManager.setOrientation(0);
-        mRecycleView.setLayoutManager(mLinearLayoutManager);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -58,7 +58,7 @@ public class HomePageSquareFragment extends BaseFragment {
         });
 
         mAdapter = new HomePageSquareFragmentAdapter(mContext);
-        mRecycleView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
 }

@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import com.dongman.fm.image.ImageUtils;
 import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.ui.fragment.adapter.CommentsAdapter;
 import com.dongman.fm.ui.fragment.adapter.RelativeAdapter;
+import com.dongman.fm.ui.utils.ToolsUtils;
 import com.dongman.fm.ui.view.FullyLinearLayoutManager;
 import com.dongman.fm.ui.view.SpacesItemDecoration;
 
@@ -80,6 +83,8 @@ public class SubjectActivity extends BaseActivity {
         Intent intent = getIntent();
         mID = intent.getStringExtra("id");
         setContentView(R.layout.subject_actvity);
+        ActionBar actionBar = this.getSupportActionBar();
+        actionBar.setTitle("主题详情");
         init();
     }
 
@@ -113,6 +118,7 @@ public class SubjectActivity extends BaseActivity {
         mCommentsRecycleView = (RecyclerView) findViewById(R.id.comments_recycleview);
         mCommentLayoutManager = new FullyLinearLayoutManager(this);
         mCommentLayoutManager.setOrientation(OrientationHelper.VERTICAL);
+        mCommentsRecycleView.setLayoutManager(mCommentLayoutManager);
         mCommentAdapter = new CommentsAdapter(this);
         mCommentsRecycleView.setAdapter(mCommentAdapter);
 
@@ -127,7 +133,7 @@ public class SubjectActivity extends BaseActivity {
                         mCreateTimeView.setText(mTopicInfo.createTime);
                         mAnimeCountView.setText(mTopicInfo.subjectCount + "部动画");
                         mSummaryView.setText(mTopicInfo.summary);
-                        ImageUtils.getImage(SubjectActivity.this, mTopicInfo.imageUrl, mImageView);
+                        ImageUtils.getImage(SubjectActivity.this, mTopicInfo.imageUrl, mImageView, ToolsUtils.getScreenWidth(SubjectActivity.this), 0);
 
                         mAnimesAdapter.setData(mAnimes);
                         mAnimesAdapter.notifyDataSetChanged();
@@ -142,7 +148,7 @@ public class SubjectActivity extends BaseActivity {
                             mCommentAdapter.notifyDataSetChanged();
                         } else {
                             mCommentsContainer.setVisibility(View.GONE);
-                            mMoreComments.setText("快来抢沙发~");
+                            mMoreComments.setText("还没人评论?快来抢沙发~");
                         }
 
                         break;

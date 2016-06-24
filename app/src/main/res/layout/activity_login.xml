@@ -26,16 +26,12 @@
 
     <LinearLayout
         android:id="@+id/login_qq"
+        android:gravity="center"
         android:layout_marginTop="50dp"
-        android:background="@drawable/search_inputbox"
         android:orientation="horizontal"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_below="@+id/logo_icon"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_below="@+id/logo_icon">
         <ImageView
             android:layout_gravity="center"
             android:src="@drawable/login_qq"
@@ -44,6 +40,7 @@
             android:layout_height="40dp" />
         <TextView
             android:layout_gravity="center"
+            android:textColor="@color/black"
             android:text="QQ登陆"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -51,16 +48,11 @@
 
     <LinearLayout
         android:layout_below="@id/login_qq"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:id="@+id/login_weibo"
         android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/search_inputbox"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="45dp">
         <ImageView
             android:layout_gravity="center"
@@ -70,6 +62,7 @@
             android:layout_height="40dp" />
         <TextView
             android:layout_gravity="center"
+            android:textColor="@color/black"
             android:text="微博登陆"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -77,21 +70,18 @@
 
     <LinearLayout
         android:layout_below="@id/login_weibo"
-        android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:id="@+id/login_oneself"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/search_inputbox"
         android:orientation="horizontal"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:layout_gravity="center"
-            android:textColor="@color/lightgrey"
+            android:textColor="@color/theme_color"
             android:text="已有账号？番米登陆"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
 

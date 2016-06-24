@@ -216,6 +216,7 @@ public class RecommendDetailFragment extends BaseFragment implements IRequestCal
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
+            FMLog.d(TAG, "浏览器图片信息：" + url);
             return true;
         }
 

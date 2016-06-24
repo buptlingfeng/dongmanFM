@@ -24,6 +24,7 @@ import com.dongman.fm.data.ReviewInfo;
 import com.dongman.fm.image.ImageUtils;
 import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.ui.activity.BaseActivity;
+import com.dongman.fm.ui.activity.PlayActivity;
 import com.dongman.fm.ui.fragment.adapter.RelativeAdapter;
 import com.dongman.fm.ui.view.CircleImageView;
 import com.dongman.fm.ui.view.SpacesItemDecoration;
@@ -32,6 +33,7 @@ import com.dongman.fm.utils.FMLog;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -217,7 +219,7 @@ public class DetailFragment extends BaseFragment {
                     break;
             }
 
-            View view = mInflater.inflate(id, null, false);
+            View view = mInflater.inflate(id, parent, false);
             return new ModuleViewHolder(view, viewType);
         }
 
@@ -280,11 +282,25 @@ public class DetailFragment extends BaseFragment {
             switch (viewType) {
                 case ANIME_BASE:
                     ImageView animeImage = (ImageView) itemView.findViewById(R.id.detail_anime_image);
+
+                    animeImage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getActivity(), PlayActivity.class);
+                            getActivity().startActivity(intent);
+                        }
+                    });
+
                     TextView average = (TextView) itemView.findViewById(R.id.anime_average);
                     TextView averageCount = (TextView) itemView.findViewById(R.id.average_count);
+                    TextView animeGenres = (TextView) itemView.findViewById(R.id.anime_genres);
+                    TextView animeSubtype = (TextView) itemView.findViewById(R.id.anime_subtype);
                     ImageUtils.getImage(mContext, mAnimeInfo.imageLarge, animeImage);
                     average.setText(mAnimeInfo.scoreAllAvg + "分");
-                    averageCount.setText(mAnimeInfo.rateCount);
+                    animeGenres.setText("类型: " + mAnimeInfo.genres);
+                    animeSubtype.setText("篇幅: " + mAnimeInfo.rateCount);
+                    averageCount.setText(mAnimeInfo.rateCount + "人评分");
+
                     break;
                 case ANIME_RELS:
                     RecyclerView recyclerView1 = (RecyclerView) viewHolder.findViewById(R.id.recycleview);
@@ -305,6 +321,12 @@ public class DetailFragment extends BaseFragment {
                     recyclerView.setAdapter(mantieAdapter);
                     recyclerView.addItemDecoration(new SpacesItemDecoration(20, 0, 10, 10));
                     mantieAdapter.setData(mMantieRecommends);
+                    TextView mantie = (TextView) viewHolder.findViewById(R.id.releate_manping_index);
+                    if (mReviewsRecommends != null && mReviewsRecommends.size() > 0) {
+                        mantie.setVisibility(View.VISIBLE);
+                    } else {
+                        mantie.setVisibility(View.GONE);
+                    }
                     break;
                 case MANPING_RELS:
                     TextView manpingTitle = (TextView) viewHolder.findViewById(R.id.manping_title);

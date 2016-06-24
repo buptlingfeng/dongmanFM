@@ -5,12 +5,18 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.widget.ImageView;
 
+import com.dongman.fm.ui.utils.ToolsUtils;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
+import com.squareup.picasso.Transformation;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -33,8 +39,26 @@ public class ImageUtils {
     public static void getImage(Context context, String url, ImageView imageView, int width, int heigth) {
         Picasso.with(context)
                 .load(url)
-                .resize(width, heigth)
-                .into(imageView);
+                .transform(new CropSquareTransformation(width))
+                .into(imageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d("TAG", "onSuccess");
+                    }
+
+                    @Override
+                    public void onError() {
+                        Log.e("TAG", "onError");
+                    }
+                });
+//        try {
+//
+////            Bitmap bitmap = creator.get();
+////            Bitmap targetBitmap = scaleByWidth(bitmap, ToolsUtils.getScreenWidth(context));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
     }
 
     /**
@@ -108,5 +132,84 @@ public class ImageUtils {
         BitmapDrawable bd = new BitmapDrawable(bitmap);
         // 因为BtimapDrawable是Drawable的子类，最终直接使用bd对象即可。
         return bd;
+    }
+
+    public static Bitmap scaleByWidth(Bitmap bm, float targetWidth) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scale = targetWidth / width;
+        // CREATE A MATRIX FOR THE MANIPULATION
+        Matrix matrix = new Matrix();
+        // RESIZE THE BIT MAP
+        matrix.postScale(scale,scale);
+        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        return resizedBitmap;
+    }
+
+    public static Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // CREATE A MATRIX FOR THE MANIPULATION
+        Matrix matrix = new Matrix();
+        // RESIZE THE BIT MAP
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // "RECREATE" THE NEW BITMAP
+        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        return resizedBitmap;
+    }
+
+    public static byte[] bmpToByteArray(final Bitmap bmp, final boolean needRecycle) {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, output);
+        if (needRecycle) {
+            bmp.recycle();
+        }
+
+        byte[] result = output.toByteArray();
+        try {
+            output.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static class CropSquareTransformation implements Transformation {
+        private float targetWidth;
+        public CropSquareTransformation(int targetWidth) {
+            this.targetWidth = targetWidth;
+        }
+
+        @Override
+        public Bitmap transform(Bitmap source) {
+            int width = source.getWidth();
+            int height = source.getHeight();
+            float scale = targetWidth / width;
+            // CREATE A MATRIX FOR THE MANIPULATION
+            Matrix matrix = new Matrix();
+            // RESIZE THE BIT MAP
+            matrix.postScale(scale,scale);
+            Bitmap resizedBitmap = Bitmap.createBitmap(source, 0, 0, width, height, matrix, false);
+            source.recycle();
+
+//            int w = (int) (width * scale);
+//            int y = (int) (height * scale);
+//
+//            Bitmap.Config config = source.getConfig() != null ? source.getConfig() : Bitmap.Config.ARGB_8888;
+//            Bitmap resizedBitmap = Bitmap.createBitmap(w, y, config);
+//            source.recycle();
+
+            return resizedBitmap;
+        }
+
+        @Override
+        public String key() { return "square()"; }
     }
 }

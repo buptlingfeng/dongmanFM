@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.dongman.fm.R;
@@ -20,6 +21,7 @@ import com.dongman.fm.ui.view.SpacesItemDecoration;
 import com.dongman.fm.utils.FMLog;
 import com.dongman.fm.utils.UILImageLoader;
 
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +45,8 @@ public class ImageShowActivity extends BaseActivity {
     private LinearLayoutManager mLayoutManager;
     private PhotosAdapter mAdapter;
     private List<PhotoInfo> mData;
+
+    private EditText mInput;
 
     private int mScreenWidth;
     private int mScreenHeight;
@@ -84,6 +88,7 @@ public class ImageShowActivity extends BaseActivity {
     }
 
     private void initView() {
+        mInput = (EditText)findViewById(R.id.input_content);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycleview);
         mAdapter = new PhotosAdapter(this, mData);
         mLayoutManager = new LinearLayoutManager(this);
@@ -104,8 +109,18 @@ public class ImageShowActivity extends BaseActivity {
                 //TODO 发送按钮
                 Intent result = new Intent();
                 Bundle bundle = new Bundle();
+                if (mData != null && mData.size() > 0) {
+                    ArrayList<String> photos = new ArrayList<String>();
+                    for(PhotoInfo photoInfo : mData) {
+                        photos.add(photoInfo.getPhotoPath());
+                    }
+                    bundle.putStringArrayList("photos", photos);
+                }
+                String inputContext = mInput.getText().toString();
+                bundle.putString("content", inputContext);
                 result.putExtras(bundle);
-                ImageShowActivity.this.setResult(1,result);
+
+                ImageShowActivity.this.setResult(OPEN_ALBUM,result);
                 ImageShowActivity.this.finish();
             }
         });
@@ -183,6 +198,8 @@ public class ImageShowActivity extends BaseActivity {
             photoInfos = data;
         }
 
+
+
         @Override
         public PhotoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = layoutInflater.inflate(R.layout.publis_photo_list_item, null, false);
@@ -209,4 +226,5 @@ public class ImageShowActivity extends BaseActivity {
             super(itemView);
         }
     }
+
 }

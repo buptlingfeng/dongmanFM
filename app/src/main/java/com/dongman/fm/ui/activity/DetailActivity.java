@@ -3,6 +3,7 @@ package com.dongman.fm.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dongman.fm.R;
@@ -52,11 +53,16 @@ public class DetailActivity extends BaseActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_avatar_toolbar_sample, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.home) {
+        if (item.getItemId() == R.id.action_bianji) {
             finish();
-            return true;
         }
 
         return super.onOptionsItemSelected(item);

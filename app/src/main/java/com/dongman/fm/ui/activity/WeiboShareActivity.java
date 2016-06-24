@@ -17,7 +17,7 @@ import com.sina.weibo.sdk.constant.WBConstants;
 /**
  * Created by liuzhiwei on 16/4/24.
  */
-public class WeiboShareActivity extends BaseActivity {
+public class WeiboShareActivity extends BaseActivity implements IWeiboHandler.Response{
 
     private static final String TAG = "WeiboShareActivity";
     private IWeiboShareAPI mWeiboShareAPI;
@@ -25,9 +25,9 @@ public class WeiboShareActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mWeiboShareAPI = WeiboShareSDK.createWeiboAPI(this, WeiboConstant.WB_APPKEY);
-        mWeiboShareAPI.registerApp();
-        sendMultiMessage();
+//        mWeiboShareAPI = WeiboShareSDK.createWeiboAPI(this, WeiboConstant.WB_APPKEY);
+//        mWeiboShareAPI.registerApp();
+//        sendMultiMessage();
     }
 
     private void sendMultiMessage() {
@@ -44,21 +44,21 @@ public class WeiboShareActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        mWeiboShareAPI.handleWeiboResponse(intent, new IWeiboHandler.Response() {
-            @Override
-            public void onResponse(BaseResponse baseResponse) {
-                switch (baseResponse.errCode) {
-                    case WBConstants.ErrorCode.ERR_OK:
-                        FMLog.d(TAG, "ErrorCode.ERR_OK");
-                        break;
-                    case WBConstants.ErrorCode.ERR_CANCEL:
-                        FMLog.d(TAG, "ErrorCode.ERR_CANCEL");
-                        break;
-                    case WBConstants.ErrorCode.ERR_FAIL:
-                        FMLog.d(TAG, "ErrorCode.ERR_FAIL");
-                        break;
-                }
-            }
-        });
+        mWeiboShareAPI.handleWeiboResponse(intent, this);
+    }
+
+    @Override
+    public void onResponse(BaseResponse baseResponse) {
+        switch (baseResponse.errCode) {
+            case WBConstants.ErrorCode.ERR_OK:
+                FMLog.d(TAG, "ErrorCode.ERR_OK");
+                break;
+            case WBConstants.ErrorCode.ERR_CANCEL:
+                FMLog.d(TAG, "ErrorCode.ERR_CANCEL");
+                break;
+            case WBConstants.ErrorCode.ERR_FAIL:
+                FMLog.d(TAG, "ErrorCode.ERR_FAIL");
+                break;
+        }
     }
 }

@@ -55,7 +55,7 @@ public class RelativeAdapter extends RecyclerView.Adapter<RelativeAdapter.Relati
 
     @Override
     public RelativeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        int layoutId = 1;
+        int layoutId;
         switch (mType) {
             case ANIMES:
                 layoutId = R.layout.anime_item;

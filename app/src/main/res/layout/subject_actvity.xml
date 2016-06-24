@@ -46,16 +46,16 @@
                 android:id="@+id/subject_img"
                 android:layout_below="@id/create_time"
                 android:padding="1dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/subject_image"
                 android:layout_width="match_parent"
-                android:layout_height="180dp" />
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/expandable_text"
                 android:layout_below="@+id/subject_img"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:paddingBottom="10dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:gravity="left"
@@ -74,18 +74,21 @@
             android:orientation="vertical">
             <TextView
                 android:text="专题动漫"
-                style="@style/sub_title"
+                style="@style/third_title"
+                android:background="@color/backgournd_grey"
                 android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:gravity="left"
-                android:textColor="@color/text_grey"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/animes_recycleview"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:gravity="center"
                 android:listSelector="@android:color/transparent"
@@ -100,18 +103,20 @@
             android:orientation="vertical">
             <TextView
                 android:text="相关盘点"
-                style="@style/sub_title"
+                style="@style/third_title"
+                android:background="@color/backgournd_grey"
                 android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:gravity="left"
-                android:textColor="@color/text_grey"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/topic_recycleview"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="160dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:gravity="center"
                 android:listSelector="@android:color/transparent"
@@ -126,18 +131,20 @@
             android:orientation="vertical">
             <TextView
                 android:text="评论"
-                style="@style/sub_title"
+                style="@style/third_title"
                 android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:gravity="left"
-                android:textColor="@color/text_grey"
+                android:background="@color/backgournd_grey"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/comments_recycleview"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:gravity="center"
                 android:listSelector="@android:color/transparent"

@@ -127,13 +127,13 @@
     <!-- ActionBar styles -->
     <style name="MyActionBar" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
-        <item name="android:displayOptions">showHome|homeAsUp|showTitle</item>
-        <item name="android:homeAsUpIndicator">@drawable/back</item> <!--返回icon-->
+        <item name="android:displayOptions">homeAsUp|showTitle</item>
+        <item name="android:homeAsUpIndicator">@drawable/icon_back_white</item> <!--返回icon-->
 
         <!-- Support library compatibility -->
-        <item name="homeAsUpIndicator">@drawable/back</item>
+        <item name="homeAsUpIndicator">@drawable/icon_back_white</item>
         <item name="background">@color/theme_color</item>
-        <item name="displayOptions">showHome|homeAsUp|showTitle</item>
+        <item name="displayOptions">homeAsUp|showTitle</item>
         <item name="titleTextStyle">@style/MyActionBarTitleText</item>
     </style>
 
@@ -187,6 +187,14 @@
     <style name="share_panel_animation">
         <item name="android:windowEnterAnimation">@anim/share_panel_in</item>
         <item name="android:windowExitAnimation">@anim/share_panel_out</item>
+    </style>
+
+
+    <style name="MenuButtonsSmall">
+        <item name="fab_size">normal</item>
+        <item name="fab_colorNormal">#1565C0</item>
+        <item name="fab_colorPressed">#2272CD</item>
+        <item name="fab_colorRipple">#62B2FF</item>
     </style>
 
 </resources>

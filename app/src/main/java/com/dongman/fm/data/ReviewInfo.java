@@ -21,6 +21,7 @@ public class ReviewInfo {
                 reviewInfo.title = object.getString("title");
                 reviewInfo.summary = object.getString("short_content");
                 reviewInfo.createTime = object.getString("create_time");
+                reviewInfo.id = object.getString("id");
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -9,6 +9,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/share_friends"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical"
@@ -26,6 +27,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/share_wechat"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical"
@@ -43,6 +45,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/share_qq"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical"
@@ -60,6 +63,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/share_weibo"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical"

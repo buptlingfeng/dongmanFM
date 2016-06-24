@@ -57,7 +57,7 @@ public class ManpingDetailFragment extends BaseFragment {
     private TextView mManpingUpdateTime;
 
     private TextView mManpingTitle;
-    private TextView mManpingVote;
+//    private TextView mManpingVote;
     private WebView mWebView;
 
 //    private CustomListView mManpingCommentsList;
@@ -102,17 +102,17 @@ public class ManpingDetailFragment extends BaseFragment {
         mManpinOwnerName = (TextView) root.findViewById(R.id.manping_detail_user_name);
         mManpingOwnerAvatar = (CircleImageView) root.findViewById(R.id.manping_detail_user_avatar);
 
-        mManpingOwnerAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction("com.dongman.fm.detail");
-                intent.putExtra("id", 1);
-                intent.putExtra("name", "海贼王");
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
-            }
-        });
+//        mManpingOwnerAvatar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.setAction("com.dongman.fm.detail");
+//                intent.putExtra("id", 1);
+//                intent.putExtra("name", "海贼王");
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                mContext.startActivity(intent);
+//            }
+//        });
 
         mManpingUpdateTime = (TextView) root.findViewById(R.id.manping_detail_updatetime);
 
@@ -125,12 +125,13 @@ public class ManpingDetailFragment extends BaseFragment {
         mWebView.setWebChromeClient(new CustomChromClient());
 
 
-        mManpingVote = (TextView) root.findViewById(R.id.manping_detail_vote);
+//        mManpingVote = (TextView) root.findViewById(R.id.manping_detail_vote);
 
-        mCommentsContainer = findViewById(R.id.comments_container);
-        mCommentsRecycleView = (RecyclerView) findViewById(R.id.comments_recycleview);
+        mCommentsContainer = root.findViewById(R.id.comments_container);
+        mCommentsRecycleView = (RecyclerView) root.findViewById(R.id.comments_recycleview);
         mCommentLayoutManager = new FullyLinearLayoutManager(getActivity());
         mCommentLayoutManager.setOrientation(OrientationHelper.VERTICAL);
+        mCommentsRecycleView.setLayoutManager(mCommentLayoutManager);
         mCommentAdapter = new CommentsAdapter(getActivity());
         mCommentsRecycleView.setAdapter(mCommentAdapter);
 
@@ -161,15 +162,15 @@ public class ManpingDetailFragment extends BaseFragment {
                             String reviewUrl = mBasicData.getString("review_url");
                             mWebView.loadUrl(reviewUrl);
                             String votes = mBasicData.getString("vote_count");
-                            mManpingVote.setText("(" + votes + ")");
+//                            mManpingVote.setText("(" + votes + ")");
 
                             mCommentAdapter.setData(mComments);
                             mCommentAdapter.notifyDataSetChanged();
-//                            if(mComments != null && mComments.length() > 0) {
-//                                addCommentFooter(true);
-//                            } else {
-//                                addCommentFooter(false);
-//                            }
+                            if(mComments != null && mComments.size() > 0) {
+                                addCommentFooter(true);
+                            } else {
+                                addCommentFooter(false);
+                            }
                         }catch (JSONException e){
                             e.printStackTrace();
                         }

@@ -91,14 +91,10 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
 
                 view.measure(childWidthSpec, childHeightSpec);
 
-                int j = view.getPaddingTop() + view.getPaddingBottom() + 46;
+                int j = view.getPaddingTop() + view.getPaddingBottom();
 
                 measuredDimension[0] = view.getMeasuredWidth() + p.leftMargin + p.rightMargin;
                 measuredDimension[1] = view.getMeasuredHeight() + p.bottomMargin + p.topMargin + j;
-
-
-                Log.d("FullyLinearLayoutManager", "j = " + j);
-                Log.d("FullyLinearLayoutManager", "measureDimension[1]" + measuredDimension[1]);
                 recycler.recycleView(view);
             }
         } catch (Exception e) {

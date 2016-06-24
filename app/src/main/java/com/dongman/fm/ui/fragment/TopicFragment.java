@@ -37,8 +37,6 @@ import java.util.Map;
 public class TopicFragment extends BaseFragment {
 
     private static final String TAG = TopicFragment.class.getName();
-    private static final int DATA_READY = 1;
-    private static final int DARA_FAILED = 2;
 
     private Context mContext;
     private Handler mHandler;
@@ -146,9 +144,10 @@ public class TopicFragment extends BaseFragment {
             @Override
             public void onResponse(Response response) throws IOException {
                 try {//TODO 数据结构改变，增加扩展字段来表示是否已经加载完毕
-                    JSONObject data = new JSONObject(response.body().string());
-                    String isEnd = data.getString("msg");
+                    JSONObject object = new JSONObject(response.body().string());
+                    String isEnd = object.getString("message");
                     if("success".equals(isEnd)){
+                        JSONObject data = object.getJSONObject("data");
                         JSONArray array = data.getJSONArray("list");
                         if(isFrist) {
                             mRecommendAdapter.setData(array);

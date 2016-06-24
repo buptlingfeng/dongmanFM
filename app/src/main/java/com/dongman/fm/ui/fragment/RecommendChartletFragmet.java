@@ -35,12 +35,15 @@ public class RecommendChartletFragmet extends BaseFragment {
 
     private static final String TAG = RecommendChartletFragmet.class.getSimpleName();
 
-    private RecyclerView mRecycleView;
+    private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private SwipeRefreshLayout mRefreshLayout;
     private RecommendAdapter mAdapter;
 
     private Handler mHandler;
+
+    private int mPageNumber = 1;
+    private boolean isLoadingMore = false;
 
     @Override
     public void onAttach(Activity activity) {
@@ -57,6 +60,14 @@ public class RecommendChartletFragmet extends BaseFragment {
                 switch (msg.what) {
                     case REFRESH_UI:
                         mAdapter.notifyDataSetChanged();
+                        break;
+                    case DATA_READY:
+                        mAdapter.notifyDataSetChanged();
+                        if(mRefreshLayout.isRefreshing()) {
+                            mRefreshLayout.setRefreshing(false);
+                        }
+                        break;
+                    case DARA_FAILED:
                         break;
                     default:
                         break;
@@ -81,12 +92,12 @@ public class RecommendChartletFragmet extends BaseFragment {
 
     private void initView(View root) {
 
-        mRecycleView = (RecyclerView) root.findViewById(R.id.recycleview);
+        mRecyclerView = (RecyclerView) root.findViewById(R.id.recycleview);
         mRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.swipe_refresh_widget);
-        mRecycleView.setHasFixedSize(true);
-        mRecycleView.setLongClickable(true);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLongClickable(true);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
-        mRecycleView.setLayoutManager(mLinearLayoutManager);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -95,16 +106,47 @@ public class RecommendChartletFragmet extends BaseFragment {
             }
         });
 
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastVisibleItem = mLinearLayoutManager.findLastVisibleItemPosition();
+                int totalItemCount = mAdapter.getItemCount();
+                //lastVisibleItem >= totalItemCount - 1 表示剩下1个item自动加载，各位自由选择
+                // dy>0 表示向下滑动
+                if (lastVisibleItem >= totalItemCount - 3 && dy > 0) {
+                    if (isLoadingMore) {
+                        Log.d(TAG, "ignore manually update!");
+                    } else {
+                        getData(mPageNumber++, false);//这里多线程也要手动控制isLoadingMore
+                        isLoadingMore = true;
+                    }
+                }
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+        });
+
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData(1, true);
+            }
+        });
+
         mAdapter = new RecommendAdapter(getActivity());
-        mRecycleView.setAdapter(mAdapter);
-        getData("cosplay,shouhui");
+        mRecyclerView.setAdapter(mAdapter);
+        getData(mPageNumber, true);
     }
 
-    private void getData(String type) {
+    private void getData(int pageNum, final boolean isFrist) {
         Map<String, String> params = new HashMap<>();
-        params.put("page", "1");
+        params.put("page", pageNum +"");
         params.put("size", "10");
-        params.put("type", type);
+        params.put("type", "cosplay,shouhui");
 
         asyncGet(APIConfig.ARTICAL_LIST, params, new IRequestCallBack() {
             @Override
@@ -123,8 +165,16 @@ public class RecommendChartletFragmet extends BaseFragment {
                         list = data.getJSONArray("list");
                     }
                     if(list != null) {
-                        mAdapter.setData(list);
-                        mHandler.sendEmptyMessage(REFRESH_UI);
+                        if (isFrist) {
+                            mAdapter.setData(list);
+                            mPageNumber ++;
+                        } else {
+                            mAdapter.addData(list);
+                        }
+                        mHandler.sendEmptyMessage(DATA_READY);
+                        isLoadingMore = false;
+                    } else {
+                        mHandler.sendEmptyMessage(DARA_FAILED);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

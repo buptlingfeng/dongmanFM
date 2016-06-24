@@ -7,7 +7,9 @@ public class APIConfig {
 
     public static final String HOST = "http://api.dongman.fm";
 
-    public static final String TOPIC_LIST = "http://www.dongman.fm" + "/api/home/detail";
+    public static final String TOPIC_LIST = HOST + "/topic/getlist";
+
+    public static final String MANPIN_LIST = "http://www.dongman.fm" + "/api/home/detail";
 
     public static final String TOPIC_DETAIL   = HOST + "/topic/detail";
 
@@ -22,4 +24,6 @@ public class APIConfig {
     public static final String SEARCH_API = HOST + "/search/q";
 
     public static final String DETAIL_API = HOST + "/api/detail";
+
+    public static final String LOGIN_OTHER_API = HOST + "/account/login_other";
 }

@@ -160,6 +160,7 @@
 
     <!-- 半透明 -->
     <color name="half_transparent">#201a181a</color>
+    <color name="transparent">#00000000</color>
 
 
     <!-- Collapsing Avatar Toolbar -->
@@ -168,4 +169,5 @@
     <color name="accent">#FF4081</color>
     <color name="window_background">#FFF5F5F5</color>
     <color name="background_dark">#ECECEC</color>
+    <color name="backgournd_grey">#EEEEEE</color><!--亮灰色 -->
 </resources>

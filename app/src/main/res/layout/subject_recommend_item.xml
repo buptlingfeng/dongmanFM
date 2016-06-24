@@ -40,15 +40,17 @@
         </FrameLayout>
 
         <LinearLayout
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/summary"
                 android:text="自从fate带入了这个专有名词之后，大多动漫开始走起了黑化路线，崩溃变坏"
+                android:gravity="center"
+                android:lineSpacingExtra="8dp"
                 style="@style/third_title"
                 android:textColor="@color/nav_default_color"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>

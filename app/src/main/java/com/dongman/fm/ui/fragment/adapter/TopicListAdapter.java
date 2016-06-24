@@ -56,10 +56,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
             for(int i = 0; i < array.length(); i++) {
                 try {
                     JSONObject data = array.getJSONObject(i);
-                    String type = data.getString("type");
-                    if (type.equals("topic")) {
-                        mData.put(data);
-                    }
+                    mData.put(data);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -95,12 +92,14 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
     public class TopicViewHolder extends  RecyclerView.ViewHolder {
 
         TextView title;
+        TextView summary;
         ImageView imageView;
         JSONObject data;
 
         public TopicViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.anime_name);
+            summary = (TextView) itemView.findViewById(R.id.summary);
             imageView = (ImageView) itemView.findViewById(R.id.topic_image);
         }
 
@@ -108,9 +107,10 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
             try {
 
                 data = obj;
-                title.setText(obj.getString("title"));
-                ImageUtils.getImage(mContext, obj.getString("img_url"), imageView, 1080, 615);
-                final String id = obj.getString("target_id");
+                title.setText(obj.getString("name"));
+                summary.setText(obj.getString("summary"));
+                ImageUtils.getImage(mContext, obj.getString("image_url"), imageView, ToolsUtils.getScreenWidth(mContext), 0);
+                final String id = obj.getString("id");
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

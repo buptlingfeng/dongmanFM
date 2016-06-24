@@ -22,6 +22,7 @@
             android:id="@+id/anime_average_star_container"
             android:layout_toRightOf="@id/detail_anime_image"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -75,7 +76,7 @@
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/detail_anime_image"
             android:layout_marginLeft="20dp"
-            android:text="篇幅："
+            android:text="篇幅: "
             style="@style/detail_anime_info_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -85,7 +86,7 @@
             android:layout_toRightOf="@id/detail_anime_image"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:text="热血/动作/格斗/英雄/怪物/超能力"
+            android:text="类型: 热血/动作/格斗/英雄/怪物/超能力"
             style="@style/detail_anime_info_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -95,18 +96,23 @@
             android:layout_toRightOf="@id/detail_anime_image"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:text="声优："
+            android:text="声优: "
             style="@style/detail_anime_info_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </RelativeLayout>
     <TextView
         android:id="@+id/anime_summary_title"
+        style="@style/third_title"
         android:layout_below="@id/anime_detail_info_header"
-        android:text="动漫详情..."
+        android:text="动漫详情"
+        android:gravity="left"
         android:textColor="@color/tab_top_text_1"
-        android:textSize="20sp"
-        android:padding="5dp"
+        android:background="@color/backgournd_grey"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
@@ -117,6 +123,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginBottom="8dp"
         android:ellipsize="end"
         android:fontFamily="sans-serif-light"
         android:textSize="12sp"

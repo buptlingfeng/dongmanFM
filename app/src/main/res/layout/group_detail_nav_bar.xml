@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav_container"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:weightSum="4"
+    android:tag="sticky"
+    android:background="@color/white"
+    android:layout_gravity="center"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/nav1"
+        android:gravity="center"
+        android:text="脑洞"
+        style="@style/sub_title"
+        android:layout_weight="1"
+        android:textColor="#607D8B"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/nav2"
+        android:gravity="center"
+        android:text="经典"
+        style="@style/sub_title"
+        android:layout_weight="1"
+        android:textColor="#607D8B"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/nav3"
+        android:gravity="center"
+        android:text="槽点"
+        style="@style/sub_title"
+        android:layout_weight="1"
+        android:textColor="#607D8B"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/nav4"
+        android:gravity="center"
+        android:text="秀我"
+        style="@style/sub_title"
+        android:layout_weight="1"
+        android:textColor="#607D8B"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+</LinearLayout>

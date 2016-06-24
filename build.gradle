@@ -5,12 +5,13 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0-rc1'
+        classpath 'com.android.tools.build:gradle:2.1.2'
     }
 }
 
 allprojects {
     repositories {
+        maven { url "https://jitpack.io" }
         jcenter()
     }
 }

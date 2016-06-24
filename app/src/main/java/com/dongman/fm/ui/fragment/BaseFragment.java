@@ -23,7 +23,9 @@ import java.util.Map;
 
 public class BaseFragment extends Fragment {
 
-	protected static final int REFRESH_UI = 1;
+	public static final int REFRESH_UI = 1;
+	public static final int DATA_READY = 3;
+	public static final int DARA_FAILED = 4;
 
 	protected LayoutInflater inflater;
 	private View contentView;

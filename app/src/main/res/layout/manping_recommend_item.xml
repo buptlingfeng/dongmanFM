@@ -160,9 +160,21 @@
                     android:src="@drawable/dianzan"
                     android:layout_width="@dimen/anime_average_star_width"
                     android:layout_height="@dimen/anime_average_star_width" />
+                <!--<com.like.LikeButton-->
+                    <!--android:id="@+id/thumb_button"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--app:circle_end_color="@android:color/holo_blue_dark"-->
+                    <!--app:circle_start_color="@android:color/holo_blue_bright"-->
+                    <!--app:dots_primary_color="@android:color/holo_blue_light"-->
+                    <!--app:dots_secondary_color="@android:color/holo_blue_dark"-->
+                    <!--app:icon_size="22dp"-->
+                    <!--app:like_drawable="@drawable/like"-->
+                    <!--app:unlike_drawable="@drawable/unlike" />-->
                 <TextView
                     android:id="@+id/comment_count"
                     android:text="(324)"
+                    android:layout_gravity="center"
                     style="@style/third_title"/>
             </LinearLayout>
 

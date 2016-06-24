@@ -36,7 +36,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
 
     @Override
     public CommentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.review_item, null, false);
+        View view = mInflater.inflate(R.layout.review_item, parent, false);
         return new CommentViewHolder(view);
     }
 
@@ -47,7 +47,10 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        if (mData != null) {
+            return mData.size();
+        }
+        return 0;
     }
 
     class CommentViewHolder extends RecyclerView.ViewHolder {

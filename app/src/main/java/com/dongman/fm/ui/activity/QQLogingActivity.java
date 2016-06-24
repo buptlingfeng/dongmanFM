@@ -42,10 +42,7 @@ public class QQLogingActivity extends BaseActivity {
 
     private void login() {
         SharePanel sharePanel = new SharePanel(this);
-        sharePanel.show(this);
-//        if (!mTencent.isSessionValid()) {
-//            mTencent.login(this,QQConstant.SCOPE, mListener);
-//        }
+        sharePanel.show();
     }
 
     private void logout() {

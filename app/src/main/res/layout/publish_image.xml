@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
     <EditText
+        android:id="@+id/input_content"
         android:hint="这一刻你想说什么..."
         android:layout_gravity="left|top"
         android:padding="5dp"

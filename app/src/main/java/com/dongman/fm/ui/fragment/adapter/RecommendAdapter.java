@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.dongman.fm.R;
 import com.dongman.fm.image.ImageUtils;
+import com.dongman.fm.ui.utils.ToolsUtils;
 import com.dongman.fm.utils.FMLog;
 
 import org.json.JSONArray;
@@ -92,7 +93,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.Reco
         TextView browseCount;
         TextView createTime;
 //        LinearLayout imageViewContainer;
-        ImageView imageView;
+        ImageView imageView1, imageView2, imageView3;
 
         public RecommendViewHolder(View itemView) {
             super(itemView);
@@ -101,7 +102,9 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.Reco
             title = (TextView) itemView.findViewById(R.id.article_title);
             summary = (TextView) itemView.findViewById(R.id.article_summary);
 //            imageViewContainer = (LinearLayout) itemView.findViewById(R.id.article_image_container);
-            imageView = (ImageView) itemView.findViewById(R.id.article_image);
+            imageView1 = (ImageView) itemView.findViewById(R.id.article_image1);
+            imageView2 = (ImageView) itemView.findViewById(R.id.article_image2);
+            imageView3 = (ImageView) itemView.findViewById(R.id.article_image3);
             createTime = (TextView) itemView.findViewById(R.id.article_create_time);
             browseCount = (TextView) itemView.findViewById(R.id.article_browse_count);
 
@@ -130,7 +133,29 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.Reco
             summary.setText(data.summary);
             createTime.setText(data.createTime);
             browseCount.setText(data.browseCount + "人看过");
-                ImageUtils.getImage(mActivity, data.imageUrls.get(0), imageView);
+            FMLog.d(TAG, "列表图片信息："+ data.imageUrls.size());
+            for (int i = 0; i < 3; i++) {
+                String imageUrl;
+                ImageView view = imageView1;
+                if (data.imageUrls.size() > i) {
+                    imageUrl = data.imageUrls.get(i);
+                    switch (i) {
+                        case 0:
+                            view = imageView1;
+                            break;
+                        case 1:
+                            view = imageView2;
+                            break;
+                        case 2:
+                            view = imageView3;
+                            break;
+                    }
+                    ImageUtils.getImage(mActivity, imageUrl, view,
+                            ToolsUtils.getScreenWidth(mActivity)/3, ToolsUtils.getScreenHeigth(mActivity));
+                } else {
+                    break;
+                }
+            }
 //            if (data.imageUrls != null && data.imageUrls.size() > 0) {
 //                imageViewContainer.setWeightSum(data.imageUrls.size());
 //                for (int i = 0; i < data.imageUrls.size(); i++) {

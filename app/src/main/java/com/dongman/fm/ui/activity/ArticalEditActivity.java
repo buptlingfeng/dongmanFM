@@ -1,6 +1,7 @@
 package com.dongman.fm.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -59,8 +60,12 @@ public class ArticalEditActivity extends BaseActivity {
 
                         String title = mTitle.getText().toString();
                         String content = mContent.getText().toString();
-                        FMLog.d(TAG, "标题为：" + title);
-                        FMLog.d(TAG, "内容为：" + content);
+                        Intent result = new Intent();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("title", title);
+                        bundle.putString("content", content);
+                        result.putExtras(bundle);
+                        ArticalEditActivity.this.setResult(2,result);
                         ArticalEditActivity.this.finish();
                         break;
                 }

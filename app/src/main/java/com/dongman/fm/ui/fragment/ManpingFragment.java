@@ -125,7 +125,7 @@ public class ManpingFragment extends BaseFragment {
         Map<String, String> params = new HashMap<>();
         params.put("page", Integer.toString(pageNum));
         params.put("tag", "review");
-        asyncGet(APIConfig.TOPIC_LIST, params, new IRequestCallBack() {
+        asyncGet(APIConfig.MANPIN_LIST, params, new IRequestCallBack() {
 
             @Override
             public void onFailure(Request request, IOException e) {

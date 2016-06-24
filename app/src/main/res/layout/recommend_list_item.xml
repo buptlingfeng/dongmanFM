@@ -16,18 +16,41 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <!--<LinearLayout-->
-                <!--android:id="@+id/article_image_container"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="180dp">-->
-            <!--</LinearLayout>-->
-            <ImageView
-                android:id="@+id/article_image"
-                android:padding="1dp"
+            <LinearLayout
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:paddingRight="2dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/article_image1"
+                    android:padding="1dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop" />
+                <ImageView
+                    android:id="@+id/article_image2"
+                    android:padding="1dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop" />
+                <ImageView
+                    android:id="@+id/article_image3"
+                    android:padding="1dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop" />
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/article_create_time"
                 android:layout_width="wrap_content"
