@@ -4,37 +4,49 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:text="相关漫贴"
-        style="@style/third_title"
-        android:textColor="@color/tab_top_text_1"
-        android:background="@color/backgournd_grey"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:gravity="left"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleview"
+    <LinearLayout
+        android:weightSum="10"
+        android:orientation="horizontal"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_gravity="center"
+            android:background="@color/theme_color"
+            android:layout_marginLeft="10dp"
+            android:layout_width="2dp"
+            android:layout_height="20dp"/>
+        <TextView
+            android:layout_gravity="center"
+            android:text="相关漫贴"
+            android:layout_weight="9"
+            android:textColor="@color/tab_top_text_1"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:gravity="left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:src="@drawable/icon_more"
+            android:gravity="right"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+    </LinearLayout>
+    <View
+        android:background="@color/lightgrey"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/relative_article_recycleview"
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:gravity="center"
         android:listSelector="@android:color/transparent"
         android:scrollbars="none">
     </android.support.v7.widget.RecyclerView>
-
-    <TextView
-        android:text="漫评"
-        android:id="@+id/releate_manping_index"
-        style="@style/third_title"
-        android:textColor="@color/tab_top_text_1"
-        android:background="@color/backgournd_grey"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:gravity="left"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 </LinearLayout>

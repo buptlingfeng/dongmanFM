@@ -19,6 +19,7 @@ import com.dongman.fm.data.APIConfig;
 import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.ui.fragment.adapter.ManpingListAdapter;
 import com.dongman.fm.ui.fragment.adapter.TopicListAdapter;
+import com.dongman.fm.ui.view.SpacesItemDecoration;
 
 import okhttp3.Request;
 import okhttp3.Response;
@@ -126,6 +127,7 @@ public class TopicFragment extends BaseFragment {
         });
         mRecommendAdapter = new TopicListAdapter(getActivity());
         mRecyclerView.setAdapter(mRecommendAdapter);
+        mRecyclerView.addItemDecoration(new SpacesItemDecoration(0,0,0,20));
         getData(mPageNumber, true);
     }
 

@@ -6,12 +6,14 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:background="@color/black"
         android:layout_width="match_parent"
         android:layout_height="@dimen/actionbar_heigth">
         <TextView
             android:gravity="center"
             android:text="小组"
-            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
@@ -20,6 +22,7 @@
         android:background="@color/lightgrey"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -48,7 +51,7 @@
                     <LinearLayout
                         android:weightSum="2"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp">
+                        android:layout_height="40dp">
                         <TextView
                             android:gravity="left|center_vertical"
                             android:paddingLeft="10dp"
@@ -85,7 +88,7 @@
                     <LinearLayout
                         android:weightSum="2"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp">
+                        android:layout_height="40dp">
                         <TextView
                             android:gravity="left|center_vertical"
                             android:paddingLeft="10dp"
@@ -122,112 +125,57 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-                <TextView
-                    android:text="番米酱推荐"
-                    android:gravity="left"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="5dp"
-                    style="@style/sub_title"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
                 <LinearLayout
-                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:weightSum="3"
-                        android:layout_width="match_parent"
+                    <View
+                        android:background="#F4538D"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="2dp"
+                        android:layout_height="20dp"/>
+                    <TextView
+                        android:text="番米酱推荐"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:background="@color/lightgrey"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"/>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <include layout="@layout/group_index"
+                        android:id="@+id/recommend_group_1"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
-
-                        <LinearLayout
-                            android:id="@+id/recommend_group_1"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:layout_width="@dimen/little_image_width"
-                            android:layout_height="wrap_content">
-                            <com.dongman.fm.ui.view.CircleImageView
-                                android:src="@color/green"
-                                app:border_color="@color/white"
-                                app:border_width="1dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/little_image_width" />
-                            <TextView
-                                android:text="魔道祖师"
-                                android:textSize="16sp"
-                                android:textColor="@color/black"
-                                android:gravity="center"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-                            <TextView
-                                android:textSize="12sp"
-                                android:text="21345参与"
-                                android:gravity="center"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/recommend_group_2"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:layout_width="@dimen/little_image_width"
-                            android:layout_height="wrap_content">
-                            <com.dongman.fm.ui.view.CircleImageView
-                                android:src="@color/orange"
-                                app:border_color="@color/white"
-                                app:border_width="1dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/little_image_width" />
-                            <TextView
-                                android:text="魔道祖师"
-                                android:textSize="16sp"
-                                android:textColor="@color/black"
-                                android:gravity="center"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-                            <TextView
-                                android:textSize="12sp"
-                                android:text="21345参与"
-                                android:gravity="center"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/recommend_group_3"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:layout_width="@dimen/little_image_width"
-                            android:layout_height="wrap_content">
-                            <com.dongman.fm.ui.view.CircleImageView
-                                android:src="@color/salmon"
-                                app:border_color="@color/white"
-                                app:border_width="1dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/little_image_width" />
-                            <TextView
-                                android:text="魔道祖师"
-                                android:textSize="16sp"
-                                android:textColor="@color/black"
-                                android:gravity="center"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-                            <TextView
-                                android:textSize="12sp"
-                                android:text="21345参与"
-                                android:gravity="center"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
+                    </include>
+                    <include layout="@layout/group_index"
+                        android:id="@+id/recommend_group_2"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="@dimen/little_image_width"
+                        android:layout_height="wrap_content">
+                    </include>
+                    <include layout="@layout/group_index"
+                        android:id="@+id/recommend_group_3"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="@dimen/little_image_width"
+                        android:layout_height="wrap_content">
+                    </include>
                 </LinearLayout>
 
                 <LinearLayout
@@ -237,87 +185,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <LinearLayout
+                    <include layout="@layout/group_index"
                         android:id="@+id/recommend_group_4"
-                        android:orientation="vertical"
+                        android:layout_gravity="bottom"
                         android:layout_weight="1"
                         android:layout_width="@dimen/little_image_width"
                         android:layout_height="wrap_content">
-                        <com.dongman.fm.ui.view.CircleImageView
-                            android:src="@color/blue"
-                            app:border_color="@color/white"
-                            app:border_width="1dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/little_image_width" />
-                        <TextView
-                            android:text="魔道祖师"
-                            android:textSize="16sp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:textSize="12sp"
-                            android:text="21345参与"
-                            android:gravity="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    </include>
+                    <include layout="@layout/group_index"
                         android:id="@+id/recommend_group_5"
-                        android:orientation="vertical"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:layout_width="@dimen/little_image_width"
                         android:layout_height="wrap_content">
-                        <com.dongman.fm.ui.view.CircleImageView
-                            android:src="@color/yellow"
-                            app:border_color="@color/white"
-                            app:border_width="1dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/little_image_width" />
-                        <TextView
-                            android:text="魔道祖师"
-                            android:textSize="16sp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:textSize="12sp"
-                            android:text="21345参与"
-                            android:gravity="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    </include>
+                    <include layout="@layout/group_index"
                         android:id="@+id/recommend_group_6"
-                        android:orientation="vertical"
-                        android:weightSum="1"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:layout_width="@dimen/little_image_width"
                         android:layout_height="wrap_content">
-                        <com.dongman.fm.ui.view.CircleImageView
-                            android:src="@color/cadetblue"
-                            app:border_color="@color/white"
-                            app:border_width="1dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/little_image_width" />
-                        <TextView
-                            android:text="魔道祖师"
-                            android:textSize="16sp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:textSize="12sp"
-                            android:text="21345参与"
-                            android:gravity="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-
+                    </include>
                 </LinearLayout>
 
                 <LinearLayout
@@ -331,8 +219,8 @@
                         android:id="@+id/all_group_indicator"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textColor="@color/lightgreen"
-                        android:text="全部番团 @ "
+                        android:textColor="@color/theme_color"
+                        android:text="全部番团"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <View
@@ -343,8 +231,8 @@
                     <TextView
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textColor="@color/lightgreen"
-                        android:text="换一换 {} "
+                        android:textColor="@color/theme_color"
+                        android:text="换一换 "
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -356,177 +244,133 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-                <TextView
-                    android:text="人气榜"
-                    android:gravity="left"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="5dp"
-                    style="@style/sub_title"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
-                    <com.dongman.fm.ui.view.CircleImageView
-                        android:src="@color/green"
-                        app:border_color="@color/white"
-                        app:border_width="1dp"
-                        android:layout_width="@dimen/actionbar_heigth"
-                        android:layout_height="@dimen/actionbar_heigth" />
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:text="库日天不要不要的"
-                            android:textSize="16sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:text="190人关注"
-                            android:textSize="12sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
+                    <View
+                        android:background="#F4538D"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="2dp"
+                        android:layout_height="20dp"/>
                     <TextView
-                        android:text="+ 关注"
-                        android:textSize="20sp"
-                        android:textColor="@color/lightgreen"
-                        android:gravity="right|center"
-                        android:layout_marginRight="10dp"
-                        android:layout_gravity="center|right"
-                        android:layout_width="match_parent"
+                        android:text="人气榜"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
-
-                <LinearLayout
-                    android:weightSum="3"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:layout_weight="1"
-                        android:src="@drawable/test6"
-                        android:layout_width="@dimen/little_image_width"
-                        android:layout_height="@dimen/little_image_width" />
-                    <ImageView
-                        android:layout_weight="1"
-                        android:src="@drawable/test5"
-                        android:layout_width="@dimen/little_image_width"
-                        android:layout_height="@dimen/little_image_width" />
-                    <ImageView
-                        android:layout_weight="1"
-                        android:src="@drawable/test6"
-                        android:layout_width="@dimen/little_image_width"
-                        android:layout_height="@dimen/little_image_width" />
-                </LinearLayout>
-
-                <TextView
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    style="@style/third_title"
-                    android:gravity="left|center_vertical"
-                    android:drawableLeft="@drawable/yinhao"
-                    android:text="虐 虐 虐 太虐人了 尼玛 能不这样吗？"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
                 <View
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:background="@color/lightgrey"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"/>
+                    android:layout_height="0.5dp"/>
 
                 <LinearLayout
+                    android:id="@+id/xrank"
                     android:orientation="vertical"
-                    android:background="@color/white"
-                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:layout_marginBottom="5dp"
+                    <RelativeLayout
+                        android:layout_marginTop="20dp"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <com.dongman.fm.ui.view.CircleImageView
-                            android:src="@color/pink"
+                            android:id="@+id/user_avatar"
+                            android:layout_marginLeft="10dp"
+                            android:src="@color/green"
                             app:border_color="@color/white"
                             app:border_width="1dp"
                             android:layout_width="@dimen/actionbar_heigth"
                             android:layout_height="@dimen/actionbar_heigth" />
 
                         <LinearLayout
+                            android:layout_toRightOf="@id/user_avatar"
                             android:orientation="vertical"
+                            android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
-                            android:gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent">
                             <TextView
-                                android:text="夏夏夏家的默千千"
+                                android:id="@+id/user_name"
+                                android:text="番米酱"
                                 android:textSize="16sp"
-                                android:layout_width="wrap_content"
+                                android:textColor="@color/title_black"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
                             <TextView
+                                android:id="@+id/follow_count"
                                 android:text="190人关注"
-                                android:textSize="12sp"
-                                android:layout_width="wrap_content"
+                                android:textSize="10sp"
+                                android:layout_marginTop="5dp"
+                                android:gravity="left"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
                         <TextView
-                            android:text="+ 关注"
-                            android:textSize="20sp"
-                            android:textColor="@color/lightgreen"
-                            android:gravity="right|center"
+                            android:id="@+id/follow_button"
+                            android:layout_alignParentRight="true"
                             android:layout_marginRight="10dp"
-                            android:layout_gravity="center|right"
-                            android:layout_width="match_parent"
+                            android:text="关注"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            android:background="@drawable/rectangle_bg"
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp">
+                        <ImageView
+                            android:id="@+id/image1"
+                            android:padding="1dp"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="2dp"
+                            android:scaleType="centerCrop"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <ImageView
+                            android:id="@+id/image2"
+                            android:layout_weight="1"
+                            android:padding="1dp"
+                            android:layout_marginLeft="2dp"
+                            android:scaleType="centerCrop"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <ImageView
+                            android:id="@+id/image3"
+                            android:layout_weight="1"
+                            android:padding="1dp"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="2dp"
+                            android:scaleType="centerCrop"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:weightSum="3"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:layout_weight="1"
-                            android:src="@drawable/test1"
-                            android:layout_width="@dimen/little_image_width"
-                            android:layout_height="@dimen/little_image_width" />
-                        <ImageView
-                            android:layout_weight="1"
-                            android:src="@drawable/test3"
-                            android:layout_width="@dimen/little_image_width"
-                            android:layout_height="@dimen/little_image_width" />
-                        <ImageView
-                            android:layout_weight="1"
-                            android:src="@drawable/test7"
-                            android:layout_width="@dimen/little_image_width"
-                            android:layout_height="@dimen/little_image_width" />
-                    </LinearLayout>
-
                     <TextView
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        style="@style/third_title"
+                        android:id="@+id/xrank_summary"
+                        android:padding="10dp"
                         android:gravity="left|center_vertical"
                         android:drawableLeft="@drawable/yinhao"
+                        style="@style/third_title"
                         android:text="虐 虐 虐 太虐人了 尼玛 能不这样吗？"
                         android:singleLine="true"
-                        android:layout_marginTop="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -543,7 +387,7 @@
                     android:id="@+id/index_title"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_height="45dp">
                     <View
                         android:background="@color/lightgrey"
@@ -601,7 +445,7 @@
 
                     <ImageView
                         android:id="@+id/anime_hot_spot_image"
-                        android:src="@drawable/test8"
+                        android:src="@drawable/test9"
                         android:layout_width="@dimen/item_image_size"
                         android:layout_height="@dimen/item_image_size"
                         android:layout_alignParentTop="true"
@@ -617,7 +461,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
-                            style="@style/sub_title"
+                            android:textColor="@color/title_black"
+                            android:textSize="16sp"
                             android:gravity="left|center_vertical"
                             android:text="有觉得混沌帅气的同伴么？"
                             android:singleLine="true"
@@ -628,7 +473,7 @@
                             style="@style/third_title"
                             android:gravity="left|center_vertical"
                             android:drawableLeft="@drawable/yinhao"
-                            android:text="虐 虐 虐 太虐人了 尼玛 能不这样吗？"
+                            android:text="我可从来不认为恐惧可以成为舍弃他人的借口！"
                             android:singleLine="true"
                             android:layout_marginTop="10dp"
                             android:layout_width="wrap_content"
@@ -665,7 +510,7 @@
 
                         <TextView
                             android:textColor="#A8D3E6"
-                            android:text="电影"
+                            android:text="卡巴内"
                             android:gravity="center"
                             android:layout_marginLeft="10dp"
                             style="@style/third_title"

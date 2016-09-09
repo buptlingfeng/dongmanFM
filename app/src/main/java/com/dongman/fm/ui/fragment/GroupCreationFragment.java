@@ -109,7 +109,7 @@ public class GroupCreationFragment extends BaseFragment{
         public CommunityViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view;
             if (viewType == 0) {
-                view = mInflater.inflate(R.layout.group_index_item, null, false);
+                view = mInflater.inflate(R.layout.group_index_item_tmp, null, false);
             } else {
                 view = mInflater.inflate(R.layout.state_recommend_item, null, false);
             }

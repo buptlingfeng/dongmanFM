@@ -1,7 +1,6 @@
 package com.dongman.fm.ui.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dongman.fm.R;
@@ -21,19 +21,19 @@ import com.dongman.fm.data.AnimeInfo;
 import com.dongman.fm.data.CommentData;
 import com.dongman.fm.data.RelativeRecommend;
 import com.dongman.fm.data.ReviewInfo;
-import com.dongman.fm.image.ImageUtils;
+import com.dongman.fm.utils.ImageUtils;
 import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.ui.activity.BaseActivity;
+import com.dongman.fm.ui.activity.CommentActivity;
 import com.dongman.fm.ui.activity.PlayActivity;
+import com.dongman.fm.ui.activity.StillsActivity;
+import com.dongman.fm.ui.fragment.adapter.BrowsersAdapter;
 import com.dongman.fm.ui.fragment.adapter.RelativeAdapter;
-import com.dongman.fm.ui.view.CircleImageView;
 import com.dongman.fm.ui.view.SpacesItemDecoration;
-import com.dongman.fm.utils.FMLog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,23 +45,26 @@ import okhttp3.Response;
 /**
  * Created by liuzhiwei on 15/7/11.
  */
-public class DetailFragment extends BaseFragment {
+public class DetailFragment extends BaseFragment implements View.OnClickListener{
 
     private static final String TAG = "DetailFragment";
-    private static final int ANIME_BASE     = 1;
-    private static final int ANIME_RELS     = 2;
-    private static final int MANTIE_RELS    = 3;
-    private static final int MANPING_RELS   = 4;
-    private static final int ANIME_COMMENTS = 5;
-
-    private static final int MORE_COMMENTS  = 6;
-
     private String          mID;
-    private RecyclerView    mRecyclerView;
-    private LinearLayoutManager mLinearLayoutManager;
-    private ModuleAdapter mModuleAdapter;
     private BaseActivity mActivity;
 
+    private View mAnimsContainer, mArticleContainer, mDottedLine;
+
+    private RecyclerView mAnimesRecyclerView, mArticleRecyclerView, mPlayRecyclerview, mBrowserRecyclerview;
+    private LinearLayout mManpingContainer, mStarContainer;
+    private RelativeAdapter mAnimesAdapter, mArticleAdapter, mPlayAdapter;
+    private BrowsersAdapter mBrowsersAdapter;
+
+    private TextView average, averageCount, animeGenres, animeSubtype;
+
+    private LinearLayout commentContainer;
+
+    private View mStills, mTopics, mGroups;
+
+    private ImageView animeImage;
 
     private AnimeInfo mAnimeInfo;
     private List<RelativeRecommend> mAnimesRecommends = new ArrayList<>();
@@ -92,7 +95,81 @@ public class DetailFragment extends BaseFragment {
                 switch (msg.what) {
                     case REFRESH_UI:
                         isDataReady = true;
-                        mModuleAdapter.notifyDataSetChanged();
+//                        mModuleAdapter.notifyDataSetChanged();
+                        ImageUtils.getImage(mContext, mAnimeInfo.imageLarge, animeImage);
+                        average.setText(mAnimeInfo.scoreAllAvg + "分");
+                        animeGenres.setText("类型: " + mAnimeInfo.genres);
+                        animeSubtype.setText("篇幅: " + mAnimeInfo.rateCount);
+                        averageCount.setText(mAnimeInfo.rateCount + "人评分");
+
+                        int childCount = mStarContainer.getChildCount();
+                        int starNum = (int) Math.ceil((mAnimeInfo.scoreAllAvg + 1) / 2);
+                        if(starNum == 0) {
+                            for(int i = 0; i < childCount - 1; i++) {
+                                ImageView childView = (ImageView)mStarContainer.getChildAt(i);
+                                childView.setImageResource(R.drawable.icon_star_grey);
+                            }
+                        } else {
+                            for(int i = 0; i < childCount - 1 && i <= starNum; i++) {
+                                ImageView childView = (ImageView)mStarContainer.getChildAt(i);
+                                childView.setImageResource(R.drawable.icon_star_yellow);
+                            }
+                        }
+                        //测试数据
+                        int count = Integer.parseInt(mAnimeInfo.rateCount);
+                        List test = new ArrayList();
+                        for (int i = 0; i < count; i++) {
+                            test.add(i);
+                        }
+                        mPlayAdapter.setData(test);
+                        mPlayAdapter.notifyDataSetChanged();
+
+                        mBrowsersAdapter.notifyDataSetChanged();
+
+                        //relative animes
+                        if (mAnimesRecommends.size() == 0) {
+                            mAnimsContainer.setVisibility(View.GONE);
+                        } else {
+                            mAnimesAdapter.setData(mAnimesRecommends);
+                            mAnimesAdapter.notifyDataSetChanged();
+                        }
+
+                        //relative article
+                        if (mMantieRecommends.size() == 0) {
+                            mArticleContainer.setVisibility(View.GONE);
+                        } else {
+                            mArticleAdapter.setData(mMantieRecommends);
+                            mArticleAdapter.notifyDataSetChanged();
+                        }
+
+                        //relative manping
+                        if (mReviewsRecommends != null && mReviewsRecommends.size() > 0) {
+                            for (int i = 0; i < mReviewsRecommends.size(); i++) {
+                                View child = LayoutInflater.from(mActivity).inflate(R.layout.manping_item, null);
+                                final ReviewInfo reviewInfo = mReviewsRecommends.get(i);
+                                TextView manpingTitle = (TextView) child.findViewById(R.id.manping_title);
+                                TextView manpingContent = (TextView) child.findViewById(R.id.manping_content);
+
+                                manpingTitle.setText(reviewInfo.title);
+                                manpingContent.setText(reviewInfo.summary);
+
+                                child.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent();
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//TODO 为什么一定要加这个标志
+                                        intent.setAction("com.dongman.fm.manping");
+                                        intent.putExtra("id", reviewInfo.id);
+                                        mActivity.startActivity(intent);
+                                    }
+                                });
+                                mManpingContainer.addView(child);
+                            }
+                        } else {
+                            mManpingContainer.setVisibility(View.GONE);
+                        }
+                        mManpingContainer.requestLayout();
+
                         break;
                     default:
                         break;
@@ -105,21 +182,81 @@ public class DetailFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detail_page_fragment, container, false);
         initView(view);
-
         return view;
     }
 
     private void initView(View root) {
-        mRecyclerView = (RecyclerView)root.findViewById(R.id.recycleview);
 
-        mLinearLayoutManager = new LinearLayoutManager(getActivity());
-        mLinearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mModuleAdapter = new ModuleAdapter(mContext);
-        mRecyclerView.setAdapter(mModuleAdapter);
+        //初始化动漫基本信息模块
+        animeImage = (ImageView) root.findViewById(R.id.detail_anime_image);
+
+        animeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PlayActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        mDottedLine = root.findViewById(R.id.dotted_line);
+        mDottedLine.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+
+        average = (TextView) root.findViewById(R.id.anime_average);
+        averageCount = (TextView) root.findViewById(R.id.average_count);
+        animeGenres = (TextView) root.findViewById(R.id.anime_genres);
+        animeSubtype = (TextView) root.findViewById(R.id.anime_subtype);
+
+        mStarContainer = (LinearLayout) root.findViewById(R.id.anime_average_star_container);
+        mPlayRecyclerview = (RecyclerView) root.findViewById(R.id.play_button_recyclerview);
+        LinearLayoutManager playLinear = new LinearLayoutManager(mActivity);
+        playLinear.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mPlayRecyclerview.setLayoutManager(playLinear);
+        mPlayAdapter = new RelativeAdapter(mActivity, RelativeAdapter.PLAY);
+        mPlayRecyclerview.setAdapter(mPlayAdapter);
+        mPlayRecyclerview.addItemDecoration(new SpacesItemDecoration(20,0,10,10));
+
+        mBrowserRecyclerview = (RecyclerView) root.findViewById(R.id.browser_recyclerview);
+        LinearLayoutManager browserLinear = new LinearLayoutManager(mActivity);
+        browserLinear.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mBrowserRecyclerview.setLayoutManager(browserLinear);
+        mBrowsersAdapter = new BrowsersAdapter(mActivity);
+        mBrowserRecyclerview.setAdapter(mBrowsersAdapter);
+        mBrowserRecyclerview.addItemDecoration(new SpacesItemDecoration(20,0,0,0));
+
+        //初始化相关动漫模块
+        mAnimsContainer = root.findViewById(R.id.animes_relative);
+        mAnimesRecyclerView = (RecyclerView) root.findViewById(R.id.relative_anime_recycleview);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity());
+        linearLayoutManager1.setOrientation(OrientationHelper.HORIZONTAL);
+        mAnimesRecyclerView.setLayoutManager(linearLayoutManager1);
+        mAnimesAdapter = new RelativeAdapter(mActivity, RelativeAdapter.ANIMES);
+        mAnimesRecyclerView.setAdapter(mAnimesAdapter);
+        mAnimesRecyclerView.addItemDecoration(new SpacesItemDecoration(20, 0, 10, 10));
+
+        //初始化剧照列表以及专题的View
+        mStills = root.findViewById(R.id.stills);
+        mStills.setOnClickListener(this);
+        mTopics = root.findViewById(R.id.topics);
+        mTopics.setOnClickListener(this);
+
+        //relative_article_recycleview
+        mArticleContainer = root.findViewById(R.id.article_relative);
+        mArticleRecyclerView = (RecyclerView) root.findViewById(R.id.relative_article_recycleview);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(OrientationHelper.HORIZONTAL);
+        mArticleRecyclerView.setLayoutManager(linearLayoutManager);
+        mArticleAdapter = new RelativeAdapter(mActivity, RelativeAdapter.MANTIE);
+        mArticleRecyclerView.setAdapter(mArticleAdapter);
+        mArticleRecyclerView.addItemDecoration(new SpacesItemDecoration(20, 0, 10, 10));
+
+        //relative_manping_recycleview
+        mManpingContainer = (LinearLayout) root.findViewById(R.id.manping_container);
+
+        commentContainer = (LinearLayout) root.findViewById(R.id.article_huifu_container);
+        commentContainer.setOnClickListener(this);
         getData(mID);
-
     }
+
 
     public void getData(String id) {
         asyncGet(APIConfig.SUBJECT_DETAIL, "id", id, new IRequestCallBack() {
@@ -188,184 +325,21 @@ public class DetailFragment extends BaseFragment {
         });
     }
 
-    class ModuleAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
-        private LayoutInflater mInflater;
-        ModuleAdapter(Context context) {
-            mInflater = LayoutInflater.from(context);
-        }
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.article_huifu_container:
+                Intent comment = new Intent(mActivity, CommentActivity.class);
+                mActivity.startActivity(comment);
+                break;
+            case R.id.stills:
+                Intent stills = new Intent(mActivity, StillsActivity.class);
+                mActivity.startActivity(stills);
+                break;
+            case R.id.topics:
+//                Intent topic = new Intent(mActivity, )
+                break;
 
-        @Override
-        public ModuleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-            int id = 0;
-            switch (viewType) {
-                case ANIME_BASE:
-                    id = R.layout.anime_base;
-                    break;
-                case ANIME_RELS:
-                    id = R.layout.relative_anims_recommend;
-                    break;
-                case MANTIE_RELS:
-                    id = R.layout.relative_recommend;
-                    break;
-                case MANPING_RELS:
-                    id = R.layout.manping_item;
-                    break;
-                case ANIME_COMMENTS:
-                    id = R.layout.review_item;
-                    break;
-                case MORE_COMMENTS:
-                    id = R.layout.more_footer;
-                    break;
-            }
-
-            View view = mInflater.inflate(id, parent, false);
-            return new ModuleViewHolder(view, viewType);
-        }
-
-        @Override
-        public void onBindViewHolder(ModuleViewHolder holder, int position) {
-            holder.bindView(position);
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-
-            switch (position) {
-                case 0 :
-                    return ANIME_BASE;
-                case 1 :
-                    return ANIME_RELS;
-                case 2 :
-                    return MANTIE_RELS;
-                default:
-                    if (mReviewsRecommends.size() + 3 > position) {
-                        return MANPING_RELS;
-                    } else if (mComments.size() + mReviewsRecommends.size() + 3 > position){
-                        return ANIME_COMMENTS;
-                    } else {
-                        FMLog.d(TAG, "More : " + position);
-                        return MORE_COMMENTS;
-                    }
-            }
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return super.getItemId(position);
-        }
-
-        @Override
-        public int getItemCount() {
-            int count = 0;
-            if (isDataReady) {
-                 count = 1 + (mAnimesRecommends.size() > 0 ? 1:0) + (mMantieRecommends.size()>0 ? 1:0) + mReviewsRecommends.size() + mComments.size() + 1;
-            }
-
-            return count;
         }
     }
-
-    class ModuleViewHolder extends RecyclerView.ViewHolder {
-
-        View viewHolder;
-        int viewType;
-        public ModuleViewHolder(View itemView, int type) {
-            super(itemView);
-            viewHolder = itemView;
-            viewType = type;
-        }
-
-
-        public void bindView(int position) {
-
-            switch (viewType) {
-                case ANIME_BASE:
-                    ImageView animeImage = (ImageView) itemView.findViewById(R.id.detail_anime_image);
-
-                    animeImage.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(getActivity(), PlayActivity.class);
-                            getActivity().startActivity(intent);
-                        }
-                    });
-
-                    TextView average = (TextView) itemView.findViewById(R.id.anime_average);
-                    TextView averageCount = (TextView) itemView.findViewById(R.id.average_count);
-                    TextView animeGenres = (TextView) itemView.findViewById(R.id.anime_genres);
-                    TextView animeSubtype = (TextView) itemView.findViewById(R.id.anime_subtype);
-                    ImageUtils.getImage(mContext, mAnimeInfo.imageLarge, animeImage);
-                    average.setText(mAnimeInfo.scoreAllAvg + "分");
-                    animeGenres.setText("类型: " + mAnimeInfo.genres);
-                    animeSubtype.setText("篇幅: " + mAnimeInfo.rateCount);
-                    averageCount.setText(mAnimeInfo.rateCount + "人评分");
-
-                    break;
-                case ANIME_RELS:
-                    RecyclerView recyclerView1 = (RecyclerView) viewHolder.findViewById(R.id.recycleview);
-                    LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity());
-                    linearLayoutManager1.setOrientation(OrientationHelper.HORIZONTAL);
-                    recyclerView1.setLayoutManager(linearLayoutManager1);
-                    RelativeAdapter animesAdapter = new RelativeAdapter(mActivity, RelativeAdapter.ANIMES);
-                    recyclerView1.setAdapter(animesAdapter);
-                    recyclerView1.addItemDecoration(new SpacesItemDecoration(20, 0, 10, 10));
-                    animesAdapter.setData(mAnimesRecommends);
-                    break;
-                case MANTIE_RELS:
-                    RecyclerView recyclerView = (RecyclerView) viewHolder.findViewById(R.id.recycleview);
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                    linearLayoutManager.setOrientation(OrientationHelper.HORIZONTAL);
-                    recyclerView.setLayoutManager(linearLayoutManager);
-                    RelativeAdapter mantieAdapter = new RelativeAdapter(mActivity, RelativeAdapter.MANTIE);
-                    recyclerView.setAdapter(mantieAdapter);
-                    recyclerView.addItemDecoration(new SpacesItemDecoration(20, 0, 10, 10));
-                    mantieAdapter.setData(mMantieRecommends);
-                    TextView mantie = (TextView) viewHolder.findViewById(R.id.releate_manping_index);
-                    if (mReviewsRecommends != null && mReviewsRecommends.size() > 0) {
-                        mantie.setVisibility(View.VISIBLE);
-                    } else {
-                        mantie.setVisibility(View.GONE);
-                    }
-                    break;
-                case MANPING_RELS:
-                    TextView manpingTitle = (TextView) viewHolder.findViewById(R.id.manping_title);
-                    TextView manpingContent = (TextView) viewHolder.findViewById(R.id.manping_content);
-                    final ReviewInfo reviewInfo = mReviewsRecommends.get(position - 3);
-                    manpingTitle.setText(reviewInfo.title);
-                    manpingContent.setText(reviewInfo.summary);
-
-                    itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent();
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//TODO 为什么一定要加这个标志
-                            intent.setAction("com.dongman.fm.manping");
-                            intent.putExtra("id", reviewInfo.id);
-                            mContext.startActivity(intent);
-                        }
-                    });
-                    break;
-                case ANIME_COMMENTS:
-                    CircleImageView commentAvatar = (CircleImageView) itemView.findViewById(R.id.comment_avatar);
-                    TextView commentDate   = (TextView) itemView.findViewById(R.id.comment_date);
-                    TextView commentContent = (TextView) itemView.findViewById(R.id.comment_content);
-                    TextView commentNick   = (TextView) itemView.findViewById(R.id.comment_nick);
-
-                    CommentData data = mComments.get(position - (3 + mReviewsRecommends.size()));
-
-                    commentNick.setText(data.userName);
-                    commentDate.setText(data.createTime);
-                    commentContent.setText(data.content);
-                    ImageUtils.getImage(mContext, data.avatarUrl, commentAvatar);
-                    break;
-                case MORE_COMMENTS:
-                    TextView hint = (TextView) viewHolder.findViewById(R.id.footer_hint_words);
-                    hint.setText("点击查看更多");
-                    break;
-            }
-        }
-    }
-
-
 }

@@ -4,19 +4,24 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_weight="1"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+    android:background="@color/index_bg"
     android:gravity="center"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/navigation_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:src="@drawable/icon_people" />
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/p_1" />
 
     <TextView
         android:id="@+id/navigation_title"
+        android:layout_marginTop="3dp"
+        android:textSize="10sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="我的"
-        android:textColor="@color/steelblue" />
+        android:textColor="@drawable/main_index_text_color" />
 </LinearLayout>

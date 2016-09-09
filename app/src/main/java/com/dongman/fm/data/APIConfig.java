@@ -9,7 +9,7 @@ public class APIConfig {
 
     public static final String TOPIC_LIST = HOST + "/topic/getlist";
 
-    public static final String MANPIN_LIST = "http://www.dongman.fm" + "/api/home/detail";
+    public static final String MANPIN_LIST = HOST + "/review/getlist";
 
     public static final String TOPIC_DETAIL   = HOST + "/topic/detail";
 

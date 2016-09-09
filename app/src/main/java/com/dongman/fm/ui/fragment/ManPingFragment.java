@@ -18,6 +18,7 @@ import com.dongman.fm.R;
 import com.dongman.fm.data.APIConfig;
 import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.ui.fragment.adapter.ManpingListAdapter;
+import com.dongman.fm.ui.view.SpacesItemDecoration;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -33,9 +34,9 @@ import okhttp3.Response;
  * Created by liuzhiwei on 15/12/13.
  * 内容包括：漫评的数据
  */
-public class ManPingFragmet extends BaseFragment {
+public class ManPingFragment extends BaseFragment {
 
-    private static final String TAG = ManPingFragmet.class.getSimpleName();
+    private static final String TAG = ManPingFragment.class.getSimpleName();
 
     private static final int DATA_READY = 1;
     private static final int DARA_FAILED = 2;
@@ -128,6 +129,7 @@ public class ManPingFragmet extends BaseFragment {
         });
         mRecommendAdapter = new ManpingListAdapter(getActivity());
         mRecyclerView.setAdapter(mRecommendAdapter);
+        mRecyclerView.addItemDecoration(new SpacesItemDecoration(0,0,0,20));
         getData(mPageNumber, true);
     }
 
@@ -146,17 +148,15 @@ public class ManPingFragmet extends BaseFragment {
             public void onResponse(Response response) throws IOException {
                 try {//TODO 数据结构改变，增加扩展字段来表示是否已经加载完毕
                     JSONObject data = new JSONObject(response.body().string());
-                    String isEnd = data.getString("msg");
-                    if("success".equals(isEnd)){
-                        JSONArray array = data.getJSONArray("list");
-                        if(isFrist) {
-                            mRecommendAdapter.setData(array);
-                            mPageNumber = 2;
-                        } else {
-                            mRecommendAdapter.addData(array);
-                        }
-                        mHandler.sendEmptyMessage(DATA_READY);
+                    data = data.getJSONObject("data");
+                    JSONArray array = data.getJSONArray("review_list");
+                    if(isFrist) {
+                        mRecommendAdapter.setData(array);
+                        mPageNumber = 2;
+                    } else {
+                        mRecommendAdapter.addData(array);
                     }
+                    mHandler.sendEmptyMessage(DATA_READY);
                     isLoadingMore = false;
                 } catch (Exception e) {
                     e.printStackTrace();

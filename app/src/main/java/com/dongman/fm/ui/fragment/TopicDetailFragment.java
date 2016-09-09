@@ -69,13 +69,13 @@ public class TopicDetailFragment extends BaseFragment implements IRequestCallBac
         mTitleView = (TextView)root.findViewById(R.id.title);
 //        mTitleView.setText(mTitle);
         mActionBar.setTitle(mTitle);
-        mMoreReviews = root.findViewById(R.id.extra_action);
-        mMoreReviews.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                mActivity.addFragment(new ReviewsListFragment(), "ReviewList");
-            }
-        });
+//        mMoreReviews = root.findViewById(R.id.extra_action);
+//        mMoreReviews.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                mActivity.addFragment(new CommentListFragment(), "ReviewList");
+//            }
+//        });
 //        mBack = root.findViewById(R.id.back);
 //        mBack.setOnClickListener(new View.OnClickListener() {
 //            @Override

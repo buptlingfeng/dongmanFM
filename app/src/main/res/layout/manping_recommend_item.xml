@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="1dp"
-    app:cardElevation="2dp"
     app:cardUseCompatPadding="true"
     app:cardPreventCornerOverlap="false"
     android:layout_width="match_parent"
@@ -78,6 +77,7 @@
                 android:layout_toRightOf="@+id/anime_grade"
                 android:layout_toEndOf="@+id/anime_grade" />
             <TextView
+                android:id="@+id/manping_summary"
                 android:text="BOSS级大寒潮来袭，现在一定有很多小伙伴们都很怀念夏天吧，动漫FM在此大寒之际，特献上，一想到夏天就会想起来的动漫，夏天的炎热VS冬天的寒冷，冰火两重天，一边欣赏雪景，一边补番，岂不快哉！"
                 android:maxLines="4"
                 android:ellipsize="end"
@@ -157,7 +157,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:src="@drawable/dianzan"
+                    android:src="@drawable/dianzan_unlike"
                     android:layout_width="@dimen/anime_average_star_width"
                     android:layout_height="@dimen/anime_average_star_width" />
                 <!--<com.like.LikeButton-->
@@ -200,4 +200,9 @@
 
         </LinearLayout>
     </RelativeLayout>
-</android.support.v7.widget.CardView>
+    <!--<View-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:background="#EEEEEE"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"/>-->
+</FrameLayout>

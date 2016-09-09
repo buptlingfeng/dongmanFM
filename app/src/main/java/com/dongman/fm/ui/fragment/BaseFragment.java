@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.dongman.fm.image.ImageUtils;
+import com.dongman.fm.utils.ImageUtils;
 import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.network.OkHttpUtil;
 import okhttp3.Callback;

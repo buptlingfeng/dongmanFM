@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.dongman.fm.R;
-import com.dongman.fm.image.ImageUtils;
+import com.dongman.fm.utils.ImageUtils;
 import com.dongman.fm.ui.view.CircleImageView;
 
 import org.json.JSONArray;

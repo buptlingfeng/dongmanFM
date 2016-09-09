@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import com.dongman.fm.R;
 import com.dongman.fm.data.RelativeRecommend;
-import com.dongman.fm.image.ImageUtils;
+import com.dongman.fm.data.ReviewInfo;
+import com.dongman.fm.utils.ImageUtils;
+import com.dongman.fm.ui.activity.BrowserActivity;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,9 +28,12 @@ public class RelativeAdapter extends RecyclerView.Adapter<RelativeAdapter.Relati
     public static final int MANTIE      = 1;
     public static final int ANIMES      = 2;
     public static final int TOPIC       = 3;
+    public static final int MANPING     = 4;
+    public static final int PLAY        = 5;
+    public static final int BROWSER     = 6;
 
     private LayoutInflater mInflater;
-    private List<RelativeRecommend> mData;
+    private List mData;
     private Context mActivity;
 
     private int mType;
@@ -40,13 +45,13 @@ public class RelativeAdapter extends RecyclerView.Adapter<RelativeAdapter.Relati
         mType = type;
     }
 
-    public void setData(List<RelativeRecommend> data) {
+    public void setData(List data) {
         mData = data;
     }
 
-    public void addData(List<RelativeRecommend> data) {
+    public void addData(List data) {
         if (data != null) {
-            Iterator<RelativeRecommend> iterator = data.iterator();
+            Iterator iterator = data.iterator();
             while (iterator.hasNext()) {
                 mData.add(iterator.next());
             }
@@ -62,6 +67,12 @@ public class RelativeAdapter extends RecyclerView.Adapter<RelativeAdapter.Relati
                 break;
             case MANTIE:
                 layoutId = R.layout.mantie_item;
+                break;
+            case MANPING:
+                layoutId = R.layout.manping_item;
+                break;
+            case PLAY:
+                layoutId = R.layout.play_button;
                 break;
             default:
                 layoutId = R.layout.mantie_item;
@@ -95,9 +106,10 @@ public class RelativeAdapter extends RecyclerView.Adapter<RelativeAdapter.Relati
 
         public void bindView(int position) {
             if (position < mData.size()) {
-                final RelativeRecommend data = mData.get(position);
+                final Object temData = mData.get(position);
                 switch (mType) {
                     case ANIMES:
+                        final RelativeRecommend data = (RelativeRecommend) temData;
                         TextView title = (TextView) itemView.findViewById(R.id.anime_title);
                         ImageView imageView = (ImageView) itemView.findViewById(R.id.anime_image);
 
@@ -117,12 +129,46 @@ public class RelativeAdapter extends RecyclerView.Adapter<RelativeAdapter.Relati
                             }
                         });
                         break;
+                    case MANPING:
+                        final ReviewInfo reviewInfo = (ReviewInfo) temData;
+                        TextView manpingTitle = (TextView) itemView.findViewById(R.id.manping_title);
+                        TextView manpingContent = (TextView) itemView.findViewById(R.id.manping_content);
+
+                        manpingTitle.setText(reviewInfo.title);
+                        manpingContent.setText(reviewInfo.summary);
+
+                        itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent();
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//TODO 为什么一定要加这个标志
+                                intent.setAction("com.dongman.fm.manping");
+                                intent.putExtra("id", reviewInfo.id);
+                                mActivity.startActivity(intent);
+                            }
+                        });
+                        break;
+                    case PLAY:
+                        TextView playCount = (TextView) itemView.findViewById(R.id.play_count);
+                        playCount.setText((position + 1) + "");
+                        playCount.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(mActivity, BrowserActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("url", "http://www.tudou.com/albumplay/iF2R9jBUhso/0wew3SKHxHg.html");
+                                intent.putExtras(bundle);
+                                mActivity.startActivity(intent);
+                            }
+                        });
+                        break;
                     default:
+                        final RelativeRecommend relativeRecommend = (RelativeRecommend) temData;
                         TextView mantieTitle = (TextView) itemView.findViewById(R.id.mantie_title);
                         ImageView mantieImageView = (ImageView) itemView.findViewById(R.id.mantie_image);
 
-                        mantieTitle.setText(data.title);
-                        ImageUtils.getImage(mActivity, data.imageUrl, mantieImageView);
+                        mantieTitle.setText(relativeRecommend.title);
+                        ImageUtils.getImage(mActivity, relativeRecommend.imageUrl, mantieImageView);
 
                         if (mType == MANTIE) {
                             itemView.setOnClickListener(new View.OnClickListener() {
@@ -131,8 +177,8 @@ public class RelativeAdapter extends RecyclerView.Adapter<RelativeAdapter.Relati
                                     Intent intent = new Intent();
                                     intent.setAction("com.dongman.fm.recommend_detail");
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("title", data.title);
-                                    bundle.putString("id", data.id);
+                                    bundle.putString("title", relativeRecommend.title);
+                                    bundle.putString("id", relativeRecommend.id);
                                     intent.putExtra("info", bundle);
                                     mActivity.startActivity(intent);
                                 }
@@ -143,7 +189,7 @@ public class RelativeAdapter extends RecyclerView.Adapter<RelativeAdapter.Relati
                                 public void onClick(View v) {
                                     Intent intent = new Intent();
                                     intent.setAction("com.dongman.fm.subject");
-                                    intent.putExtra("id", data.id);
+                                    intent.putExtra("id", relativeRecommend.id);
                                     mActivity.startActivity(intent);
                                 }
                             });

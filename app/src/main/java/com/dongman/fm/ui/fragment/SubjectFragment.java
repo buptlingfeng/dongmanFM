@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.dongman.fm.R;
 import com.dongman.fm.data.APIConfig;
-import com.dongman.fm.image.ImageUtils;
+import com.dongman.fm.utils.ImageUtils;
 import com.dongman.fm.network.IRequestCallBack;
 import okhttp3.Request;
 import okhttp3.Response;

@@ -1,4 +1,4 @@
-package com.dongman.fm.image;
+package com.dongman.fm.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -9,13 +9,11 @@ import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.widget.ImageView;
 
-import com.dongman.fm.ui.utils.ToolsUtils;
+import com.dongman.fm.utils.FMLog;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
 import com.squareup.picasso.Transformation;
 
 import java.io.ByteArrayOutputStream;
@@ -25,6 +23,8 @@ import java.io.IOException;
  * Created by liuzhiwei on 15/7/11.
  */
 public class ImageUtils {
+
+    private static final String TAG = "ImageUtils";
 
     /**
      * 异步方法
@@ -36,29 +36,21 @@ public class ImageUtils {
         Picasso.with(context).load(url).into(imageView);
     }
 
-    public static void getImage(Context context, String url, ImageView imageView, int width, int heigth) {
+    public static void getImage(Context context, final String url, ImageView imageView, int width, int heigth) {
         Picasso.with(context)
                 .load(url)
                 .transform(new CropSquareTransformation(width))
                 .into(imageView, new Callback() {
                     @Override
                     public void onSuccess() {
-                        Log.d("TAG", "onSuccess");
+                        FMLog.i(TAG, "onSuccess : " + url);
                     }
 
                     @Override
                     public void onError() {
-                        Log.e("TAG", "onError");
+                        FMLog.e(TAG, "onError : " + url == null?"the url is null!": url);
                     }
                 });
-//        try {
-//
-////            Bitmap bitmap = creator.get();
-////            Bitmap targetBitmap = scaleByWidth(bitmap, ToolsUtils.getScreenWidth(context));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
     }
 
     /**

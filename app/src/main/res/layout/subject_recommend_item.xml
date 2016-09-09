@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="1dp"
-    app:cardElevation="2dp"
-    app:cardUseCompatPadding="true"
-    app:cardPreventCornerOverlap="false"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -24,34 +20,43 @@
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 />
-            <TextView
-                android:id="@+id/anime_name"
-                android:layout_gravity="center"
-                android:paddingLeft="10dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:gravity="center_horizontal"
-                android:background="#201a181a"
-                android:textColor="@color/white"
-                style="@style/translation_title"
-                android:text="黑化主角动漫大盘点！"
+            <ImageView
+                android:background="@color/half_tran"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
         </FrameLayout>
+        <TextView
+            android:id="@+id/anime_name"
+            android:layout_gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/title_black"
+            style="@style/translation_title"
+            android:textSize="18sp"
+            android:text="黑化主角动漫大盘点！"
+            android:maxLines="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <LinearLayout
-            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/summary"
                 android:text="自从fate带入了这个专有名词之后，大多动漫开始走起了黑化路线，崩溃变坏"
-                android:gravity="center"
+                android:textSize="14sp"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/summary_content"
+                android:layout_marginBottom="10dp"
                 android:lineSpacingExtra="8dp"
-                style="@style/third_title"
-                android:textColor="@color/nav_default_color"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"  />
         </LinearLayout>
     </LinearLayout>
-</android.support.v7.widget.CardView>
+</FrameLayout>

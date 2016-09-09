@@ -2,70 +2,251 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F2F1EE"
     android:orientation="vertical">
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:background="@color/black"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/actionbar_heigth"
         android:layout_gravity="center"
         android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/search_view"
+            android:src="@drawable/search_icon"
+            android:layout_gravity="center_vertical|right"
+            android:scaleType="centerCrop"
+            android:layout_marginRight="10dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
         <TextView
-            android:gravity="center_vertical"
             android:text="首页"
-            style="@style/translation_title"
-            android:paddingRight="20dp"
-            android:paddingLeft="20dp"
-            android:textColor="#607D8B"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
-    </LinearLayout>
-    <!--<RelativeLayout-->
+    </FrameLayout>
+
+    <!--<include layout="@layout/recycleview_layout"-->
         <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="@dimen/homepage_title_height"-->
-        <!--android:visibility="gone"-->
-        <!--android:background="@color/lightgrey">-->
-
-        <!--<com.dongman.fm.ui.view.CircleImageView-->
-            <!--android:id="@+id/user_icon"-->
-            <!--android:scaleType="centerCrop"-->
-            <!--android:layout_marginLeft="5dp"-->
-            <!--android:layout_width="@dimen/homepage_title_height"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:src="@drawable/ic_launcher" />-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="5dp"-->
-            <!--android:layout_toRightOf="@+id/user_icon"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:weightSum="1">-->
-
-            <!--<EditText-->
-                <!--android:id="@+id/search_input"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="0.97"-->
-                <!--android:background="@color/whitesmoke"-->
-                <!--android:hint="不知道看什么？点TA-&ndash;&gt;"-->
-                <!--android:textColor="@color/green"-->
-                <!--android:textColorHint="@color/grey"-->
-                <!--android:textSize="15sp" />-->
-
-            <!--<ImageButton-->
-                <!--android:id="@+id/search_button"-->
-                <!--android:layout_width="55dp"-->
-                <!--android:layout_height="55dp"-->
-                <!--android:layout_weight="0.03"-->
-                <!--android:background="@drawable/icon_search_normal" />-->
-        <!--</LinearLayout>-->
-
-    <!--</RelativeLayout>-->
-
-    <include layout="@layout/recycleview_layout"
+        <!--android:layout_height="match_parent">-->
+    <!--</include>-->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@id/swipe_refresh_widget"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </include>
+        <ScrollView
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.dongman.fm.ui.view.Banner
+                    android:visibility="visible"
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:uik_autoScroll="true"
+                    app:uik_autoScrollInterval="3000"
+                    app:uik_ratio="0.5">
+                </com.dongman.fm.ui.view.Banner>
+            </LinearLayout>
+
+            <include
+                android:layout_marginTop="8dp"
+                android:id="@+id/animes_relative"
+                layout="@layout/relative_anims_recommend"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent" />
+
+            <LinearLayout
+                android:visibility="visible"
+                android:layout_marginTop="8dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:weightSum="10"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_gravity="center"
+                        android:background="@color/theme_color"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="2dp"
+                        android:layout_height="20dp"/>
+                    <TextView
+                        android:layout_gravity="center"
+                        android:text="热门漫团"
+                        android:layout_weight="9"
+                        android:textColor="@color/tab_top_text_1"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:gravity="left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_more"
+                        android:gravity="right"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+                </LinearLayout>
+                <View
+                    android:background="@color/lightgrey"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"/>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.dongman.fm.ui.view.ManTuanHomeItemView
+                        android:id="@+id/recommend_group_1"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </com.dongman.fm.ui.view.ManTuanHomeItemView>
+                    <com.dongman.fm.ui.view.ManTuanHomeItemView
+                        android:id="@+id/recommend_group_2"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="@dimen/little_image_width"
+                        android:layout_height="wrap_content">
+                    </com.dongman.fm.ui.view.ManTuanHomeItemView>
+                    <com.dongman.fm.ui.view.ManTuanHomeItemView
+                        android:id="@+id/recommend_group_3"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="@dimen/little_image_width"
+                        android:layout_height="wrap_content">
+                    </com.dongman.fm.ui.view.ManTuanHomeItemView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.dongman.fm.ui.view.ManTuanHomeItemView
+                        android:id="@+id/recommend_group_4"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="@dimen/little_image_width"
+                        android:layout_height="wrap_content">
+                    </com.dongman.fm.ui.view.ManTuanHomeItemView>
+
+                    <com.dongman.fm.ui.view.ManTuanHomeItemView
+                        android:id="@+id/recommend_group_5"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="@dimen/little_image_width"
+                        android:layout_height="wrap_content">
+                    </com.dongman.fm.ui.view.ManTuanHomeItemView>
+                    <com.dongman.fm.ui.view.ManTuanHomeItemView
+                        android:id="@+id/recommend_group_6"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="@dimen/little_image_width"
+                        android:layout_height="wrap_content">
+                    </com.dongman.fm.ui.view.ManTuanHomeItemView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:weightSum="10"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_gravity="center"
+                        android:background="@color/theme_color"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="2dp"
+                        android:layout_height="20dp"/>
+                    <TextView
+                        android:layout_gravity="center"
+                        android:text="最新专题"
+                        android:layout_weight="9"
+                        android:textColor="@color/tab_top_text_1"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:gravity="left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_more"
+                        android:gravity="right"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+                </LinearLayout>
+                <View
+                    android:background="@color/lightgrey"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"/>
+
+                <com.dongman.fm.ui.view.TopicHomeItemView
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/topic_item_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+                <com.dongman.fm.ui.view.TopicHomeItemView
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/topic_item_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <com.dongman.fm.ui.view.TopicHomeItemView
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/topic_item_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <View
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"/>
+        </LinearLayout>
+
+    </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

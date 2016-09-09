@@ -17,20 +17,25 @@ import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dongman.fm.R;
 import com.dongman.fm.data.APIConfig;
+import com.dongman.fm.data.AnimeInfo;
 import com.dongman.fm.data.CommentData;
-import com.dongman.fm.image.ImageUtils;
+import com.dongman.fm.utils.ImageUtils;
 import com.dongman.fm.network.IRequestCallBack;
-import com.dongman.fm.ui.fragment.adapter.CommentAdapter;
+import com.dongman.fm.ui.activity.CommentActivity;
 import com.dongman.fm.ui.fragment.adapter.CommentsAdapter;
 import com.dongman.fm.ui.fragment.adapter.RelativeAdapter;
 import com.dongman.fm.ui.view.CircleImageView;
-import com.dongman.fm.ui.view.CustomListView;
 import com.dongman.fm.ui.view.FullyLinearLayoutManager;
+import com.dongman.fm.ui.view.ObservableScrollView;
+import com.dongman.fm.ui.view.SharePanel;
 import com.dongman.fm.ui.view.SpacesItemDecoration;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 
 import okhttp3.Request;
 import okhttp3.Response;
@@ -46,7 +51,7 @@ import java.util.List;
 /**
  * Created by liuzhiwei on 15/8/13.
  */
-public class ManpingDetailFragment extends BaseFragment {
+public class ManpingDetailFragment extends BaseFragment implements View.OnClickListener{
 
     private static final String TAG = ManpingDetailFragment.class.getSimpleName();
 
@@ -57,12 +62,7 @@ public class ManpingDetailFragment extends BaseFragment {
     private TextView mManpingUpdateTime;
 
     private TextView mManpingTitle;
-//    private TextView mManpingVote;
     private WebView mWebView;
-
-//    private CustomListView mManpingCommentsList;
-//    private CommentAdapter mCommentAdapter;
-
     private View mCommentsContainer;
     private RecyclerView mCommentsRecycleView;
     private FullyLinearLayoutManager mCommentLayoutManager;
@@ -71,6 +71,9 @@ public class ManpingDetailFragment extends BaseFragment {
     private RecyclerView mRecycleView;
     private LinearLayoutManager mLinearLayoutManager;
     private RelativeAdapter mMantieAdapter;
+    private TextView mRecommendTag;
+    private TextView mRelativeAnimeTitle;
+    private ImageView mRelativeAnimeImage;
 
     private Handler mHandler;
 
@@ -78,10 +81,24 @@ public class ManpingDetailFragment extends BaseFragment {
 
     private JSONObject mBasicData;
     private List<CommentData> mComments;
+    private Activity mActivity;
+    private ObservableScrollView mScrollView;
+
+
+    private View mBack, mShare, mComment;
+    private LikeButton mVote;
+    private TextView mCommentCount, mVoteCount;
+
+    private View mHeader, mIndicator;
+
+    private AnimeInfo mAnimeInfo;
+
+    private boolean isVisible = true;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        mActivity = activity;
         mID = this.getArguments().getString("id");
     }
 
@@ -93,31 +110,76 @@ public class ManpingDetailFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.manping_detail, null, false);
-        init(view);
+        initView(view);
         return view;
     }
 
-    private void init(View root) {
+    private void initView(View root) {
 
         mManpinOwnerName = (TextView) root.findViewById(R.id.manping_detail_user_name);
         mManpingOwnerAvatar = (CircleImageView) root.findViewById(R.id.manping_detail_user_avatar);
+        mRecommendTag = (TextView) root.findViewById(R.id.recommend_tag);
+        mRelativeAnimeTitle = (TextView) root.findViewById(R.id.releate_anime);
+        mRelativeAnimeImage = (ImageView) root.findViewById(R.id.releate_anime_image);
+        mHeader = root.findViewById(R.id.manping_detail_head_container);
+        mIndicator = root.findViewById(R.id.mapping_indicator);
 
-//        mManpingOwnerAvatar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setAction("com.dongman.fm.detail");
-//                intent.putExtra("id", 1);
-//                intent.putExtra("name", "海贼王");
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                mContext.startActivity(intent);
-//            }
-//        });
+        mScrollView = (ObservableScrollView) root.findViewById(R.id.root_container);
+
+        mScrollView.setOnScrollListener(new ObservableScrollView.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged(int x, int y, int oldX, int oldY) {
+                if (y < oldY) {//向下滑动
+                    if (isVisible) {
+                        return;
+                    }
+                    mHeader.setVisibility(View.VISIBLE);
+                    mIndicator.setVisibility(View.VISIBLE);
+                    isVisible = true;
+
+                } else {//向上滑动
+                    if (!isVisible) {
+                        return;
+                    }
+                    if (oldY <= 0 && y <= 0) {//防止回震的情况
+                        return;
+                    }
+                    mHeader.setVisibility(View.GONE);
+                    mIndicator.setVisibility(View.GONE);
+                    isVisible = false;
+                }
+            }
+        });
+
+        mBack = root.findViewById(R.id.article_back);
+        mShare = root.findViewById(R.id.share);
+        mVote = (LikeButton) root.findViewById(R.id.article_vote);
+        mComment = root.findViewById(R.id.article_huifu);
+
+        mBack.setOnClickListener(this);
+        mShare.setOnClickListener(this);
+        mComment.setOnClickListener(this);
+        mRelativeAnimeImage.setOnClickListener(this);
+
+        mVote.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+
+            }
+        });
+
+        mCommentCount = (TextView)root.findViewById(R.id.article_huifu_count);
+        mVoteCount = (TextView) root.findViewById(R.id.article_vote_count);
 
         mManpingUpdateTime = (TextView) root.findViewById(R.id.manping_detail_updatetime);
 
         mManpingTitle = (TextView) root.findViewById(R.id.manping_detail_title);
-//        mManpingContent = (TextView) root.findViewById(R.id.manping_detail_content);
+
         mWebView = (WebView) root.findViewById(R.id.webView1);
         mWebView.setWebViewClient(new CustomWebViewClient());
 
@@ -155,21 +217,25 @@ public class ManpingDetailFragment extends BaseFragment {
                             ImageUtils.getImage(getActivity(), url, mManpingOwnerAvatar);
                             String updateTime = mBasicData.getString("create_time");
                             mManpingUpdateTime.setText(updateTime);
-
+                            String tag = mBasicData.getString("tag");
+                            mRecommendTag.setText(tag);
                             String manpingTitle = mBasicData.getString("title");
                             mManpingTitle.setText(manpingTitle);
 
                             String reviewUrl = mBasicData.getString("review_url");
                             mWebView.loadUrl(reviewUrl);
                             String votes = mBasicData.getString("vote_count");
-//                            mManpingVote.setText("(" + votes + ")");
-
+                            mVoteCount.setText(votes);
                             mCommentAdapter.setData(mComments);
                             mCommentAdapter.notifyDataSetChanged();
                             if(mComments != null && mComments.size() > 0) {
                                 addCommentFooter(true);
                             } else {
                                 addCommentFooter(false);
+                            }
+                            if (mAnimeInfo != null) {
+                                mRelativeAnimeTitle.setText(mAnimeInfo.title);
+                                ImageUtils.getImage(mActivity, mAnimeInfo.imageLarge, mRelativeAnimeImage);
                             }
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -206,7 +272,12 @@ public class ManpingDetailFragment extends BaseFragment {
                             mComments.add(comment);
                         }
                     }
+                    JSONObject subjectInfo = data.getJSONObject("subject");
 
+                    mAnimeInfo = new AnimeInfo();
+                    mAnimeInfo.id = subjectInfo.getString("id");
+                    mAnimeInfo.title = subjectInfo.getString("title");
+                    mAnimeInfo.imageLarge = subjectInfo.getString("img_url");
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -229,6 +300,34 @@ public class ManpingDetailFragment extends BaseFragment {
             hint.setText("点击查看更多");
         } else {
             hint.setText("快去抢沙发~");
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.article_back:
+                mActivity.finish();
+                break;
+            case R.id.share:
+                new SharePanel(mActivity).show();
+                break;
+            case R.id.article_huifu:
+                Intent comment = new Intent(mActivity, CommentActivity.class);
+                mActivity.startActivity(comment);
+                break;
+            case R.id.releate_anime_image:
+                if (mAnimeInfo != null) {
+                    Intent detail = new Intent();
+                    detail.setAction("com.dongman.fm.detail");
+                    Bundle data = new Bundle();
+                    data.putString("id", mAnimeInfo.id);
+                    data.putString("name", mAnimeInfo.title);
+                    detail.putExtras(data);
+                    mActivity.startActivity(detail);
+                }
+                break;
+
         }
     }
 

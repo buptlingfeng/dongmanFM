@@ -8,25 +8,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dongman.fm.R;
-import com.dongman.fm.image.ImageUtils;
+import com.dongman.fm.utils.ImageUtils;
 import com.dongman.fm.ui.fragment.PublishFragment;
-import com.dongman.fm.ui.utils.ToolsUtils;
-import com.dongman.fm.ui.view.listview.SmoothListView;
-import com.dongman.fm.utils.FMLog;
-import com.dongman.fm.utils.UILImageLoader;
+import com.dongman.fm.utils.ToolsUtils;
 import com.github.clans.fab.FloatingActionMenu;
 
 import java.util.ArrayList;

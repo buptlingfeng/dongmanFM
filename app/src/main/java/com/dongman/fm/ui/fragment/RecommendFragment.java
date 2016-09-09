@@ -86,7 +86,7 @@ public class RecommendFragment extends BaseFragment {
         List<Fragment> data = new ArrayList<>();
         data.add(new RecommendHotFragmet());
         data.add(new TopicFragment());
-        data.add(new ManPingFragmet());
+        data.add(new ManPingFragment());
         data.add(new RecommendNewsFragmet());
         data.add(new RecommendChartletFragmet());
         mViewPager = (ViewPager) root.findViewById(R.id.main_viewPager);
@@ -96,7 +96,7 @@ public class RecommendFragment extends BaseFragment {
         mViewPager.addOnPageChangeListener(new PageChangeListener());
         mViewPager.setOffscreenPageLimit(1);
         mCurrentTab = mNav1;
-        mNav1.setTextColor(mActivity.getResources().getColor(R.color.red));
+//        mNav1.setTextColor(mActivity.getResources().getColor(R.color.red));
     }
 
     @Override
@@ -132,8 +132,8 @@ public class RecommendFragment extends BaseFragment {
 
     private void changeStatus(TextView nav, int position) {
         if(mCurrentTab != nav) {
-            mCurrentTab.setTextColor(mActivity.getResources().getColor(R.color.nav_default_color));
-            nav.setTextColor(mActivity.getResources().getColor(R.color.red));
+            mCurrentTab.setTextColor(mActivity.getResources().getColor(R.color.white));
+            nav.setTextColor(mActivity.getResources().getColor(R.color.main_index_color_select));
             mViewPager.setCurrentItem(position);
             mCurrentTab = nav;
         }

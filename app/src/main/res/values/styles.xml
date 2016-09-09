@@ -129,10 +129,11 @@
         <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
         <item name="android:displayOptions">homeAsUp|showTitle</item>
         <item name="android:homeAsUpIndicator">@drawable/icon_back_white</item> <!--返回icon-->
+        <item name="android:background">@color/index_bg</item>
 
         <!-- Support library compatibility -->
         <item name="homeAsUpIndicator">@drawable/icon_back_white</item>
-        <item name="background">@color/theme_color</item>
+        <item name="background">@color/black</item>
         <item name="displayOptions">homeAsUp|showTitle</item>
         <item name="titleTextStyle">@style/MyActionBarTitleText</item>
     </style>

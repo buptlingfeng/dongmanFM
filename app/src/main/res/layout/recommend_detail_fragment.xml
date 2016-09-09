@@ -1,18 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <com.dongman.fm.ui.view.ObservableScrollView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            
+            <TextView
+                android:id="@+id/article_title"
+                android:gravity="left"
+                android:text="网球王子与网球优等生的感觉"
+                android:textSize="26dp"
+                android:textColor="@color/text_normal"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/create_time"
+                    android:text="20小时前"
+                    android:textSize="14sp"
+                    android:textColor="@color/summary_content"
+                    android:gravity="left"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true" />
+                <ImageView
+                    android:src="@drawable/separator"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+                <TextView
+                    android:id="@+id/browse_count"
+                    android:text="65人观看"
+                    android:textSize="14sp"
+                    android:textColor="@color/summary_content"
+                    android:gravity="left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:layout_marginRight="30dp"
+                    android:text="查看原文"
+                    android:gravity="right"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
             <WebView
                 android:id="@+id/webView1"
                 android:scrollbars="none"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
+
+            <include
+                layout="@layout/recommend_group_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <View
+                android:background="@color/lightgrey"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
             <LinearLayout
                 android:id="@+id/relative_manping_container"
                 android:layout_below="@id/manping_detail_container"
@@ -20,89 +82,132 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="vertical">
-                <TextView
-                    android:text="相关动漫"
-                    style="@style/sub_title"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="5dp"
-                    android:gravity="left"
-                    android:textColor="@color/text_grey"
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_gravity="center"
+                        android:background="@color/theme_color"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="2dp"
+                        android:layout_height="20dp"/>
+                    <TextView
+                        android:text="相关动漫"
+                        android:textColor="@color/tab_top_text_1"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:gravity="left"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycleview"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
+                    android:layout_height="200dp"
                     android:background="@color/white"
                     android:gravity="center"
                     android:listSelector="@android:color/transparent"
                     android:scrollbars="none">
                 </android.support.v7.widget.RecyclerView>
             </LinearLayout>
-            <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/divider_text"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_below="@id/relative_manping_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2">
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:src="@drawable/dianzan"
-                        android:layout_width="@dimen/anime_average_star_width"
-                        android:layout_height="@dimen/anime_average_star_width" />
-                    <TextView
-                        android:text="(324)"
-                        style="@style/third_title"/>
-                </LinearLayout>
 
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:src="@drawable/huifu"
-                        android:layout_width="@dimen/anime_average_star_width"
-                        android:layout_height="@dimen/anime_average_star_width" />
-                    <TextView
-                        android:id="@+id/manping_detail_vote"
-                        android:text="(24)"
-                        style="@style/third_title"/>
-                </LinearLayout>
-            </LinearLayout>
-            <!--<include-->
-                <!--android:id="@+id/review_item1"-->
-                <!--layout="@layout/review_item"/>-->
-            <!--<include-->
-                <!--android:id="@+id/review_item2"-->
-                <!--layout="@layout/review_item"/>-->
-            <!--<include-->
-                <!--android:id="@+id/review_item3"-->
-                <!--layout="@layout/review_item"/>-->
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/comments_recycleview"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center"
-                android:listSelector="@android:color/transparent"
-                android:scrollbars="none">
-            </android.support.v7.widget.RecyclerView>
-            <TextView
-                android:id="@+id/extra_action"
-                android:text="@string/more_reviews"
-                android:background="@color/white"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="50dp" />
+                android:layout_height="30dp"/>
         </LinearLayout>
 
-</ScrollView>
+    </com.dongman.fm.ui.view.ObservableScrollView>
+
+    <RelativeLayout
+        android:background="@color/grey_white"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/article_back"
+            android:src="@drawable/aritle_back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <EditText
+            android:visibility="gone"
+            android:id="@+id/article_huifu_input"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:hint="写一些你想说的"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/article_huifu_container"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/article_huifu"
+                android:src="@drawable/huifu"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:id="@+id/article_huifu_count"
+                android:text="0"
+                android:textColor="@color/grey"
+                android:layout_marginLeft="24dp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/article_vote_container"
+            android:layout_toLeftOf="@id/article_huifu_container"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.like.LikeButton
+                app:liked="false"
+                android:id="@+id/article_vote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon_size="20dp"
+                app:anim_scale_factor="2.2"
+                app:like_drawable="@drawable/dianzan_like"
+                app:unlike_drawable="@drawable/dianzan_unlike"
+                app:icon_type="star" />
+
+            <TextView
+                android:id="@+id/article_vote_count"
+                android:text="0"
+                android:textColor="@color/grey"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/share"
+            android:layout_toLeftOf="@id/article_vote_container"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="40dp"
+            android:src="@drawable/share"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+    </RelativeLayout>
+
+</FrameLayout>

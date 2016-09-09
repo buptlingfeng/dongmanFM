@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dongman.fm.R;
-import com.dongman.fm.image.ImageUtils;
+import com.dongman.fm.utils.ImageUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +46,10 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
                 }
             }
         }
+    }
+
+    public void cleanData() {
+        mData = null;
     }
 
     @Override
@@ -102,10 +106,10 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
                 final String title = object.getString("title");
                 animeTitle.setText(title);
 
-                animCategory.setText("类型：" + object.getString("category"));
+                animCategory.setText("类型：" + object.getString("genre"));
                 country.setText("国家：" + object.getString("country"));
-                playCount.setText("播放：" + object.getString("play_count"));
-                double score = object.getDouble("total_score");
+                playCount.setText("播放：" + object.getString("episodes"));
+                double score = object.getDouble("rating");
 
                 int childCount = rateContainer.getChildCount();
                 int starNum = (int) Math.ceil(score / 2);

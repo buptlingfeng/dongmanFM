@@ -66,7 +66,7 @@
 
         <ImageView
             android:id="@+id/anime_hot_spot_image"
-            android:src="@drawable/test8"
+            android:src="@drawable/test9"
             android:layout_width="@dimen/item_image_size"
             android:layout_height="@dimen/item_image_size"
             android:layout_alignParentTop="true"

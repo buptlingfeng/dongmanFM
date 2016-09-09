@@ -14,38 +14,45 @@
 
         <ImageView
             android:id="@+id/detail_anime_image"
+            android:background="@drawable/image_border"
             android:scaleType="fitXY"
             android:src="@drawable/holder"
             android:layout_width="@dimen/little_image_width"
             android:layout_height="@dimen/little_image_heigth" />
         <LinearLayout
-            android:id="@+id/anime_average_star_container"
+            android:id="@+id/average_container"
             android:layout_toRightOf="@id/detail_anime_image"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageView
-                android:src="@drawable/icon_star_yellow"
-                android:layout_width="@dimen/anime_average_star_width"
-                android:layout_height="@dimen/anime_average_star_heigth" />
-            <ImageView
-                android:src="@drawable/icon_star_grey"
-                android:layout_width="@dimen/anime_average_star_width"
-                android:layout_height="@dimen/anime_average_star_heigth" />
-            <ImageView
-                android:src="@drawable/icon_star_grey"
-                android:layout_width="@dimen/anime_average_star_width"
-                android:layout_height="@dimen/anime_average_star_heigth" />
-            <ImageView
-                android:src="@drawable/icon_star_grey"
-                android:layout_width="@dimen/anime_average_star_width"
-                android:layout_height="@dimen/anime_average_star_heigth" />
-            <ImageView
-                android:src="@drawable/icon_star_grey"
-                android:layout_width="@dimen/anime_average_star_width"
-                android:layout_height="@dimen/anime_average_star_heigth" />
+            <LinearLayout
+                android:id="@+id/anime_average_star_container"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/icon_star_yellow"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_heigth" />
+                <ImageView
+                    android:src="@drawable/icon_star_grey"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_heigth" />
+                <ImageView
+                    android:src="@drawable/icon_star_grey"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_heigth" />
+                <ImageView
+                    android:src="@drawable/icon_star_grey"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_heigth" />
+                <ImageView
+                    android:src="@drawable/icon_star_grey"
+                    android:layout_width="@dimen/anime_average_star_width"
+                    android:layout_height="@dimen/anime_average_star_heigth" />
+            </LinearLayout>
             <TextView
                 android:id="@+id/anime_average"
                 android:layout_marginLeft="10dp"
@@ -72,7 +79,7 @@
         </LinearLayout>
         <TextView
             android:id="@+id/anime_subtype"
-            android:layout_below="@id/anime_average_star_container"
+            android:layout_below="@id/average_container"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/detail_anime_image"
             android:layout_marginLeft="20dp"
@@ -85,7 +92,6 @@
             android:layout_below="@id/anime_subtype"
             android:layout_toRightOf="@id/detail_anime_image"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
             android:text="类型: 热血/动作/格斗/英雄/怪物/超能力"
             style="@style/detail_anime_info_text"
             android:layout_width="match_parent"
@@ -95,37 +101,120 @@
             android:layout_below="@id/anime_genres"
             android:layout_toRightOf="@id/detail_anime_image"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
             android:text="声优: "
             style="@style/detail_anime_info_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/anime_summary_title"
+            android:visibility="gone"
+            android:layout_below="@id/detail_anime_image"
+            android:text="动漫详情"
+            android:gravity="left"
+            android:textColor="@color/tab_top_text_1"
+            android:background="@color/backgournd_grey"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/anime_summary_detail"
+            android:layout_below="@id/detail_anime_image"
+            android:visibility="visible"
+            android:text="主人公埼玉原本是一名整日奔波于求职的普通人。3年前的一天偶然遇到了要对淘气少年下杀手的异变螃蟹人后，回忆起年少年时“想要成为英雄”的梦想，最终拼尽全力救下了淘气 "
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:lineSpacingExtra="5dp"
+            android:textSize="12sp"
+            android:textColor="#666666"/>
     </RelativeLayout>
-    <TextView
-        android:id="@+id/anime_summary_title"
-        style="@style/third_title"
-        android:layout_below="@id/anime_detail_info_header"
-        android:text="动漫详情"
-        android:gravity="left"
-        android:textColor="@color/tab_top_text_1"
-        android:background="@color/backgournd_grey"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_gravity="center_vertical"
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/anime_summary_detail"
-        android:text="主人公埼玉原本是一名整日奔波于求职的普通人。3年前的一天偶然遇到了要对淘气少年下杀手的异变螃蟹人后，回忆起年少年时“想要成为英雄”的梦想，最终拼尽全力救下了淘气 "
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="8dp"
-        android:ellipsize="end"
-        android:fontFamily="sans-serif-light"
-        android:textSize="12sp"
-        android:textColor="#666666"/>
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="播放源 :"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:textColor="@color/summary_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_letv"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_tudou"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_iqiyi"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+        </LinearLayout>
+        <View
+            android:id="@+id/dotted_line"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/dotted_ling"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/play_button_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none"/>
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="看过的人 :"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:textColor="@color/summary_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/browser_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:listSelector="@android:color/transparent"
+                android:scrollbars="none"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 </LinearLayout>

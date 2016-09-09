@@ -8,12 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dongman.fm.R;
-import com.dongman.fm.image.ImageUtils;
-import com.dongman.fm.ui.utils.ToolsUtils;
+import com.dongman.fm.utils.ImageUtils;
+import com.dongman.fm.utils.ToolsUtils;
 import com.dongman.fm.utils.FMLog;
 
 import org.json.JSONArray;
@@ -63,7 +62,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.Reco
 
     @Override
     public RecommendViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.recommend_list_item, null, false);
+        View view = mInflater.inflate(R.layout.recommend_list_item, parent, false);
         return new RecommendViewHolder(view);
     }
 
@@ -93,7 +92,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.Reco
         TextView browseCount;
         TextView createTime;
 //        LinearLayout imageViewContainer;
-        ImageView imageView1, imageView2, imageView3;
+        ImageView imageView;
 
         public RecommendViewHolder(View itemView) {
             super(itemView);
@@ -101,10 +100,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.Reco
 
             title = (TextView) itemView.findViewById(R.id.article_title);
             summary = (TextView) itemView.findViewById(R.id.article_summary);
-//            imageViewContainer = (LinearLayout) itemView.findViewById(R.id.article_image_container);
-            imageView1 = (ImageView) itemView.findViewById(R.id.article_image1);
-            imageView2 = (ImageView) itemView.findViewById(R.id.article_image2);
-            imageView3 = (ImageView) itemView.findViewById(R.id.article_image3);
+            imageView = (ImageView) itemView.findViewById(R.id.article_image);
             createTime = (TextView) itemView.findViewById(R.id.article_create_time);
             browseCount = (TextView) itemView.findViewById(R.id.article_browse_count);
 
@@ -133,40 +129,10 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.Reco
             summary.setText(data.summary);
             createTime.setText(data.createTime);
             browseCount.setText(data.browseCount + "人看过");
-            FMLog.d(TAG, "列表图片信息："+ data.imageUrls.size());
             for (int i = 0; i < 3; i++) {
-                String imageUrl;
-                ImageView view = imageView1;
-                if (data.imageUrls.size() > i) {
-                    imageUrl = data.imageUrls.get(i);
-                    switch (i) {
-                        case 0:
-                            view = imageView1;
-                            break;
-                        case 1:
-                            view = imageView2;
-                            break;
-                        case 2:
-                            view = imageView3;
-                            break;
-                    }
-                    ImageUtils.getImage(mActivity, imageUrl, view,
-                            ToolsUtils.getScreenWidth(mActivity)/3, ToolsUtils.getScreenHeigth(mActivity));
-                } else {
-                    break;
-                }
+                ImageUtils.getImage(mActivity, data.imageUrls, imageView,
+                        ToolsUtils.getScreenWidth(mActivity), ToolsUtils.getScreenHeigth(mActivity));
             }
-//            if (data.imageUrls != null && data.imageUrls.size() > 0) {
-//                imageViewContainer.setWeightSum(data.imageUrls.size());
-//                for (int i = 0; i < data.imageUrls.size(); i++) {
-//                    ImageView imageView = new ImageView(mActivity);
-//                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-//                    ImageUtils.getImage(mActivity, data.imageUrls.get(i), imageView);
-//                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(imageViewContainer.getWidth()/data.imageUrls.size(), imageViewContainer.getHeight());
-//                    imageViewContainer.addView(imageView,params);
-//                }
-//                imageViewContainer.requestLayout();
-//            }
 
         }
     }
@@ -174,7 +140,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.Reco
 
         public String title;
         public String summary;
-        public List<String> imageUrls;
+        public String imageUrls;
         public String id;
         public String browseCount;
         public String createTime;
@@ -186,14 +152,8 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.Reco
                     result.title = data.getString("title");
                     result.summary = data.getString("content");
                     result.id = data.getString("id");
-//                    result.imageUrl = data.getJSONArray("thumbs");
-                    JSONArray images = data.getJSONArray("thumbs");
-                    if (images != null) {
-                        result.imageUrls = new ArrayList<>();
-                        for (int i = 0; i < images.length(); i++) {
-                            result.imageUrls.add(images.get(i).toString());
-                        }
-                    }
+                    String imgUrl = data.getString("img_url");
+                    result.imageUrls = imgUrl;
                     result.browseCount = data.getString("browse_count");
                     result.createTime = data.getString("create_time");
                     return result;

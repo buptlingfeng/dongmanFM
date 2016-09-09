@@ -1,4 +1,4 @@
-package com.dongman.fm.ui.utils;
+package com.dongman.fm.utils;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

@@ -149,6 +149,8 @@
 
     <!-- TextView 的浅灰色字体颜色 -->
     <color name="text_grey">#D0D0D0</color>
+    <color name="title_black">#343536</color>
+    <color name="summary_content">#626364</color>
     <!---->
     <color name="text_normal">#2A2A2A</color>
     <color name="tab_top_text_1">#aaa</color>
@@ -158,11 +160,17 @@
     <color name="nav_default_color">#607D8B</color>
     <color name="theme_color">#009688</color>
 
+    <color name="grey_white">#F9F9F9</color>
+    <color name="recommend_grey">#FFE9E9E9</color>
+    <color name="light_recommend_grey">#dedddd</color>
     <!-- 半透明 -->
     <color name="half_transparent">#201a181a</color>
     <color name="transparent">#00000000</color>
+    <color name="half_tran">#60000000</color>
+    <color name="index_bg">#e0000000</color>
 
-
+    <color name="main_index_color_select">#06AA85</color>
+    <color name="default_background">#ededed</color>
     <!-- Collapsing Avatar Toolbar -->
     <color name="primary">#3F51B5</color>
     <color name="primary_dark">#303F9F</color>

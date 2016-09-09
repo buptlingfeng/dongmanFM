@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,9 +26,7 @@ import com.dongman.fm.data.CommentData;
 import com.dongman.fm.data.RelativeRecommend;
 import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.ui.activity.BaseActivity;
-import com.dongman.fm.ui.fragment.adapter.CommentsAdapter;
 import com.dongman.fm.ui.fragment.adapter.RelativeAdapter;
-import com.dongman.fm.ui.view.FullyLinearLayoutManager;
 import com.dongman.fm.ui.view.SpacesItemDecoration;
 import com.dongman.fm.utils.FMLog;
 
@@ -49,18 +49,20 @@ public class RecommendDetailFragment extends BaseFragment implements IRequestCal
     private static final String TAG = RecommendDetailFragment.class.getSimpleName();
 
     private BaseActivity mActivity;
-    private TextView mMoreReviews;
+//    private TextView mMoreReviews;
     private ActionBar mActionBar;
 
     private RecyclerView mRelativeRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private RelativeAdapter mRelativeAdapter;
 
-    private FullyLinearLayoutManager mFullyLinearManager;
-    private RecyclerView mCommentsRecycleView;
-    private CommentsAdapter mCommentAdapter;
+//    private EditText mInputEdit;
+    private LinearLayout mReviewsContainer;
+    private TextView mReviewCount;
+    private TextView mTitleView, mBrowseCount, mCreateTimeView;
 
-//    private String mUrl;
+    private TextView mVoteContent;
+
     private String mId;
     private String mTitle;
 
@@ -82,7 +84,6 @@ public class RecommendDetailFragment extends BaseFragment implements IRequestCal
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FMLog.d(TAG, TAG + " onAttach()");
         Bundle bundle = getArguments();
         mId = bundle.getString("id");
         mTitle = bundle.getString("title");
@@ -101,9 +102,18 @@ public class RecommendDetailFragment extends BaseFragment implements IRequestCal
                         }
                         mRelativeAdapter.setData(mData.animes);
                         mRelativeAdapter.notifyDataSetChanged();
-
-                        mCommentAdapter.setData(mData.comments);
-                        mCommentAdapter.notifyDataSetChanged();
+                        if (mData.createTime == null || mData.createTime.equals("null")) {
+                            Log.e(TAG, "the create time is null");
+                            mCreateTimeView.setText("三天前");
+                        } else {
+                            mCreateTimeView.setText(mData.createTime);
+                        }
+                        mBrowseCount.setText(mData.browseCount + "人看过");
+//                        if (mData.source == null || mData.createTime.equals("null")) {
+//                            mSourceTag.setVisibility(View.GONE);
+//                        } else {
+//                            mSourceTag.setText(mData.source);
+//                        }
                         break;
                     default:
                         break;
@@ -121,23 +131,24 @@ public class RecommendDetailFragment extends BaseFragment implements IRequestCal
 
     private void initView(View root) {
 
-//        mTitleView = (TextView)root.findViewById(R.id.title);
-//        mTitleView.setText(mTitle);
-        mActionBar.setTitle(mTitle);
-        mMoreReviews = (TextView) root.findViewById(R.id.extra_action);
-        mMoreReviews.setOnClickListener(new View.OnClickListener(){
+        mActionBar.setTitle("详情");
+        mReviewsContainer = (LinearLayout) root.findViewById(R.id.article_huifu_container);
+        mReviewsContainer.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                mActivity.addFragment(new ReviewsListFragment(), "ReviewList");
+            public void onClick(View view) {
+                mActivity.addFragment(new CommentListFragment(), "ReviewList");
             }
         });
-//        mBack = root.findViewById(R.id.back);
-//        mBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mActivity.onBackPressed();
-//            }
-//        });
+
+        mTitleView = (TextView) root.findViewById(R.id.article_title);
+        mTitleView.setText(mTitle);
+        mCreateTimeView = (TextView) root.findViewById(R.id.create_time);
+        mBrowseCount = (TextView) root.findViewById(R.id.browse_count);
+//        mSourceTag = (TextView) root.findViewById(R.id.source_tag);
+
+        mReviewCount = (TextView) root.findViewById(R.id.article_huifu_count);
+        mVoteContent = (TextView) root.findViewById(R.id.article_vote_count);
+
         mWebView = (WebView) root.findViewById(R.id.webView1);
         mWebView.setWebViewClient(new CustomWebViewClient());
 
@@ -152,13 +163,6 @@ public class RecommendDetailFragment extends BaseFragment implements IRequestCal
         mRelativeAdapter = new RelativeAdapter(mActivity, RelativeAdapter.ANIMES);
         mRelativeRecyclerView.setAdapter(mRelativeAdapter);
         mRelativeRecyclerView.addItemDecoration(new SpacesItemDecoration(20, 0, 10, 10));
-
-        mCommentsRecycleView = (RecyclerView) root.findViewById(R.id.comments_recycleview);
-        mFullyLinearManager = new FullyLinearLayoutManager(mContext);
-        mFullyLinearManager.setOrientation(OrientationHelper.VERTICAL);
-        mCommentsRecycleView.setLayoutManager(mFullyLinearManager);
-        mCommentAdapter = new CommentsAdapter(mContext);
-        mCommentsRecycleView.setAdapter(mCommentAdapter);
     }
 
     private void getData(String id) {
@@ -260,6 +264,7 @@ public class RecommendDetailFragment extends BaseFragment implements IRequestCal
         String title;
         String createTime;
         String articleId;
+        String source;
         int browseCount;
         String articleUrl;
         List<CommentData> comments;
@@ -280,6 +285,7 @@ public class RecommendDetailFragment extends BaseFragment implements IRequestCal
                     data.articleId = object.getString("article_id");
                     data.browseCount = object.getInt("browse_count");
                     data.articleUrl = object.getString("article_url");
+                    data.source = object.getString("source");
                     JSONArray comments = object.getJSONArray("comments");
                     if (comments != null) {
                         for (int i = 0; i < comments.length(); i++) {

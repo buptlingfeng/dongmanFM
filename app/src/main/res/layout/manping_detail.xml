@@ -1,28 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ScrollView
-        android:orientation="vertical"
-        android:id="@+id/root_container"
-        android:scrollbars="none"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="false">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <com.dongman.fm.ui.view.ObservableScrollView
+            android:orientation="vertical"
+            android:id="@+id/root_container"
+            android:scrollbars="none"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="false">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="67dp"/>
+
+
+                <LinearLayout
+                    android:id="@+id/manping_detail_container"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/manping_detail_title"
+                        android:gravity="left"
+                        android:text="网球王子与网球优等生的感觉"
+                        android:textSize="26dp"
+                        android:textColor="@color/text_normal"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/recommend_tag"
+                            android:layout_marginLeft="30dp"
+                            android:text="神作"
+                            android:textColor="@color/theme_color"
+                            android:paddingRight="10dp"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:background="@drawable/tag_bg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/manping_detail_updatetime"
+                            android:text="2015-08-13"
+                            android:textColor="@color/summary_content"
+                            android:gravity="right"
+                            android:paddingRight="40dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true" />
+                    </LinearLayout>
+                    <WebView
+                        android:id="@+id/webView1"
+                        android:scrollbars="none"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp"
+                            android:text="相关动漫"
+                            android:textSize="18sp"
+                            android:textColor="@color/title_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_marginLeft="10dp"
+                            android:padding="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:id="@+id/releate_anime_image"
+                                android:src="@drawable/test9"
+                                android:scaleType="centerCrop"
+                                android:layout_width="90dp"
+                                android:layout_height="90dp"/>
+                            <TextView
+                                android:id="@+id/releate_anime"
+                                android:text="网球王子"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/summary_content"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/releate_anime"-->
+                            <!--android:layout_marginLeft="20dp"-->
+                            <!--android:layout_marginTop="10dp"-->
+                            <!--android:paddingTop="5dp"-->
+                            <!--android:paddingBottom="5dp"-->
+                            <!--android:paddingLeft="20dp"-->
+                            <!--android:paddingRight="20dp"-->
+                            <!--android:text="网球王子"-->
+                            <!--android:background="@drawable/tag_bg"-->
+                            <!--android:textColor="@color/theme_color"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content" />-->
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_manping_container"
+                    android:layout_below="@id/manping_detail_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+                    <TextView
+                        android:text="相关漫贴"
+                        style="@style/sub_title"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="5dp"
+                        android:gravity="left"
+                        android:textColor="@color/text_grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@id/recycleview"
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:gravity="center"
+                        android:listSelector="@android:color/transparent"
+                        android:scrollbars="none">
+                    </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/comments_container"
+                    android:layout_below="@id/relative_manping_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+                    <TextView
+                        android:text="评论"
+                        style="@style/sub_title"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:gravity="left"
+                        android:textColor="@color/text_grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/comments_recycleview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:listSelector="@android:color/transparent"
+                        android:scrollbars="none">
+                    </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.dongman.fm.ui.view.ObservableScrollView>
+        <LinearLayout
+            android:id="@+id/manping_detail_head_container"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <RelativeLayout
-                android:id="@+id/manping_detail_head_container"
                 android:padding="8dp"
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.dongman.fm.ui.view.CircleImageView
                     android:id="@+id/manping_detail_user_avatar"
                     android:src="@color/blue"
+                    app:border_color="@color/theme_color"
                     android:layout_width="@dimen/manping_user_avatar_size"
                     android:layout_height="@dimen/manping_user_avatar_size" />
                 <TextView
@@ -37,108 +219,137 @@
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/manping_detail_user_avatar"/>
                 <TextView
-                    android:id="@+id/manping_detail_updatetime"
-                    android:text="2015-08-13"
-                    android:textColor="@color/text_grey"
+                    android:id="@+id/watch_user"
+                    android:text="关注"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:background="@drawable/rectangle_bg"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true" />
+
             </RelativeLayout>
             <View
-                android:id="@+id/divider"
-                android:layout_below="@id/manping_detail_head_container"
+                android:layout_below="@id/manping_detail_user_avatar"
                 android:background="@color/text_grey"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"/>
-            <LinearLayout
-                android:id="@+id/manping_detail_container"
-                android:layout_below="@id/divider"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical"
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_gravity="bottom|right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:background="@color/text_grey"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:id="@+id/mapping_indicator"
+            android:orientation="horizontal"
+            android:background="@color/white"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_centerVertical="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/manping_detail_title"
-                    android:gravity="left"
-                    android:text="网球王子与网球优等生的感觉"
-                    android:textSize="26dp"
-                    android:textColor="@color/text_normal"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <WebView
-                    android:id="@+id/webView1"
-                    android:scrollbars="none"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/relative_manping_container"
-                android:layout_below="@id/manping_detail_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:orientation="vertical">
-                <TextView
-                    android:text="相关漫贴"
-                    style="@style/sub_title"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="5dp"
-                    android:gravity="left"
-                    android:textColor="@color/text_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <android.support.v7.widget.RecyclerView
-                    android:id="@id/recycleview"
-                    android:layout_width="match_parent"
-                    android:layout_height="170dp"
-                    android:gravity="center"
-                    android:listSelector="@android:color/transparent"
-                    android:scrollbars="none">
-                </android.support.v7.widget.RecyclerView>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/comments_container"
-                android:layout_below="@id/relative_manping_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:text="评论"
-                    style="@style/sub_title"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:gravity="left"
-                    android:textColor="@color/text_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/comments_recycleview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:listSelector="@android:color/transparent"
-                    android:scrollbars="none">
-                </android.support.v7.widget.RecyclerView>
-            </LinearLayout>
+                <ImageView
+                    android:id="@+id/article_back"
+                    android:src="@drawable/aritle_back"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+                <LinearLayout
+                    android:id="@+id/article_huifu_container"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/article_huifu"
+                        android:src="@drawable/huifu"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp" />
+                    <TextView
+                        android:id="@+id/article_huifu_count"
+                        android:text="37"
+                        android:textColor="@color/grey"
+                        android:layout_marginLeft="24dp"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
 
-        </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/article_vote_container"
+                    android:layout_toLeftOf="@id/article_huifu_container"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-    </ScrollView>
+                    <com.like.LikeButton
+                        app:liked="false"
+                        android:id="@+id/article_vote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:icon_size="20dp"
+                        app:anim_scale_factor="2.2"
+                        app:like_drawable="@drawable/dianzan_like"
+                        app:unlike_drawable="@drawable/dianzan_unlike"
+                        app:icon_type="star" />
 
+                    <!--<ImageView-->
+                        <!--android:id="@+id/article_vote"-->
+                        <!--android:src="@drawable/dianzan_unlike"-->
+                        <!--android:layout_width="20dp"-->
+                        <!--android:layout_height="20dp" />-->
+                    <TextView
+                        android:id="@+id/article_vote_count"
+                        android:text="109"
+                        android:textColor="@color/grey"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/share"
+                    android:layout_toLeftOf="@id/article_vote_container"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="40dp"
+                    android:src="@drawable/share"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/container"
         android:layout_gravity="bottom|right"
         android:gravity="right"
         android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:visibility="gone"
+        android:layout_width="30dp"
+        android:layout_height="30dp">
         <com.like.LikeButton
             app:liked="true"
             android:id="@+id/star_button"
@@ -148,51 +359,5 @@
             android:layout_marginRight="16dp"
             app:icon_size="22dp"
             app:icon_type="star" />
-        <com.like.LikeButton
-            android:id="@+id/heart_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/circle"
-            android:layout_marginBottom="12dp"
-            android:layout_marginRight="16dp"
-            app:icon_size="22dp"
-            app:anim_scale_factor="3"
-            app:icon_type="heart" />
-        <!--<com.github.clans.fab.FloatingActionButton-->
-            <!--android:id="@+id/fab1"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="bottom|right"-->
-            <!--android:layout_marginBottom="12dp"-->
-            <!--android:layout_marginRight="16dp"-->
-            <!--android:src="@drawable/icon_star"-->
-            <!--app:fab_colorNormal="@color/theme_color"-->
-            <!--app:fab_colorRipple="@color/nav_default_color"-->
-            <!--app:fab_colorPressed="@color/nav_default_color"-->
-            <!--app:fab_elevationCompat="4dp" />-->
-        <!--<com.github.clans.fab.FloatingActionButton-->
-            <!--android:id="@+id/fab2"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="bottom|right"-->
-            <!--android:layout_marginBottom="12dp"-->
-            <!--android:layout_marginRight="16dp"-->
-            <!--android:src="@drawable/icon_bianji"-->
-            <!--app:fab_colorNormal="@color/theme_color"-->
-            <!--app:fab_colorRipple="@color/nav_default_color"-->
-            <!--app:fab_colorPressed="@color/nav_default_color"-->
-            <!--app:fab_elevationCompat="4dp" />-->
-        <!--<com.github.clans.fab.FloatingActionButton-->
-            <!--android:id="@+id/fab3"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="bottom|right"-->
-            <!--android:layout_marginBottom="12dp"-->
-            <!--android:layout_marginRight="16dp"-->
-            <!--android:src="@drawable/icon_vote"-->
-            <!--app:fab_colorNormal="@color/theme_color"-->
-            <!--app:fab_colorRipple="@color/nav_default_color"-->
-            <!--app:fab_colorPressed="@color/nav_default_color"-->
-            <!--app:fab_elevationCompat="4dp" />-->
     </LinearLayout>
 </FrameLayout>

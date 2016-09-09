@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -23,6 +24,10 @@ import com.dongman.fm.R;
 import com.dongman.fm.data.APIConfig;
 import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.ui.activity.adapter.SearchListAdapter;
+import com.dongman.fm.ui.view.FlowLayout;
+import com.dongman.fm.ui.view.SearchHotWordView;
+import com.dongman.fm.utils.FMLog;
+
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -53,6 +58,8 @@ public class SearchActivity extends BaseActivity {
     private SearchListAdapter mAdapter;
     private JSONArray mSearchListData;
 
+    private FlowLayout mFlowLayout;
+
     private String mSearchKeyword;
     private int mPageCount = 1;
 
@@ -67,6 +74,7 @@ public class SearchActivity extends BaseActivity {
 
     private void init() {
 
+        mFlowLayout = (FlowLayout) findViewById(R.id.flowlayout);
         mHandler = new Handler(Looper.myLooper()) {
             @Override
             public void handleMessage(Message msg) {
@@ -106,6 +114,9 @@ public class SearchActivity extends BaseActivity {
                     getSearchList(mSearchKeyword, mPageCount, true);
                 } else {
                     //TODO 提示用户需要输入
+                    mFlowLayout.setVisibility(View.VISIBLE);
+                    mAdapter.cleanData();
+                    mAdapter.notifyDataSetChanged();
                 }
             }
         });
@@ -124,6 +135,11 @@ public class SearchActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mSearchKeyword = s.toString();
+                if (TextUtils.isEmpty(mSearchKeyword)) {
+                    mFlowLayout.setVisibility(View.VISIBLE);
+                    mAdapter.cleanData();
+                    mAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -149,6 +165,7 @@ public class SearchActivity extends BaseActivity {
                     mPageCount = 1;
                     //TODO search
                     getSearchList(mSearchKeyword, mPageCount, true);
+                    mFlowLayout.setVisibility(View.GONE);
                     return true;
 
                 }
@@ -186,7 +203,26 @@ public class SearchActivity extends BaseActivity {
                 super.onScrollStateChanged(recyclerView, newState);
             }
         });
+        initRecommendSearchKeyWords();
+    }
 
+    private void initRecommendSearchKeyWords() {
+        String[] keyWords = new String[]{"海贼王", "一拳超人", "JOJO", "火影忍者", "死神", "剑风传奇", "进击的巨人", "魔法少女伊莉雅", "弹丸论破", "东京食尸鬼", "fate", "宠物小精灵"};
+        int ranHeight = dip2px(this, 30);
+        ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ranHeight);
+        lp.setMargins(dip2px(this, 10), 0, dip2px(this, 10), 0);
+        for (int i = 0; i < keyWords.length; i ++) {
+            SearchHotWordView hotWordView = new SearchHotWordView(this);
+            hotWordView.setTextView(keyWords[i]);
+            hotWordView.setOnClickListener(new KeyWordOnClickListener(keyWords[i]));
+            mFlowLayout.addView(hotWordView, lp);
+        }
+        mFlowLayout.relayoutToCompress();
+    }
+
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 
     private void getSearchList(String keyWord, int page, final boolean isFrist) {
@@ -228,4 +264,24 @@ public class SearchActivity extends BaseActivity {
             }
         });
     }
+
+    class KeyWordOnClickListener implements View.OnClickListener {
+
+        private String keywords;
+
+        public KeyWordOnClickListener(String keywords) {
+            this.keywords = keywords;
+        }
+
+        @Override
+        public void onClick(View v) {
+            mInputEdit.setText(keywords);
+            ((InputMethodManager) mInputEdit.getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(SearchActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            mInputEdit.setSelection(keywords.length());
+            mFlowLayout.setVisibility(View.GONE);
+            getSearchList(keywords,1, true);
+        }
+    }
+
 }

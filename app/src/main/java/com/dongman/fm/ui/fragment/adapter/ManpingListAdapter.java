@@ -3,7 +3,6 @@ package com.dongman.fm.ui.fragment.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dongman.fm.R;
-import com.dongman.fm.image.ImageUtils;
+import com.dongman.fm.utils.ImageUtils;
 import com.dongman.fm.ui.view.CircleImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -24,17 +26,9 @@ import org.json.JSONObject;
  */
 public class ManpingListAdapter extends RecyclerView.Adapter<ManpingListAdapter.ManpingViewHolder> {
 
-    private static final String TAG = ManpingListAdapter.class.getName();
-
     private Context mContext;
     private LayoutInflater mInflater;
-    private JSONArray mData = new JSONArray();
-
-    public ManpingListAdapter(JSONArray array, Context context) {
-        mData = array;
-        mContext = context;
-        mInflater = LayoutInflater.from(mContext);
-    }
+    private List<ReviewData> mData = new ArrayList<>();
 
     public ManpingListAdapter(Context context) {
         mContext = context;
@@ -51,13 +45,14 @@ public class ManpingListAdapter extends RecyclerView.Adapter<ManpingListAdapter.
             for(int i = 0; i < array.length(); i++) {
                 try {
                     JSONObject data = array.getJSONObject(i);
-                    String type = data.getString("type");
-                    if (type.equals("review")) {
-                        mData.put(data);
+                    ReviewData reviewData = ReviewData.create(data);
+                    if (reviewData != null) {
+                        mData.add(reviewData);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
             }
         }
         return this;
@@ -71,11 +66,7 @@ public class ManpingListAdapter extends RecyclerView.Adapter<ManpingListAdapter.
 
     @Override
     public void onBindViewHolder(ManpingListAdapter.ManpingViewHolder holder, int position) {
-        try {
-            holder.bindView(mData.getJSONObject(position));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        holder.bindView(mData.get(position));
     }
 
     @Override
@@ -83,7 +74,7 @@ public class ManpingListAdapter extends RecyclerView.Adapter<ManpingListAdapter.
         if(mData == null) {
             return 0;
         } else {
-            return mData.length();
+            return mData.size();
         }
     }
 
@@ -97,6 +88,7 @@ public class ManpingListAdapter extends RecyclerView.Adapter<ManpingListAdapter.
         TextView animeName;
         TextView commentCount;
         TextView voteCount;
+        TextView summary;
 
 
         public ManpingViewHolder(View itemView) {
@@ -109,36 +101,76 @@ public class ManpingListAdapter extends RecyclerView.Adapter<ManpingListAdapter.
             animeName = (TextView) itemView.findViewById(R.id.anime_name);
             commentCount = (TextView) itemView.findViewById(R.id.comment_count);
             voteCount = (TextView) itemView.findViewById(R.id.vote_count);
+            summary = (TextView) itemView.findViewById(R.id.manping_summary);
         }
 
-        public void bindView(final JSONObject obj) {
-            try {
-                title.setText(obj.getString("title"));
-                userName.setText(obj.getString("user_name"));
-                ImageUtils.getImage(mContext, obj.getString("avatar_img_url"), avatarImg);
-                ImageUtils.getImage(mContext, obj.getString("img_url"),animeImg);
-                createTime.setText(obj.getString("create_time"));
-                animeName.setText(obj.getString("subject_title"));
-                commentCount.setText("评论：" + obj.getString("comments"));
-                voteCount.setText("赞：" + obj.getString("votes"));
+        public void bindView(final ReviewData data) {
+            title.setText(data.title);
+            userName.setText(data.userName);
+            ImageUtils.getImage(mContext,data.avatarImgUrl, avatarImg);
+            ImageUtils.getImage(mContext, data.imgUrl, animeImg);
+            createTime.setText(data.createTime);
+            animeName.setText(data.subjectTitle);
+            commentCount.setText("评论：" + data.comments);
+            voteCount.setText("赞：" + data.votes);
+            summary.setText(data.content);
 
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent();
-                        intent.setAction("com.dongman.fm.manping");
-                        try {
-                            intent.putExtra("id", obj.getString("target_id"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        mContext.startActivity(intent);
-                    }
-                });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setAction("com.dongman.fm.manping");
+                    intent.putExtra("id", data.id);
+                    mContext.startActivity(intent);
+                }
+            });
+        }
+    }
 
-            }catch (JSONException e) {
-                e.printStackTrace();
+    static class ReviewData {
+
+        String id;
+        String title;
+        String createTime;
+        String userId;
+        String userName;
+        String avatarImgUrl;
+        String imgUrl;
+        String votes;
+        String comments;
+        String subjectTitle;
+        String totalScore;
+        String subjectId;
+        String content;
+        String tag;
+        String userUrl;
+
+        public static ReviewData create(JSONObject data) {
+            ReviewData result = null;
+            if (data != null) {
+                try {
+                    result = new ReviewData();
+                    result.id = data.getString("id");
+                    result.title = data.getString("title");
+                    result.createTime = data.getString("create_time");
+                    result.userId = data.getString("user_id");
+                    result.userName = data.getString("user_name");
+                    result.avatarImgUrl = data.getString("avatar_img_url");
+                    result.imgUrl = data.getString("img_url");
+                    result.votes = data.getString("votes");
+                    result.comments = data.getString("comments");
+                    result.subjectTitle = data.getString("subject_title");
+                    result.totalScore = data.getString("total_score");
+                    result.subjectId = data.getString("subject_id");
+                    result.content = data.getString("content");
+                    result.tag = data.getString("tag");
+                    result.userUrl = data.getString("user_url");
+                } catch (JSONException e) {
+
+                }
             }
+
+            return result;
         }
     }
 }

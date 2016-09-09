@@ -1,14 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/default_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@id/recycleview"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:listSelector="@android:color/transparent"
-        android:scrollbars="none" />
-</LinearLayout>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/anime_base_info"
+                layout="@layout/anime_base"/>
+
+            <include
+                android:layout_marginTop="8dp"
+                android:id="@+id/animes_relative"
+                layout="@layout/relative_anims_recommend"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent" />
+
+            <include
+                android:layout_marginTop="8dp"
+                android:layout_height="180dp"
+                android:layout_width="match_parent"
+                layout="@layout/anime_detail_top_photo"/>
+
+            <include
+                android:id="@+id/article_relative"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                layout="@layout/relative_recommend"/>
+
+            <LinearLayout
+                android:id="@+id/manping_container"
+                android:background="@color/white"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_gravity="center"
+                        android:background="@color/theme_color"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="2dp"
+                        android:layout_height="20dp"/>
+                    <TextView
+                        android:text="漫评精华"
+                        android:textColor="@color/tab_top_text_1"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:gravity="left"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <include
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                layout="@layout/group_introduction_item"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="45dp"/>
+        </LinearLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/article_huifu_container"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/article_huifu"
+                android:src="@drawable/huifu"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:id="@+id/article_huifu_count"
+                android:text="37"
+                android:textColor="@color/grey"
+                android:layout_marginLeft="24dp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/article_vote_container"
+            android:layout_toLeftOf="@id/article_huifu_container"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.like.LikeButton
+                app:liked="false"
+                android:id="@+id/article_vote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon_size="20dp"
+                app:anim_scale_factor="2.2"
+                app:like_drawable="@drawable/dianzan_like"
+                app:unlike_drawable="@drawable/dianzan_unlike"
+                app:icon_type="star" />
+
+            <TextView
+                android:id="@+id/article_vote_count"
+                android:text="109"
+                android:textColor="@color/grey"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</FrameLayout>

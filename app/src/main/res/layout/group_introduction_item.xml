@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:scaleType="centerCrop"
+            android:src="@drawable/subject_image"
+            android:padding="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+        <ImageView
+            android:background="@color/half_tran"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_gravity="right|top"
+            android:background="@drawable/icon_recommend"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/talk"
+                        android:gravity="center_horizontal"
+                        android:src="@drawable/icon_discuss"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+                    <TextView
+                        android:layout_toRightOf="@id/talk"
+                        android:text="大家都在聊"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_horizontal"
+                    android:text="RE:从零开始的异世界生活团"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <com.dongman.fm.ui.view.CircleImageView
+                        app:border_color="@color/white"
+                        app:border_width="1dp"
+                        android:src="@drawable/icon_logo"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+                    <com.dongman.fm.ui.view.CircleImageView
+                        android:layout_marginLeft="10dp"
+                        app:border_color="@color/white"
+                        app:border_width="1dp"
+                        android:src="@drawable/test7"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+                    <com.dongman.fm.ui.view.CircleImageView
+                        android:layout_marginLeft="10dp"
+                        app:border_color="@color/white"
+                        app:border_width="1dp"
+                        android:src="@drawable/test8"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+                    <com.dongman.fm.ui.view.CircleImageView
+                        android:layout_marginLeft="10dp"
+                        app:border_color="@color/white"
+                        app:border_width="1dp"
+                        android:src="@drawable/test9"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="bottom"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="12sp"
+                        android:text="34关注"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:layout_marginLeft="10dp"
+                        android:background="@color/white"
+                        android:layout_width="1dp"
+                        android:layout_height="13dp"/>
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:textSize="12sp"
+                        android:text="87个帖子"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+    </FrameLayout>
+
+
+</FrameLayout>

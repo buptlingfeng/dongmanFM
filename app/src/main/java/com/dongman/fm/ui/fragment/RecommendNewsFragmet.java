@@ -16,6 +16,7 @@ import com.dongman.fm.R;
 import com.dongman.fm.data.APIConfig;
 import com.dongman.fm.network.IRequestCallBack;
 import com.dongman.fm.ui.fragment.adapter.RecommendAdapter;
+import com.dongman.fm.ui.view.SpacesItemDecoration;
 import com.dongman.fm.utils.FMLog;
 
 import org.json.JSONArray;
@@ -99,6 +100,7 @@ public class RecommendNewsFragmet extends BaseFragment {
         mRecyclerView.setLongClickable(true);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        mRecyclerView.addItemDecoration(new SpacesItemDecoration(0,0,0,20));
 
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -141,7 +143,6 @@ public class RecommendNewsFragmet extends BaseFragment {
 
             }
         });
-
         getData(mPageNumber, true);
     }
 

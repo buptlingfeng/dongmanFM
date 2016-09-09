@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -44,6 +45,15 @@
         <!--android:scrollbars="none"-->
         <!--android:visibility="gone">-->
     <!--</GridView>-->
+
+    <com.dongman.fm.ui.view.FlowLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/flowlayout"
+        app:lineSpacing="10dp"
+        app:maxLine="4"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_result_list"
